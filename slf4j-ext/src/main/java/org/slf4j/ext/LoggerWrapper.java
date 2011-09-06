@@ -3,6 +3,7 @@ package org.slf4j.ext;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.Level;
 import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
 
@@ -151,6 +152,46 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
+  public void trace(String format, Object arg1, Object arg2, Object arg3) {
+    maybeLog(Level.TRACE, null, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4) {
+    maybeLog(Level.TRACE, null, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5) {
+    maybeLog(Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
   public void trace(String format, Object[] objects) {
     maybeLog(Level.TRACE, null, format, objects);
   }
@@ -182,6 +223,47 @@ public class LoggerWrapper implements Logger {
   public void trace(Marker marker, String format, Object arg1,
       Object arg2) {
     maybeLog(Level.TRACE, marker, format, arg1, arg2);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3) {
+    maybeLog(Level.TRACE, marker, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4) {
+    maybeLog(Level.TRACE, marker, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5) {
+    maybeLog(Level.TRACE, marker, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.TRACE, marker, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.TRACE, marker, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
   }
 
   /**
@@ -226,6 +308,46 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
+  public void debug(String format, Object arg1, Object arg2, Object arg3) {
+    maybeLog(Level.DEBUG, null, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4) {
+    maybeLog(Level.DEBUG, null, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5) {
+    maybeLog(Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
   public void debug(String format, Object[] objects) {
     maybeLog(Level.DEBUG, null, format, objects);
   }
@@ -257,6 +379,47 @@ public class LoggerWrapper implements Logger {
   public void debug(Marker marker, String format, Object arg1,
       Object arg2) {
     maybeLog(Level.DEBUG, marker, format, arg1, arg2);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3) {
+    maybeLog(Level.DEBUG, marker, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4) {
+    maybeLog(Level.DEBUG, marker, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5) {
+    maybeLog(Level.DEBUG, marker, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.DEBUG, marker, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.DEBUG, marker, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
   }
 
   /**
@@ -301,6 +464,46 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
+  public void info(String format, Object arg1, Object arg2, Object arg3) {
+    maybeLog(Level.INFO, null, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4) {
+    maybeLog(Level.INFO, null, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5) {
+    maybeLog(Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
   public void info(String format, Object[] objects) {
     maybeLog(Level.INFO, null, format, objects);
   }
@@ -332,6 +535,47 @@ public class LoggerWrapper implements Logger {
   public void info(Marker marker, String format, Object arg1,
       Object arg2) {
     maybeLog(Level.INFO, marker, format, arg1, arg2);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3) {
+    maybeLog(Level.INFO, marker, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4) {
+    maybeLog(Level.INFO, marker, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5) {
+    maybeLog(Level.INFO, marker, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.INFO, marker, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.INFO, marker, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
   }
 
   /**
@@ -376,6 +620,46 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
+  public void warn(String format, Object arg1, Object arg2, Object arg3) {
+    maybeLog(Level.WARN, null, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4) {
+    maybeLog(Level.WARN, null, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5) {
+    maybeLog(Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
   public void warn(String format, Object[] objects) {
     maybeLog(Level.WARN, null, format, objects);
   }
@@ -407,6 +691,47 @@ public class LoggerWrapper implements Logger {
   public void warn(Marker marker, String format, Object arg1,
       Object arg2) {
     maybeLog(Level.WARN, marker, format, arg1, arg2);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3) {
+    maybeLog(Level.WARN, marker, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4) {
+    maybeLog(Level.WARN, marker, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5) {
+    maybeLog(Level.WARN, marker, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.WARN, marker, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.WARN, marker, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
   }
 
   /**
@@ -451,6 +776,46 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
+  public void error(String format, Object arg1, Object arg2, Object arg3) {
+    maybeLog(Level.ERROR, null, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4) {
+    maybeLog(Level.ERROR, null, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5) {
+    maybeLog(Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(String format, Object arg1, Object arg2, Object arg3,
+      Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
   public void error(String format, Object[] objects) {
     maybeLog(Level.ERROR, null, format, objects);
   }
@@ -482,6 +847,47 @@ public class LoggerWrapper implements Logger {
   public void error(Marker marker, String format, Object arg1,
       Object arg2) {
     maybeLog(Level.ERROR, marker, format, arg1, arg2);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3) {
+    maybeLog(Level.ERROR, marker, format, arg1, arg2, arg3);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4) {
+    maybeLog(Level.ERROR, marker, format, arg1, arg2, arg3, arg4);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5) {
+    maybeLog(Level.ERROR, marker, format, arg1, arg2, arg3, arg4, arg5);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6) {
+    maybeLog(Level.ERROR, marker, format, arg1, arg2, arg3, arg4, arg5, arg6);
+  }
+
+  /**
+   * Delegate to the appropriate method of the underlying logger.
+   */
+  public void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
+    maybeLog(Level.ERROR, marker, format, arg1, arg2, arg3, arg4, arg5, arg6,
+        others);
   }
 
   /**
@@ -538,6 +944,51 @@ public class LoggerWrapper implements Logger {
     }
   }
 
+  private void maybeLog(Level level, Marker marker, String format, Object arg1,
+      Object arg2, Object arg3) {
+    if (isEnabled(level)) {
+      log(level, marker, format, new Object[]{arg1, arg2, arg3});
+    }
+  }
+
+  private void maybeLog(Level level, Marker marker, String format, Object arg1,
+      Object arg2, Object arg3, Object arg4) {
+    if (isEnabled(level)) {
+      log(level, marker, format, new Object[]{arg1, arg2, arg3, arg4});
+    }
+  }
+
+  private void maybeLog(Level level, Marker marker, String format, Object arg1,
+      Object arg2, Object arg3, Object arg4, Object arg5) {
+    if (isEnabled(level)) {
+      log(level, marker, format, new Object[]{arg1, arg2, arg3, arg4, arg5});
+    }
+  }
+
+  private void maybeLog(Level level, Marker marker, String format, Object arg1,
+      Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
+    if (isEnabled(level)) {
+      log(level, marker, format, new Object[]{arg1, arg2, arg3, arg4, arg5,
+          arg6});
+    }
+  }
+
+  private void maybeLog(Level level, Marker marker, String format, Object arg1,
+      Object arg2, Object arg3, Object arg4, Object arg5, Object arg6,
+      Object... others) {
+    if (isEnabled(level)) {
+      Object[] argArray = new Object[others.length + 6];
+      argArray[0] = arg1;
+      argArray[1] = arg2;
+      argArray[2] = arg3;
+      argArray[3] = arg4;
+      argArray[4] = arg5;
+      argArray[5] = arg6;
+      System.arraycopy(others, 0, argArray, 6, others.length);
+      log(level, marker, format, argArray);
+    }
+  }
+
   private void maybeLog(Level level, Marker marker, String format,
       Object[] argArray) {
     if (isEnabled(level)) {
@@ -547,7 +998,7 @@ public class LoggerWrapper implements Logger {
 
   private void log(Level level, Marker marker, String format) {
     if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
+      ((LocationAwareLogger) logger).log(marker, fqcn, level.intValue(),
           format, null, null);
     } else {
       switch (level) {
@@ -572,7 +1023,7 @@ public class LoggerWrapper implements Logger {
 
   private void log(Level level, Marker marker, String format, Throwable t) {
     if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
+      ((LocationAwareLogger) logger).log(marker, fqcn, level.intValue(),
           format, null, t);
     } else {
       switch (level) {
@@ -598,7 +1049,7 @@ public class LoggerWrapper implements Logger {
   private void log(Level level, Marker marker, String format, Object arg) {
     if (instanceofLAL) {
       FormattingTuple ft = MessageFormatter.format(format, arg);
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
+      ((LocationAwareLogger) logger).log(marker, fqcn, level.intValue(),
           ft.getMessage(), ft.getArgArray(), ft.getThrowable());
     } else {
       switch (level) {
@@ -625,7 +1076,7 @@ public class LoggerWrapper implements Logger {
       Object arg2) {
     if (instanceofLAL) {
       FormattingTuple ft = MessageFormatter.format(format, arg1, arg2);
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
+      ((LocationAwareLogger) logger).log(marker, fqcn, level.intValue(),
           ft.getMessage(), ft.getArgArray(), ft.getThrowable());
     } else {
       switch (level) {
@@ -652,7 +1103,7 @@ public class LoggerWrapper implements Logger {
       Object[] argArray) {
     if (instanceofLAL) {
       FormattingTuple ft = MessageFormatter.arrayFormat(format, argArray);
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
+      ((LocationAwareLogger) logger).log(marker, fqcn, level.intValue(),
           ft.getMessage(), argArray, ft.getThrowable());
     } else {
       switch (level) {
@@ -672,24 +1123,6 @@ public class LoggerWrapper implements Logger {
           logger.error(marker, format, argArray);
           break;
       }
-    }
-  }
-
-  private enum Level {
-    TRACE(LocationAwareLogger.TRACE_INT),
-    DEBUG(LocationAwareLogger.DEBUG_INT),
-    INFO(LocationAwareLogger.INFO_INT),
-    WARN(LocationAwareLogger.WARN_INT),
-    ERROR(LocationAwareLogger.ERROR_INT);
-
-    private int intId;
-
-    private Level(int intId) {
-      this.intId = intId;
-    }
-
-    public int getIntId() {
-      return intId;
     }
   }
 }

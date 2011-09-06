@@ -718,4 +718,99 @@ public interface Logger {
    */ 
   public void error(Marker marker, String msg, Throwable t);
 
+  void trace(String format, Object arg1, Object arg2, Object arg3);
+  void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4);
+  void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5);
+  void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6);
+  void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6, Object... others);
+
+  void trace(Marker marker, String format, Object arg1, Object arg2, Object arg3);
+  void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4);
+  void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5);
+  void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6);
+  void trace(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others);
+
+  void debug(String format, Object arg1, Object arg2, Object arg3);
+  void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4);
+  void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5);
+  void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6);
+  void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6, Object... others);
+
+  void debug(Marker marker, String format, Object arg1, Object arg2, Object arg3);
+  void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4);
+  void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5);
+  void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6);
+  void debug(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others);
+
+  void info(String format, Object arg1, Object arg2, Object arg3);
+  void info(String format, Object arg1, Object arg2, Object arg3, Object arg4);
+  void info(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5);
+  void info(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6);
+  void info(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6, Object... others);
+
+  void info(Marker marker, String format, Object arg1, Object arg2, Object arg3);
+  void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4);
+  void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5);
+  void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6);
+  void info(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others);
+
+  void warn(String format, Object arg1, Object arg2, Object arg3);
+  void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4);
+  void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5);
+  void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6);
+  void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6, Object... others);
+
+  void warn(Marker marker, String format, Object arg1, Object arg2, Object arg3);
+  void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4);
+  void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5);
+  void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6);
+  void warn(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others);
+
+  void error(String format, Object arg1, Object arg2, Object arg3);
+  void error(String format, Object arg1, Object arg2, Object arg3, Object arg4);
+  void error(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5);
+  void error(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6);
+  void error(String format, Object arg1, Object arg2, Object arg3, Object arg4,
+      Object arg5, Object arg6, Object... others);
+
+  void error(Marker marker, String format, Object arg1, Object arg2, Object arg3);
+  void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4);
+  void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5);
+  void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6);
+  void error(Marker marker, String format, Object arg1, Object arg2,
+      Object arg3, Object arg4, Object arg5, Object arg6, Object... others);
+
 }
