@@ -34,7 +34,7 @@
 package org.slf4j.helpers;
 
 import org.slf4j.Logger;
-import org.slf4j.helpers.MarkerIgnoringBase;
+import org.slf4j.Marker;
 
 
 /**
@@ -42,9 +42,9 @@ import org.slf4j.helpers.MarkerIgnoringBase;
  *
  * @author Ceki G&uuml;lc&uuml;
  */
-public class NOPLogger extends MarkerIgnoringBase {
+public class NOPLogger extends AbstractLogger {
 
-  private static final long serialVersionUID = -517220405410904473L;
+  private static final long serialVersionUID = -725455597199117029L;
 
   /**
    * The unique instance of NOPLogger.
@@ -52,187 +52,23 @@ public class NOPLogger extends MarkerIgnoringBase {
   public static final NOPLogger NOP_LOGGER = new NOPLogger();
 
   /**
-   * There is no point in creating multiple instances of NOPLOgger, 
+   * There is no point in creating multiple instances of NOPLOgger,
    * except by derived classes, hence the protected  access for the constructor.
    */
   protected NOPLogger() {
-  }
-
-  /**
-   * Always returns the string value "NOP".
-   */
-  public String getName() {
-    return "NOP";
+    super("NOP");
   }
 
   /**
    * Always returns false.
    * @return always false
    */
-  final public boolean isTraceEnabled() {
+  protected boolean isEnabled(Marker marker, Level level) {
     return false;
   }
 
   /** A NOP implementation. */
-  final public void trace(String msg) {
-    // NOP
-  }
-
-  /** A NOP implementation.  */
-  final public void trace(String format, Object arg) {
-    // NOP
-  }
-
-  /** A NOP implementation.  */
-  public final void trace(String format, Object arg1, Object arg2) {
-    // NOP
-  }
-
-  /** A NOP implementation.  */
-  public final void trace(String format, Object[] argArray) {
-    // NOP
-  }
-  
-  /** A NOP implementation. */
-  final public void trace(String msg, Throwable t) {
-    // NOP
-  }
-
-  /**
-   * Always returns false.
-   * @return always false
-   */
-  final public boolean isDebugEnabled() {
-    return false;
-  }
-
-  /** A NOP implementation. */
-  final public void debug(String msg) {
-    // NOP
-  }
-
-  /** A NOP implementation.  */
-  final public void debug(String format, Object arg) {
-    // NOP
-  }
-
-  /** A NOP implementation.  */
-  public final void debug(String format, Object arg1, Object arg2) {
-    // NOP
-  }
-
-  /** A NOP implementation.  */
-  public final void debug(String format, Object[] argArray) {
-    // NOP
-  }
-  
-  
-  
-  /** A NOP implementation. */
-  final public void debug(String msg, Throwable t) {
-    // NOP
-  }
-
-  /**
-   * Always returns false.
-   * @return always false
-   */
-  final public boolean isInfoEnabled() {
-    // NOP
-    return false;
-  }
-
-
-  /** A NOP implementation. */
-  final public void info(String msg) {
-    // NOP
-  }
-
-  /** A NOP implementation. */
-  final  public void info(String format, Object arg1) {
-    // NOP
-  }
-
-  /** A NOP implementation. */
-  final public void info(String format, Object arg1, Object arg2) {
-    // NOP
-  }
-  
-  /** A NOP implementation.  */
-  public final void info(String format, Object[] argArray) {
-    // NOP
-  }
-
-
-  /** A NOP implementation. */
-  final public void info(String msg, Throwable t) {
-    // NOP
-  }
-
-
-  /**
-   * Always returns false.
-   * @return always false
-   */
-  final public boolean isWarnEnabled() {
-    return false;
-  }
-
-  /** A NOP implementation. */
-  final public void warn(String msg) {
-    // NOP
-  }
-
-  /** A NOP implementation. */
-  final public void warn(String format, Object arg1) {
-    // NOP
-  }
-
-  /** A NOP implementation. */
-  final public void warn(String format, Object arg1, Object arg2) {
-    // NOP
-  }
-  
-  /** A NOP implementation.  */
-  public final void warn(String format, Object[] argArray) {
-    // NOP
-  }
-
-
-  /** A NOP implementation. */
-  final public void warn(String msg, Throwable t) {
-    // NOP
-  }
-
-
-  /** A NOP implementation. */
-  final public boolean isErrorEnabled() {
-    return false;
-  }
-
-  /** A NOP implementation. */
-  final public void error(String msg) {
-    // NOP
-  }
-
-  /** A NOP implementation. */
-  final public void error(String format, Object arg1) {
-    // NOP
-  }
-
-  /** A NOP implementation. */
-  final public void error(String format, Object arg1, Object arg2) {
-    // NOP
-  }
-  
-  /** A NOP implementation.  */
-  public final void error(String format, Object[] argArray) {
-    // NOP
-  }
-
-
-  /** A NOP implementation. */
-  final public void error(String msg, Throwable t) {
+  protected void log(Marker marker, Level level, String msg, Throwable t) {
     // NOP
   }
 }
