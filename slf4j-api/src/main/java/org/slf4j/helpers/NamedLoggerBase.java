@@ -266,36 +266,29 @@ abstract class NamedLoggerBase implements Logger, Serializable {
   private void maybeLog(Marker marker, Level level, String format, Object arg1,
       Object arg2, Object arg3) {
     if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, format, new Object[]{arg1, arg2, arg3});
     }
   }
 
   private void maybeLog(Marker marker, Level level, String format, Object arg1,
       Object arg2, Object arg3, Object arg4) {
     if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3, arg4});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, format, new Object[]{arg1, arg2, arg3, arg4});
     }
   }
 
   private void maybeLog(Marker marker, Level level, String format, Object arg1,
       Object arg2, Object arg3, Object arg4, Object arg5) {
     if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3, arg4, arg5});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, format, new Object[]{arg1, arg2, arg3, arg4, arg5});
     }
   }
 
   private void maybeLog(Marker marker, Level level, String format, Object arg1,
       Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
     if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3, arg4, arg5, arg6});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, format, new Object[]{arg1, arg2, arg3, arg4, arg5,
+          arg6});
     }
   }
 
@@ -311,8 +304,7 @@ abstract class NamedLoggerBase implements Logger, Serializable {
       argArray[4] = arg5;
       argArray[5] = arg6;
       System.arraycopy(others, 0, argArray, 6, others.length);
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, argArray);
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, format, argArray);
     }
   }
 
@@ -335,22 +327,22 @@ abstract class NamedLoggerBase implements Logger, Serializable {
     }
   }
 
-  private void log(Marker marker, Level level, String msg, Throwable t) {
+  private void log(Marker marker, Level level, String format, Object[] args) {
     switch(level) {
       case TRACE :
-        trace(marker, msg, t);
+        trace(marker, format, args);
         break;
       case DEBUG :
-        debug(marker, msg, t);
+        debug(marker, format, args);
         break;
       case INFO :
-        info(marker, msg, t);
+        info(marker, format, args);
         break;
       case WARN :
-        warn(marker, msg, t);
+        warn(marker, format, args);
         break;
       case ERROR :
-        error(marker, msg, t);
+        error(marker, format, args);
         break;
       default:
         // will only happen if a new level is defined
