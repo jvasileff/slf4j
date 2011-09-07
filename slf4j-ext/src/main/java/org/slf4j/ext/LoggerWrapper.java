@@ -1,5 +1,9 @@
 package org.slf4j.ext;
 
+import static org.slf4j.helpers.Level.TRACE;
+
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.helpers.FormattingTuple;
@@ -674,5 +678,145 @@ public class LoggerWrapper implements Logger {
           break;
       }
     }
+  }
+
+  // TRACE
+
+  public final void trace(Map supplementalData) {
+    trace((Marker) null, supplementalData);
+  }
+
+  public final void trace(Map supplementalData, String msg) {
+    trace((Marker) null, supplementalData, msg);
+  }
+
+  public final void trace(Map supplementalData, String format, Object... args) {
+    trace(null, supplementalData, format, args);
+  }
+
+  public final void trace(Marker marker, Map supplementalData) {
+    trace(marker, supplementalData == null ? null : supplementalData.toString(),
+        (Throwable) null);
+  }
+
+  public final void trace(Marker marker, Map supplementalData, String msg) {
+    trace(marker, msg, (Throwable) null);
+  }
+
+  public final void trace(Marker marker, Map supplementalData, String format,
+      Object... args) {
+    trace(marker, format, args);
+  }
+
+  // DEBUG
+
+  public final void debug(Map supplementalData) {
+    debug((Marker) null, supplementalData);
+  }
+
+  public final void debug(Map supplementalData, String msg) {
+    debug((Marker) null, supplementalData, msg);
+  }
+
+  public final void debug(Map supplementalData, String format, Object... args) {
+    debug(null, supplementalData, format, args);
+  }
+
+  public final void debug(Marker marker, Map supplementalData) {
+    debug(marker, supplementalData == null ? null : supplementalData.toString(),
+        (Throwable) null);
+  }
+
+  public final void debug(Marker marker, Map supplementalData, String msg) {
+    debug(marker, msg, (Throwable) null);
+  }
+
+  public final void debug(Marker marker, Map supplementalData, String format,
+      Object... args) {
+    debug(marker, format, args);
+  }
+
+  // INFO
+
+  public final void info(Map supplementalData) {
+    info((Marker) null, supplementalData);
+  }
+
+  public final void info(Map supplementalData, String msg) {
+    info((Marker) null, supplementalData, msg);
+  }
+
+  public final void info(Map supplementalData, String format, Object... args) {
+    info(null, supplementalData, format, args);
+  }
+
+  public final void info(Marker marker, Map supplementalData) {
+    info(marker, supplementalData == null ? null : supplementalData.toString(),
+        (Throwable) null);
+  }
+
+  public final void info(Marker marker, Map supplementalData, String msg) {
+    info(marker, msg, (Throwable) null);
+  }
+
+  public final void info(Marker marker, Map supplementalData, String format,
+      Object... args) {
+    info(marker, format, args);
+  }
+
+  // WARN
+
+  public final void warn(Map supplementalData) {
+    warn((Marker) null, supplementalData);
+  }
+
+  public final void warn(Map supplementalData, String msg) {
+    warn((Marker) null, supplementalData, msg);
+  }
+
+  public final void warn(Map supplementalData, String format, Object... args) {
+    warn(null, supplementalData, format, args);
+  }
+
+  public final void warn(Marker marker, Map supplementalData) {
+    warn(marker, supplementalData == null ? null : supplementalData.toString(),
+        (Throwable) null);
+  }
+
+  public final void warn(Marker marker, Map supplementalData, String msg) {
+    warn(marker, msg, (Throwable) null);
+  }
+
+  public final void warn(Marker marker, Map supplementalData, String format,
+      Object... args) {
+    warn(marker, format, args);
+  }
+
+  // ERROR
+
+  public final void error(Map supplementalData) {
+    error((Marker) null, supplementalData);
+  }
+
+  public final void error(Map supplementalData, String msg) {
+    error((Marker) null, supplementalData, msg);
+  }
+
+  public final void error(Map supplementalData, String format, Object... args) {
+    error(null, supplementalData, format, args);
+  }
+
+  public final void error(Marker marker, Map supplementalData) {
+    error(marker, supplementalData == null ? null : supplementalData.toString(),
+        (Throwable) null);
+  }
+
+  public final void error(Marker marker, Map supplementalData, String msg) {
+    error(marker, msg, (Throwable) null);
+  }
+
+  public final void error(Marker marker, Map supplementalData, String format,
+      Object... args) {
+    error(marker, format, args);
   }
 }

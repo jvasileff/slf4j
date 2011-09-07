@@ -8,6 +8,7 @@ import static org.slf4j.helpers.Level.WARN;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,8 @@ public abstract class AbstractLogger implements Logger, Serializable {
   private String name;
 
   protected abstract boolean isEnabled(Marker marker, Level level);
-  protected abstract void log(Marker marker, Level level, String msg, Throwable t);
+  protected abstract void log(Marker marker, Level level, Map supplementalData,
+      String msg, Throwable t);
 
   protected AbstractLogger(String name) {
     setName(name);
@@ -65,43 +67,67 @@ public abstract class AbstractLogger implements Logger, Serializable {
   }
 
   public final void trace(String msg) {
-    log(null, TRACE, msg, null);
+    log(null, TRACE, null, msg, null);
   }
 
   public final void trace(String msg, Throwable t) {
-    log(null, TRACE, msg, t);
-  }
-
-  public final void trace(String format, Object... argArray) {
-    maybeLog(null, TRACE, format, argArray);
+    log(null, TRACE, null, msg, t);
   }
 
   public final void trace(String format, Object arg) {
-    maybeLog(null, TRACE, format, arg);
+    maybeLog(null, TRACE, null, format, arg);
   }
 
   public final void trace(String format, Object arg1, Object arg2) {
-    maybeLog(null, TRACE, format, arg1, arg2);
+    maybeLog(null, TRACE, null, format, arg1, arg2);
+  }
+
+  public final void trace(String format, Object... args) {
+    maybeLog(null, TRACE, null, format, args);
+  }
+
+  public final void trace(Map supplementalData) {
+    maybeLog(null, TRACE, supplementalData);
+  }
+
+  public final void trace(Map supplementalData, String msg) {
+    log(null, TRACE, supplementalData, msg, null);
+  }
+
+  public final void trace(Map supplementalData, String format, Object... argArray) {
+    maybeLog(null, TRACE, supplementalData, format, argArray);
   }
 
   public final void trace(Marker marker, String msg) {
-    log(marker, TRACE, msg, null);
+    log(marker, TRACE, null, msg, null);
   }
 
   public final void trace(Marker marker, String msg, Throwable t) {
-    log(marker, TRACE, msg, t);
-  }
-
-  public final void trace(Marker marker, String format, Object... argArray) {
-    maybeLog(marker, TRACE, format, argArray);
+    log(marker, TRACE, null, msg, t);
   }
 
   public final void trace(Marker marker, String format, Object arg) {
-    maybeLog(marker, TRACE, format, arg);
+    maybeLog(marker, TRACE, null, format, arg);
   }
 
   public final void trace(Marker marker, String format, Object arg1, Object arg2) {
-    maybeLog(marker, TRACE, format, arg1, arg2);
+    maybeLog(marker, TRACE, null, format, arg1, arg2);
+  }
+
+  public final void trace(Marker marker, String format, Object... args) {
+    maybeLog(marker, TRACE, null, format, args);
+  }
+
+  public final void trace(Marker marker, Map supplementalData) {
+    maybeLog(marker, TRACE, supplementalData);
+  }
+
+  public final void trace(Marker marker, Map supplementalData, String msg) {
+    log(marker, TRACE, supplementalData, msg, null);
+  }
+
+  public final void trace(Marker marker, Map supplementalData, String format,Object... args) {
+    maybeLog(marker, TRACE, supplementalData, format, args);
   }
 
   // DEBUG
@@ -115,43 +141,67 @@ public abstract class AbstractLogger implements Logger, Serializable {
   }
 
   public final void debug(String msg) {
-    log(null, DEBUG, msg, null);
+    log(null, DEBUG, null, msg, null);
   }
 
   public final void debug(String msg, Throwable t) {
-    log(null, DEBUG, msg, t);
-  }
-
-  public final void debug(String format, Object... argArray) {
-    maybeLog(null, DEBUG, format, argArray);
+    log(null, DEBUG, null, msg, t);
   }
 
   public final void debug(String format, Object arg) {
-    maybeLog(null, DEBUG, format, arg);
+    maybeLog(null, DEBUG, null, format, arg);
   }
 
   public final void debug(String format, Object arg1, Object arg2) {
-    maybeLog(null, DEBUG, format, arg1, arg2);
+    maybeLog(null, DEBUG, null, format, arg1, arg2);
+  }
+
+  public final void debug(String format, Object... args) {
+    maybeLog(null, DEBUG, null, format, args);
+  }
+
+  public final void debug(Map supplementalData) {
+    maybeLog(null, DEBUG, supplementalData);
+  }
+
+  public final void debug(Map supplementalData, String msg) {
+    log(null, DEBUG, supplementalData, msg, null);
+  }
+
+  public final void debug(Map supplementalData, String format, Object... argArray) {
+    maybeLog(null, DEBUG, supplementalData, format, argArray);
   }
 
   public final void debug(Marker marker, String msg) {
-    log(marker, DEBUG, msg, null);
+    log(marker, DEBUG, null, msg, null);
   }
 
   public final void debug(Marker marker, String msg, Throwable t) {
-    log(marker, DEBUG, msg, t);
-  }
-
-  public final void debug(Marker marker, String format, Object... argArray) {
-    maybeLog(marker, DEBUG, format, argArray);
+    log(marker, DEBUG, null, msg, t);
   }
 
   public final void debug(Marker marker, String format, Object arg) {
-    maybeLog(marker, DEBUG, format, arg);
+    maybeLog(marker, DEBUG, null, format, arg);
   }
 
   public final void debug(Marker marker, String format, Object arg1, Object arg2) {
-    maybeLog(marker, DEBUG, format, arg1, arg2);
+    maybeLog(marker, DEBUG, null, format, arg1, arg2);
+  }
+
+  public final void debug(Marker marker, String format, Object... args) {
+    maybeLog(marker, DEBUG, null, format, args);
+  }
+
+  public final void debug(Marker marker, Map supplementalData) {
+    maybeLog(marker, DEBUG, supplementalData);
+  }
+
+  public final void debug(Marker marker, Map supplementalData, String msg) {
+    log(marker, DEBUG, supplementalData, msg, null);
+  }
+
+  public final void debug(Marker marker, Map supplementalData, String format,Object... args) {
+    maybeLog(marker, DEBUG, supplementalData, format, args);
   }
 
   // INFO
@@ -165,43 +215,67 @@ public abstract class AbstractLogger implements Logger, Serializable {
   }
 
   public final void info(String msg) {
-    log(null, INFO, msg, null);
+    log(null, INFO, null, msg, null);
   }
 
   public final void info(String msg, Throwable t) {
-    log(null, INFO, msg, t);
-  }
-
-  public final void info(String format, Object... argArray) {
-    maybeLog(null, INFO, format, argArray);
+    log(null, INFO, null, msg, t);
   }
 
   public final void info(String format, Object arg) {
-    maybeLog(null, INFO, format, arg);
+    maybeLog(null, INFO, null, format, arg);
   }
 
   public final void info(String format, Object arg1, Object arg2) {
-    maybeLog(null, INFO, format, arg1, arg2);
+    maybeLog(null, INFO, null, format, arg1, arg2);
+  }
+
+  public final void info(String format, Object... args) {
+    maybeLog(null, INFO, null, format, args);
+  }
+
+  public final void info(Map supplementalData) {
+    maybeLog(null, INFO, supplementalData);
+  }
+
+  public final void info(Map supplementalData, String msg) {
+    log(null, INFO, supplementalData, msg, null);
+  }
+
+  public final void info(Map supplementalData, String format, Object... argArray) {
+    maybeLog(null, INFO, supplementalData, format, argArray);
   }
 
   public final void info(Marker marker, String msg) {
-    log(marker, INFO, msg, null);
+    log(marker, INFO, null, msg, null);
   }
 
   public final void info(Marker marker, String msg, Throwable t) {
-    log(marker, INFO, msg, t);
-  }
-
-  public final void info(Marker marker, String format, Object... argArray) {
-    maybeLog(marker, INFO, format, argArray);
+    log(marker, INFO, null, msg, t);
   }
 
   public final void info(Marker marker, String format, Object arg) {
-    maybeLog(marker, INFO, format, arg);
+    maybeLog(marker, INFO, null, format, arg);
   }
 
   public final void info(Marker marker, String format, Object arg1, Object arg2) {
-    maybeLog(marker, INFO, format, arg1, arg2);
+    maybeLog(marker, INFO, null, format, arg1, arg2);
+  }
+
+  public final void info(Marker marker, String format, Object... args) {
+    maybeLog(marker, INFO, null, format, args);
+  }
+
+  public final void info(Marker marker, Map supplementalData) {
+    maybeLog(marker, INFO, supplementalData);
+  }
+
+  public final void info(Marker marker, Map supplementalData, String msg) {
+    log(marker, INFO, supplementalData, msg, null);
+  }
+
+  public final void info(Marker marker, Map supplementalData, String format,Object... args) {
+    maybeLog(marker, INFO, supplementalData, format, args);
   }
 
   // WARN
@@ -215,43 +289,67 @@ public abstract class AbstractLogger implements Logger, Serializable {
   }
 
   public final void warn(String msg) {
-    log(null, WARN, msg, null);
+    log(null, WARN, null, msg, null);
   }
 
   public final void warn(String msg, Throwable t) {
-    log(null, WARN, msg, t);
-  }
-
-  public final void warn(String format, Object... argArray) {
-    maybeLog(null, WARN, format, argArray);
+    log(null, WARN, null, msg, t);
   }
 
   public final void warn(String format, Object arg) {
-    maybeLog(null, WARN, format, arg);
+    maybeLog(null, WARN, null, format, arg);
   }
 
   public final void warn(String format, Object arg1, Object arg2) {
-    maybeLog(null, WARN, format, arg1, arg2);
+    maybeLog(null, WARN, null, format, arg1, arg2);
+  }
+
+  public final void warn(String format, Object... args) {
+    maybeLog(null, WARN, null, format, args);
+  }
+
+  public final void warn(Map supplementalData) {
+    maybeLog(null, WARN, supplementalData);
+  }
+
+  public final void warn(Map supplementalData, String msg) {
+    log(null, WARN, supplementalData, msg, null);
+  }
+
+  public final void warn(Map supplementalData, String format, Object... argArray) {
+    maybeLog(null, WARN, supplementalData, format, argArray);
   }
 
   public final void warn(Marker marker, String msg) {
-    log(marker, WARN, msg, null);
+    log(marker, WARN, null, msg, null);
   }
 
   public final void warn(Marker marker, String msg, Throwable t) {
-    log(marker, WARN, msg, t);
-  }
-
-  public final void warn(Marker marker, String format, Object... argArray) {
-    maybeLog(marker, WARN, format, argArray);
+    log(marker, WARN, null, msg, t);
   }
 
   public final void warn(Marker marker, String format, Object arg) {
-    maybeLog(marker, WARN, format, arg);
+    maybeLog(marker, WARN, null, format, arg);
   }
 
   public final void warn(Marker marker, String format, Object arg1, Object arg2) {
-    maybeLog(marker, WARN, format, arg1, arg2);
+    maybeLog(marker, WARN, null, format, arg1, arg2);
+  }
+
+  public final void warn(Marker marker, String format, Object... args) {
+    maybeLog(marker, WARN, null, format, args);
+  }
+
+  public final void warn(Marker marker, Map supplementalData) {
+    maybeLog(marker, WARN, supplementalData);
+  }
+
+  public final void warn(Marker marker, Map supplementalData, String msg) {
+    log(marker, WARN, supplementalData, msg, null);
+  }
+
+  public final void warn(Marker marker, Map supplementalData, String format,Object... args) {
+    maybeLog(marker, WARN, supplementalData, format, args);
   }
 
   // ERROR
@@ -265,67 +363,98 @@ public abstract class AbstractLogger implements Logger, Serializable {
   }
 
   public final void error(String msg) {
-    log(null, ERROR, msg, null);
+    log(null, ERROR, null, msg, null);
   }
 
   public final void error(String msg, Throwable t) {
-    log(null, ERROR, msg, t);
-  }
-
-  public final void error(String format, Object... argArray) {
-    maybeLog(null, ERROR, format, argArray);
+    log(null, ERROR, null, msg, t);
   }
 
   public final void error(String format, Object arg) {
-    maybeLog(null, ERROR, format, arg);
+    maybeLog(null, ERROR, null, format, arg);
   }
 
   public final void error(String format, Object arg1, Object arg2) {
-    maybeLog(null, ERROR, format, arg1, arg2);
+    maybeLog(null, ERROR, null, format, arg1, arg2);
+  }
+
+  public final void error(String format, Object... args) {
+    maybeLog(null, ERROR, null, format, args);
+  }
+
+  public final void error(Map supplementalData) {
+    maybeLog(null, ERROR, supplementalData);
+  }
+
+  public final void error(Map supplementalData, String msg) {
+    log(null, ERROR, supplementalData, msg, null);
+  }
+
+  public final void error(Map supplementalData, String format, Object... argArray) {
+    maybeLog(null, ERROR, supplementalData, format, argArray);
   }
 
   public final void error(Marker marker, String msg) {
-    log(marker, ERROR, msg, null);
+    log(marker, ERROR, null, msg, null);
   }
 
   public final void error(Marker marker, String msg, Throwable t) {
-    log(marker, ERROR, msg, t);
-  }
-
-  public final void error(Marker marker, String format, Object... argArray) {
-    maybeLog(marker, ERROR, format, argArray);
+    log(marker, ERROR, null, msg, t);
   }
 
   public final void error(Marker marker, String format, Object arg) {
-    maybeLog(marker, ERROR, format, arg);
+    maybeLog(marker, ERROR, null, format, arg);
   }
 
   public final void error(Marker marker, String format, Object arg1, Object arg2) {
-    maybeLog(marker, ERROR, format, arg1, arg2);
+    maybeLog(marker, ERROR, null, format, arg1, arg2);
+  }
+
+  public final void error(Marker marker, String format, Object... args) {
+    maybeLog(marker, ERROR, null, format, args);
+  }
+
+  public final void error(Marker marker, Map supplementalData) {
+    maybeLog(marker, ERROR, supplementalData);
+  }
+
+  public final void error(Marker marker, Map supplementalData, String msg) {
+    log(marker, ERROR, supplementalData, msg, null);
+  }
+
+  public final void error(Marker marker, Map supplementalData, String format,Object... args) {
+    maybeLog(marker, ERROR, supplementalData, format, args);
   }
 
   // Private Methods
 
-  private void maybeLog(Marker marker, Level level, String format, Object arg) {
+  private void maybeLog(Marker marker, Level level, Map supplementalData, String format, Object arg) {
     if (isEnabled(level)) {
       FormattingTuple ft = MessageFormatter.format(format, arg);
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, supplementalData, ft.getMessage(), ft.getThrowable());
     }
   }
 
-  private void maybeLog(Marker marker, Level level, String format, Object arg1,
+  private void maybeLog(Marker marker, Level level, Map supplementalData, String format, Object arg1,
       Object arg2) {
     if (isEnabled(level)) {
       FormattingTuple ft = MessageFormatter.format(format, arg1, arg2);
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, supplementalData, ft.getMessage(), ft.getThrowable());
     }
   }
 
-  private void maybeLog(Marker marker, Level level, String format,
+  private void maybeLog(Marker marker, Level level, Map supplementalData, String format,
       Object[] argArray) {
     if (isEnabled(level)) {
       FormattingTuple ft = MessageFormatter.arrayFormat(format, argArray);
-      log(marker, level, ft.getMessage(), ft.getThrowable());
+      log(marker, level, supplementalData, ft.getMessage(), ft.getThrowable());
+    }
+  }
+
+  private void maybeLog(Marker marker, Level level, Map supplementalData) {
+    if (isEnabled(level)) {
+      log(marker, level, supplementalData,
+        supplementalData == null ? null : supplementalData.toString(), null);
     }
   }
 

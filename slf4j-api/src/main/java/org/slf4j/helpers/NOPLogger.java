@@ -33,6 +33,8 @@
 
 package org.slf4j.helpers;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
@@ -68,7 +70,8 @@ public class NOPLogger extends AbstractLogger {
   }
 
   /** A NOP implementation. */
-  protected void log(Marker marker, Level level, String msg, Throwable t) {
+  protected void log(Marker marker, Level level, Map supplementalData,
+      String msg, Throwable t) {
     // NOP
   }
 }

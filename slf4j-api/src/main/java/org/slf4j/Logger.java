@@ -25,6 +25,8 @@
 
 package org.slf4j;
 
+import java.util.Map;
+
 /**
  * The org.slf4j.Logger interface is the main user entry point of SLF4J API. 
  * It is expected that logging takes place through concrete implementations 
@@ -718,4 +720,49 @@ public interface Logger {
    */ 
   public void error(Marker marker, String msg, Throwable t);
 
+  public void trace(Map supplementalData);
+  public void trace(Map supplementalData, String msg);
+  public void trace(Map supplementalData, String format, Object... args);
+
+  public void trace(Marker marker, Map supplementalData);
+  public void trace(Marker marker, Map supplementalData, String msg);
+  public void trace(Marker marker, Map supplementalData, String format,
+      Object... args);
+
+  public void debug(Map supplementalData);
+  public void debug(Map supplementalData, String msg);
+  public void debug(Map supplementalData, String format,
+      Object... args);
+
+  public void debug(Marker marker, Map supplementalData);
+  public void debug(Marker marker, Map supplementalData, String msg);
+  public void debug(Marker marker, Map supplementalData, String format,
+      Object... args);
+
+  public void info(Map supplementalData);
+  public void info(Map supplementalData, String msg);
+  public void info(Map supplementalData, String format, Object... args);
+
+  public void info(Marker marker, Map supplementalData);
+  public void info(Marker marker, Map supplementalData, String msg);
+  public void info(Marker marker, Map supplementalData, String format,
+      Object... args);
+
+  public void warn(Map supplementalData);
+  public void warn(Map supplementalData, String msg);
+  public void warn(Map supplementalData, String format, Object... args);
+
+  public void warn(Marker marker, Map supplementalData);
+  public void warn(Marker marker, Map supplementalData, String msg);
+  public void warn(Marker marker, Map supplementalData, String format,
+      Object... args);
+
+  public void error(Map supplementalData);
+  public void error(Map supplementalData, String msg);
+  public void error(Map supplementalData, String format, Object... args);
+
+  public void error(Marker marker, Map supplementalData);
+  public void error(Marker marker, Map supplementalData, String msg);
+  public void error(Marker marker, Map supplementalData, String format,
+      Object... args);
 }

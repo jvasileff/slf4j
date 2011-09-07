@@ -33,6 +33,7 @@
 
 package org.slf4j.impl;
 
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
@@ -176,8 +177,8 @@ public final class JDK14LoggerAdapter extends AbstractLogger implements
     }
   }
 
-  protected void log(Marker marker, org.slf4j.helpers.Level level, String msg,
-      Throwable t) {
+  protected void log(Marker marker, org.slf4j.helpers.Level level, 
+      Map supplementalData, String msg, Throwable t) {
     log(marker, SELF, level.intValue(), msg, null, t);
   }
 }

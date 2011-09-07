@@ -33,6 +33,7 @@
 
 package org.slf4j;
 
+import java.util.Map;
 import java.util.logging.Level;
 
 import junit.framework.TestCase;
@@ -97,10 +98,10 @@ public class InvocationTest extends TestCase {
   
   public void testNull() {
     Logger logger = LoggerFactory.getLogger("testNull");
-    logger.debug(null);
-    logger.info(null);
-    logger.warn(null);
-    logger.error(null);
+    logger.debug((String) null);
+    logger.info((String) null);
+    logger.warn((String) null);
+    logger.error((String) null);
     
     Exception e = new Exception("This is a test exception.");
     logger.debug(null, e);
@@ -108,7 +109,15 @@ public class InvocationTest extends TestCase {
     logger.warn(null, e);
     logger.error(null, e);
   }
-  
+
+  public void testNull2() {
+    Logger logger = LoggerFactory.getLogger("testNull");
+    logger.debug((Map) null);
+    logger.info((Map) null);
+    logger.warn((Map) null);
+    logger.error((Map) null);
+  }
+ 
   public void testMarker() {
     Logger logger = LoggerFactory.getLogger("testMarker");
     Marker blue = MarkerFactory.getMarker("BLUE");

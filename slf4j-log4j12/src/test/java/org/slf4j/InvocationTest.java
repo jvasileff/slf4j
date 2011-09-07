@@ -100,11 +100,11 @@ public class InvocationTest extends TestCase {
 
   public void testNull() {
     Logger logger = LoggerFactory.getLogger("testNull");
-    logger.trace(null);
-    logger.debug(null);
-    logger.info(null);
-    logger.warn(null);
-    logger.error(null);
+    logger.trace((String) null);
+    logger.debug((String) null);
+    logger.info((String) null);
+    logger.warn((String) null);
+    logger.error((String) null);
 
     Exception e = new Exception("This is a test exception.");
     logger.debug(null, e);
@@ -113,7 +113,15 @@ public class InvocationTest extends TestCase {
     logger.error(null, e);
     assertEquals(8, listAppender.list.size());
   }
-  
+
+  public void testNull2() {
+    Logger logger = LoggerFactory.getLogger("testNull");
+    logger.debug((Map) null);
+    logger.info((Map) null);
+    logger.warn((Map) null);
+    logger.error((Map) null);
+  }
+
   // http://bugzilla.slf4j.org/show_bug.cgi?id=78
   public void testNullParameter_BUG78() {
     Logger logger = LoggerFactory.getLogger("testNullParameter_BUG78");

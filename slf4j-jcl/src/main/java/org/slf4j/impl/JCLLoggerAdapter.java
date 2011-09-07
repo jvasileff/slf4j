@@ -25,6 +25,8 @@
 
 package org.slf4j.impl;
 
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
@@ -69,7 +71,7 @@ public final class JCLLoggerAdapter extends AbstractLogger {
     }
   }
 
-  protected void log(Marker marker, Level level, String msg, Throwable t) {
+  protected void log(Marker marker, Level level, Map supplementalData, String msg, Throwable t) {
     switch (level) {
       case TRACE :
         if (t != null) {

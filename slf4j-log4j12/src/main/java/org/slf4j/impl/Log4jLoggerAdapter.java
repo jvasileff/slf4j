@@ -25,6 +25,7 @@
 package org.slf4j.impl;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import org.apache.log4j.Level;
 import org.slf4j.Logger;
@@ -130,8 +131,8 @@ public final class Log4jLoggerAdapter extends AbstractLogger implements
     }
   }
 
-  protected void log(Marker marker, org.slf4j.helpers.Level level, String msg,
-      Throwable t) {
+  protected void log(Marker marker, org.slf4j.helpers.Level level,
+      Map supplementalData, String msg, Throwable t) {
     log(marker, FQCN, level.intValue(), msg, null, t);
   }
 }

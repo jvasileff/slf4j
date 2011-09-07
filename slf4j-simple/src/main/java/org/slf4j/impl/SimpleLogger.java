@@ -33,6 +33,8 @@
 
 package org.slf4j.impl;
 
+import java.util.Map;
+
 import org.slf4j.Marker;
 import org.slf4j.helpers.AbstractLogger;
 import org.slf4j.helpers.Level;
@@ -135,7 +137,8 @@ public class SimpleLogger extends AbstractLogger {
     }
   }
 
-  protected void log(Marker marker, Level level, String msg, Throwable t) {
+  protected void log(Marker marker, Level level, Map supplementalData,
+      String msg, Throwable t) {
     switch (level) {
       case TRACE :
       case DEBUG :
