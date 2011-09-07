@@ -72,7 +72,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(null, TRACE, msg, t);
   }
 
-  public final void trace(String format, Object[] argArray) {
+  public final void trace(String format, Object... argArray) {
     maybeLog(null, TRACE, format, argArray);
   }
 
@@ -84,26 +84,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
     maybeLog(null, TRACE, format, arg1, arg2);
   }
 
-  public final void trace(String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(null, TRACE, format, arg1, arg2, arg3);
-  }
-
-  public final void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(null, TRACE, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(null, TRACE, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(null, TRACE, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void trace(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(null, TRACE, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
-  }
-
   public final void trace(Marker marker, String msg) {
     log(marker, TRACE, msg, null);
   }
@@ -112,7 +92,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(marker, TRACE, msg, t);
   }
 
-  public final void trace(Marker marker, String format, Object[] argArray) {
+  public final void trace(Marker marker, String format, Object... argArray) {
     maybeLog(marker, TRACE, format, argArray);
   }
 
@@ -122,26 +102,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
   public final void trace(Marker marker, String format, Object arg1, Object arg2) {
     maybeLog(marker, TRACE, format, arg1, arg2);
-  }
-
-  public final void trace(Marker marker, String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(marker, TRACE, format, arg1, arg2, arg3);
-  }
-
-  public final void trace(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(marker, TRACE, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void trace(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(marker, TRACE, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void trace(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(marker, TRACE, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void trace(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(marker, TRACE, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
   }
 
   // DEBUG
@@ -162,7 +122,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(null, DEBUG, msg, t);
   }
 
-  public final void debug(String format, Object[] argArray) {
+  public final void debug(String format, Object... argArray) {
     maybeLog(null, DEBUG, format, argArray);
   }
 
@@ -174,26 +134,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
     maybeLog(null, DEBUG, format, arg1, arg2);
   }
 
-  public final void debug(String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(null, DEBUG, format, arg1, arg2, arg3);
-  }
-
-  public final void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(null, DEBUG, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(null, DEBUG, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(null, DEBUG, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void debug(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(null, DEBUG, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
-  }
-
   public final void debug(Marker marker, String msg) {
     log(marker, DEBUG, msg, null);
   }
@@ -202,7 +142,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(marker, DEBUG, msg, t);
   }
 
-  public final void debug(Marker marker, String format, Object[] argArray) {
+  public final void debug(Marker marker, String format, Object... argArray) {
     maybeLog(marker, DEBUG, format, argArray);
   }
 
@@ -212,26 +152,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
   public final void debug(Marker marker, String format, Object arg1, Object arg2) {
     maybeLog(marker, DEBUG, format, arg1, arg2);
-  }
-
-  public final void debug(Marker marker, String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(marker, DEBUG, format, arg1, arg2, arg3);
-  }
-
-  public final void debug(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(marker, DEBUG, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void debug(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(marker, DEBUG, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void debug(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(marker, DEBUG, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void debug(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(marker, DEBUG, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
   }
 
   // INFO
@@ -252,7 +172,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(null, INFO, msg, t);
   }
 
-  public final void info(String format, Object[] argArray) {
+  public final void info(String format, Object... argArray) {
     maybeLog(null, INFO, format, argArray);
   }
 
@@ -264,26 +184,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
     maybeLog(null, INFO, format, arg1, arg2);
   }
 
-  public final void info(String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(null, INFO, format, arg1, arg2, arg3);
-  }
-
-  public final void info(String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(null, INFO, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void info(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(null, INFO, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void info(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(null, INFO, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void info(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(null, INFO, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
-  }
-
   public final void info(Marker marker, String msg) {
     log(marker, INFO, msg, null);
   }
@@ -292,7 +192,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(marker, INFO, msg, t);
   }
 
-  public final void info(Marker marker, String format, Object[] argArray) {
+  public final void info(Marker marker, String format, Object... argArray) {
     maybeLog(marker, INFO, format, argArray);
   }
 
@@ -302,26 +202,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
   public final void info(Marker marker, String format, Object arg1, Object arg2) {
     maybeLog(marker, INFO, format, arg1, arg2);
-  }
-
-  public final void info(Marker marker, String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(marker, INFO, format, arg1, arg2, arg3);
-  }
-
-  public final void info(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(marker, INFO, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void info(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(marker, INFO, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void info(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(marker, INFO, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void info(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(marker, INFO, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
   }
 
   // WARN
@@ -342,7 +222,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(null, WARN, msg, t);
   }
 
-  public final void warn(String format, Object[] argArray) {
+  public final void warn(String format, Object... argArray) {
     maybeLog(null, WARN, format, argArray);
   }
 
@@ -354,26 +234,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
     maybeLog(null, WARN, format, arg1, arg2);
   }
 
-  public final void warn(String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(null, WARN, format, arg1, arg2, arg3);
-  }
-
-  public final void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(null, WARN, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(null, WARN, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(null, WARN, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void warn(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(null, WARN, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
-  }
-
   public final void warn(Marker marker, String msg) {
     log(marker, WARN, msg, null);
   }
@@ -382,7 +242,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(marker, WARN, msg, t);
   }
 
-  public final void warn(Marker marker, String format, Object[] argArray) {
+  public final void warn(Marker marker, String format, Object... argArray) {
     maybeLog(marker, WARN, format, argArray);
   }
 
@@ -392,26 +252,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
   public final void warn(Marker marker, String format, Object arg1, Object arg2) {
     maybeLog(marker, WARN, format, arg1, arg2);
-  }
-
-  public final void warn(Marker marker, String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(marker, WARN, format, arg1, arg2, arg3);
-  }
-
-  public final void warn(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(marker, WARN, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void warn(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(marker, WARN, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void warn(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(marker, WARN, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void warn(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(marker, WARN, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
   }
 
   // ERROR
@@ -432,7 +272,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(null, ERROR, msg, t);
   }
 
-  public final void error(String format, Object[] argArray) {
+  public final void error(String format, Object... argArray) {
     maybeLog(null, ERROR, format, argArray);
   }
 
@@ -444,26 +284,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
     maybeLog(null, ERROR, format, arg1, arg2);
   }
 
-  public final void error(String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(null, ERROR, format, arg1, arg2, arg3);
-  }
-
-  public final void error(String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(null, ERROR, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void error(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(null, ERROR, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void error(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(null, ERROR, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void error(String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(null, ERROR, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
-  }
-
   public final void error(Marker marker, String msg) {
     log(marker, ERROR, msg, null);
   }
@@ -472,7 +292,7 @@ public abstract class AbstractLogger implements Logger, Serializable {
     log(marker, ERROR, msg, t);
   }
 
-  public final void error(Marker marker, String format, Object[] argArray) {
+  public final void error(Marker marker, String format, Object... argArray) {
     maybeLog(marker, ERROR, format, argArray);
   }
 
@@ -482,26 +302,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
   public final void error(Marker marker, String format, Object arg1, Object arg2) {
     maybeLog(marker, ERROR, format, arg1, arg2);
-  }
-
-  public final void error(Marker marker, String format, Object arg1, Object arg2, Object arg3) {
-    maybeLog(marker, ERROR, format, arg1, arg2, arg3);
-  }
-
-  public final void error(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4) {
-    maybeLog(marker, ERROR, format, arg1, arg2, arg3, arg4);
-  }
-
-  public final void error(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
-    maybeLog(marker, ERROR, format, arg1, arg2, arg3, arg4, arg5);
-  }
-
-  public final void error(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    maybeLog(marker, ERROR, format, arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-
-  public final void error(Marker marker, String format, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object... others) {
-    maybeLog(marker, ERROR, format, arg1, arg2, arg3, arg4, arg5, arg6, others);
   }
 
   // Private Methods
@@ -517,59 +317,6 @@ public abstract class AbstractLogger implements Logger, Serializable {
       Object arg2) {
     if (isEnabled(level)) {
       FormattingTuple ft = MessageFormatter.format(format, arg1, arg2);
-      log(marker, level, ft.getMessage(), ft.getThrowable());
-    }
-  }
-
-  private void maybeLog(Marker marker, Level level, String format, Object arg1,
-      Object arg2, Object arg3) {
-    if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
-    }
-  }
-
-  private void maybeLog(Marker marker, Level level, String format, Object arg1,
-      Object arg2, Object arg3, Object arg4) {
-    if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3, arg4});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
-    }
-  }
-
-  private void maybeLog(Marker marker, Level level, String format, Object arg1,
-      Object arg2, Object arg3, Object arg4, Object arg5) {
-    if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3, arg4, arg5});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
-    }
-  }
-
-  private void maybeLog(Marker marker, Level level, String format, Object arg1,
-      Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-    if (isEnabled(level)) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, new Object[]{
-          arg1, arg2, arg3, arg4, arg5, arg6});
-      log(marker, level, ft.getMessage(), ft.getThrowable());
-    }
-  }
-
-  private void maybeLog(Marker marker, Level level, String format, Object arg1,
-      Object arg2, Object arg3, Object arg4, Object arg5, Object arg6,
-      Object... others) {
-    if (isEnabled(level)) {
-      Object[] argArray = new Object[others.length + 6];
-      argArray[0] = arg1;
-      argArray[1] = arg2;
-      argArray[2] = arg3;
-      argArray[3] = arg4;
-      argArray[4] = arg5;
-      argArray[5] = arg6;
-      System.arraycopy(others, 0, argArray, 6, others.length);
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, argArray);
       log(marker, level, ft.getMessage(), ft.getThrowable());
     }
   }
