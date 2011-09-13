@@ -8,7 +8,7 @@ import org.slf4j.helpers.MessageFormatter;
 
 public final class StandardFormatter implements Formatter {
 
-  private static final StandardFormatter instance = new StandardFormatter(); 
+  private static final StandardFormatter instance = new StandardFormatter();
 
   private StandardFormatter() {
     // singleton
@@ -20,9 +20,5 @@ public final class StandardFormatter implements Formatter {
 
   public FormattingTuple arrayFormat(String message, Object[] args) {
     return MessageFormatter.arrayFormat(message, args);
-  }
-
-  public String format(Map<String, Object> supplementalData) {
-    return supplementalData == null ? null : supplementalData.toString();
   }
 }
