@@ -720,6 +720,10 @@ public interface Logger {
    */ 
   public void error(Marker marker, String msg, Throwable t);
 
+  public Logger withFormatter(Formatter formatter);
+
   public void log(Entry entry);
   public void log(String callerFQCN, Entry entry);
+  public Formatter getFormatter();
+
 }

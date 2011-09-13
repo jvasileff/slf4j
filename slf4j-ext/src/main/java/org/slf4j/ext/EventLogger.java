@@ -18,8 +18,7 @@ public class EventLogger {
 
   static Marker EVENT_MARKER = MarkerFactory.getMarker("EVENT");
 
-  private static LoggerWrapper eventLogger =
-    new LoggerWrapper(LoggerFactory.getLogger("EventLogger"), FQCN);
+  private static Logger eventLogger = LoggerFactory.getLogger("EventLogger");
 
   /**
    * There can only be a single EventLogger.
@@ -33,11 +32,11 @@ public class EventLogger {
    * @param data The EventData.
    */
   public static void logEvent(EventData data) {
-    if (eventLogger.instanceofLAL) {
-      ((LocationAwareLogger) eventLogger.logger).log(EVENT_MARKER, FQCN,
+    if (eventLogger instanceof LocationAwareLogger) {
+      ((LocationAwareLogger) eventLogger).log(EVENT_MARKER, FQCN,
           LocationAwareLogger.INFO_INT, data.toXML(), null, null);
     } else {
-      eventLogger.logger.info(EVENT_MARKER, data.toXML(), data);
+      eventLogger.info(EVENT_MARKER, data.toXML(), data);
     }
   }
 }

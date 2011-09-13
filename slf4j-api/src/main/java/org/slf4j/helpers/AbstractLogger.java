@@ -6,6 +6,7 @@ import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.LoggingProvider;
+import org.slf4j.formatters.StandardFormatter;
 
 public abstract class AbstractLogger extends LoggerImpl implements Logger,
     Serializable, LoggingProvider {
@@ -13,7 +14,7 @@ public abstract class AbstractLogger extends LoggerImpl implements Logger,
   private static final long serialVersionUID = 3237785459601004498L;
 
   protected AbstractLogger(String name) {
-    super(name);
+    super(name, StandardFormatter.getInstance());
     // would be better for the superclass to take the loggingProvider in the
     // constructor, but super(this) is not allowed.
     setLoggingProvider(this);
@@ -37,5 +38,8 @@ public abstract class AbstractLogger extends LoggerImpl implements Logger,
     // using getName() instead of this.name works even for
     // NOPLogger
     return LoggerFactory.getLogger(getName());
+
+    // FIXME: restore formatter
+    //return LoggerFactory.getLogger(getName()).withFormatter(formatter);
   }
 }

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import org.slf4j.formatters.StandardFormatter;
 import org.slf4j.helpers.LegacyLoggerWrapper;
 import org.slf4j.helpers.LoggerImpl;
 import org.slf4j.helpers.NOPLoggerFactory;
@@ -256,7 +257,8 @@ public final class LoggerFactory {
     if (logger instanceof LoggingProvider) {
       return logger;
     } else {
-      return new LoggerImpl(name, new LegacyLoggerWrapper(logger));
+      return new LoggerImpl(name, new LegacyLoggerWrapper(logger),
+          StandardFormatter.getInstance());
     }
   }
 

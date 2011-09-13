@@ -8,6 +8,7 @@ import static org.slf4j.helpers.Level.WARN;
 
 import java.io.Serializable;
 
+import org.slf4j.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggingProvider;
 import org.slf4j.Marker;
@@ -21,15 +22,19 @@ public class LoggerImpl implements Logger, LocationAwareLogger, Serializable {
   private static final String FQCN = LoggerImpl.class.getName();
 
   private final String name;
+  private final Formatter formatter;
   private LoggingProvider provider;
 
-  public LoggerImpl(String name, LoggingProvider provider) {
+  public LoggerImpl(String name, LoggingProvider provider,
+      Formatter formatter) {
     this.name = name;
     this.provider = provider;
+    this.formatter = formatter;
   }
 
-  public LoggerImpl(String name) {
+  public LoggerImpl(String name, Formatter formatter) {
     this.name = name;
+    this.formatter = formatter;
   }
 
   protected void setLoggingProvider(LoggingProvider provider) {
@@ -340,7 +345,7 @@ public class LoggerImpl implements Logger, LocationAwareLogger, Serializable {
       String format, Object arg) {
     if (provider.isEnabledInternal(marker, level)) {
       provider.logInternal(FQCN, new StandardEntry(marker, level, format,
-          new Object[] {arg}));
+          new Object[] {arg}, formatter));
     }
   }
 
@@ -348,7 +353,7 @@ public class LoggerImpl implements Logger, LocationAwareLogger, Serializable {
       String format, Object arg1, Object arg2) {
     if (provider.isEnabledInternal(marker, level)) {
       provider.logInternal(FQCN, new StandardEntry(marker, level, format,
-          new Object[] {arg1, arg2}));
+          new Object[] {arg1, arg2}, formatter));
     }
   }
 
@@ -356,8 +361,16 @@ public class LoggerImpl implements Logger, LocationAwareLogger, Serializable {
       String format, Object[] args) {
     if (provider.isEnabledInternal(marker, level)) {
       provider.logInternal(FQCN, new StandardEntry(marker, level, format,
-          args));
+          args, formatter));
     }
+  }
+
+  public Logger withFormatter(Formatter formatter) {
+    return new LoggerImpl(getName(), this.provider, formatter);
+  }
+
+  public Formatter getFormatter() {
+    return formatter;
   }
 
   public void log(Marker marker, String fqcn, int level, String message,

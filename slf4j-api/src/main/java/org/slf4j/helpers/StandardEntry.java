@@ -7,7 +7,6 @@ import org.slf4j.entries.FormattedMessageEntry;
 import org.slf4j.entries.MarkerAwareEntry;
 import org.slf4j.entries.ParameterAwareEntry;
 import org.slf4j.entries.ThrowableAwareEntry;
-import org.slf4j.formatters.StandardFormatter;
 import org.slf4j.helpers.FormattingTuple;
 
 public class StandardEntry implements Entry, MarkerAwareEntry,
@@ -21,14 +20,6 @@ public class StandardEntry implements Entry, MarkerAwareEntry,
   private FormattingTuple ft;
 
   public StandardEntry(
-      Marker marker, Level level,
-      String messagePattern, Object[] rawArgs) {
-
-    this(marker, level, messagePattern, rawArgs,
-        StandardFormatter.getInstance());
-  }
-
-  private StandardEntry(
       Marker marker, Level level,
       String messagePattern, Object[] rawArgs,
       Formatter formatter) {

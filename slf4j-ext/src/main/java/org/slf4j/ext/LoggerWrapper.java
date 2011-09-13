@@ -1,5 +1,6 @@
 package org.slf4j.ext;
 
+import org.slf4j.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
@@ -557,7 +558,20 @@ public class LoggerWrapper implements Logger {
 
   private void log(Level level, Marker marker, String format,
       Object[] argArray) {
-    logger.log(fqcn, new StandardEntry(marker, level, format, argArray));
+    logger.log(fqcn, new StandardEntry(marker, level, format, argArray,
+        logger.getFormatter()));
+  }
+
+  public Logger withFormatter(Formatter formatter) {
+    // TODO: test this.
+    // TODO: javadoc should recommend subclasses override this method returning
+    //    subclass rather than Logger
+    return new LoggerWrapper(logger.withFormatter(formatter),
+        LoggerWrapper.class.getName());
+  }
+ 
+  public Formatter getFormatter() {
+    return logger.getFormatter();
   }
 
   public void log(Entry entry) {

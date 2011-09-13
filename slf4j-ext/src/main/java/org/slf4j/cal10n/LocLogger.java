@@ -21,6 +21,7 @@
  */
 package org.slf4j.cal10n;
 
+import org.slf4j.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -171,5 +172,9 @@ public class LocLogger extends LoggerWrapper implements Logger {
     } else {
       logger.error(LOCALIZED, translatedMsg, mpo);
     }
+  }
+
+  public LocLogger withFormatter(Formatter formatter) {
+    return new LocLogger(logger.withFormatter(formatter), imc);
   }
 }

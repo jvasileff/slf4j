@@ -1,5 +1,6 @@
 package org.slf4j.ext;
 
+import org.slf4j.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -196,5 +197,9 @@ public class XLogger extends LoggerWrapper implements Logger {
     }
     sb.append(')');
     return sb.toString();
+  }
+
+  public XLogger withFormatter(Formatter formatter) {
+    return new XLogger(logger.withFormatter(formatter));
   }
 }
