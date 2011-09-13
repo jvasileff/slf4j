@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.ext.LoggerWrapper;
+import org.slf4j.ext.XLogger;
 import org.slf4j.spi.LocationAwareLogger;
 
 import ch.qos.cal10n.IMessageConveyor;
@@ -171,5 +172,4 @@ public class LocLogger extends LoggerWrapper implements Logger {
       logger.error(LOCALIZED, translatedMsg, mpo);
     }
   }
-
 }

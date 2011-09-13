@@ -1,5 +1,6 @@
 package org.slf4j.ext;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -18,7 +19,7 @@ public class EventLogger {
   static Marker EVENT_MARKER = MarkerFactory.getMarker("EVENT");
 
   private static LoggerWrapper eventLogger =
-      new LoggerWrapper(LoggerFactory.getLogger("EventLogger"), FQCN);
+    new LoggerWrapper(LoggerFactory.getLogger("EventLogger"), FQCN);
 
   /**
    * There can only be a single EventLogger.

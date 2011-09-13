@@ -25,6 +25,8 @@
 
 package org.slf4j;
 
+import org.slf4j.entries.Entry;
+
 /**
  * The org.slf4j.Logger interface is the main user entry point of SLF4J API. 
  * It is expected that logging takes place through concrete implementations 
@@ -132,7 +134,7 @@ public interface Logger {
    * 
    * @since 1.4
    */
-  public void trace(String format, Object[] argArray);
+  public void trace(String format, Object... argArray);
   
   /**
    * Log an exception (throwable) at the TRACE level with an
@@ -194,7 +196,7 @@ public interface Logger {
   public void trace(Marker marker, String format, Object arg1, Object arg2);
 
   /**
-   * This method is similar to {@link #trace(String, Object[])}
+   * This method is similar to {@link #trace(String, Object...)}
    * method except that the marker data is also taken into
    * consideration.
    *
@@ -204,7 +206,7 @@ public interface Logger {
    * 
    * @since 1.4
    */
-  public void trace(Marker marker, String format, Object[] argArray);
+  public void trace(Marker marker, String format, Object... argArray);
 
   
   /**
@@ -274,7 +276,7 @@ public interface Logger {
    * @param format the format string
    * @param argArray an array of arguments
    */
-  public void debug(String format, Object[] argArray);
+  public void debug(String format, Object... argArray);
   
   /**
    * Log an exception (throwable) at the DEBUG level with an
@@ -326,7 +328,7 @@ public interface Logger {
   public void debug(Marker marker, String format, Object arg1, Object arg2);
 
   /**
-   * This method is similar to {@link #debug(String, Object[])}
+   * This method is similar to {@link #debug(String, Object...)}
    * method except that the marker data is also taken into
    * consideration.
    *
@@ -334,7 +336,7 @@ public interface Logger {
    * @param format  the format string
    * @param argArray an array of arguments
    */
-  public void debug(Marker marker, String format, Object[] argArray);
+  public void debug(Marker marker, String format, Object... argArray);
 
   
   /**
@@ -400,7 +402,7 @@ public interface Logger {
    * @param format the format string
    * @param argArray an array of arguments
    */
-  public void info(String format, Object[] argArray);
+  public void info(String format, Object... argArray);
   
   /**
    * Log an exception (throwable) at the INFO level with an
@@ -451,7 +453,7 @@ public interface Logger {
   
   
   /**
-   * This method is similar to {@link #info(String, Object[])}
+   * This method is similar to {@link #info(String, Object...)}
    * method except that the marker data is also taken into
    * consideration.
    *
@@ -459,7 +461,7 @@ public interface Logger {
    * @param format  the format string
    * @param argArray an array of arguments
    */
-  public void info(Marker marker, String format, Object[] argArray);
+  public void info(Marker marker, String format, Object... argArray);
 
   
   /**
@@ -510,7 +512,7 @@ public interface Logger {
    * @param format the format string
    * @param argArray an array of arguments
    */
-  public void warn(String format, Object[] argArray);
+  public void warn(String format, Object... argArray);
   
   /**
    * Log a message at the WARN level according to the specified format
@@ -574,7 +576,7 @@ public interface Logger {
   public void warn(Marker marker, String format, Object arg1, Object arg2);  
   
   /**
-   * This method is similar to {@link #warn(String, Object[])}
+   * This method is similar to {@link #warn(String, Object...)}
    * method except that the marker data is also taken into
    * consideration.
    *
@@ -582,7 +584,7 @@ public interface Logger {
    * @param format  the format string
    * @param argArray an array of arguments
    */
-  public void warn(Marker marker, String format, Object[] argArray);
+  public void warn(Marker marker, String format, Object... argArray);
 
   
   /**
@@ -645,7 +647,7 @@ public interface Logger {
    * @param format the format string
    * @param argArray an array of arguments
    */
-  public void error(String format, Object[] argArray);
+  public void error(String format, Object... argArray);
   
   /**
    * Log an exception (throwable) at the ERROR level with an
@@ -696,7 +698,7 @@ public interface Logger {
   public void error(Marker marker, String format, Object arg1, Object arg2);  
   
   /**
-   * This method is similar to {@link #error(String, Object[])}
+   * This method is similar to {@link #error(String, Object...)}
    * method except that the marker data is also taken into
    * consideration.
    *
@@ -704,7 +706,7 @@ public interface Logger {
    * @param format  the format string
    * @param argArray an array of arguments
    */
-  public void error(Marker marker, String format, Object[] argArray);
+  public void error(Marker marker, String format, Object... argArray);
 
   
   /**
@@ -718,4 +720,6 @@ public interface Logger {
    */ 
   public void error(Marker marker, String msg, Throwable t);
 
+  public void log(Entry entry);
+  public void log(String callerFQCN, Entry entry);
 }

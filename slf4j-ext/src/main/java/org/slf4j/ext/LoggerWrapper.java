@@ -2,8 +2,10 @@ package org.slf4j.ext;
 
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.helpers.FormattingTuple;
-import org.slf4j.helpers.MessageFormatter;
+import org.slf4j.entries.Entry;
+import org.slf4j.helpers.Level;
+import org.slf4j.helpers.SimpleEntry;
+import org.slf4j.helpers.StandardEntry;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**
@@ -20,13 +22,13 @@ public class LoggerWrapper implements Logger {
   // (homonyms)
   // a LoggerWrapper should not contain any state beyond
   // the Logger instance it wraps.
-  // Note that 'instanceofLAL' directly depends on Logger.
   // fqcn depend on the caller, but its value would not be different
   // between successive invocations of a factory class
 
   protected final Logger logger;
   final String fqcn;
   // is this logger instance a LocationAwareLogger
+  @Deprecated
   protected final boolean instanceofLAL;
 
   public LoggerWrapper(Logger logger, String fqcn) {
@@ -151,7 +153,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void trace(String format, Object[] objects) {
+  public void trace(String format, Object... objects) {
     maybeLog(Level.TRACE, null, format, objects);
   }
 
@@ -187,7 +189,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void trace(Marker marker, String format, Object[] objects) {
+  public void trace(Marker marker, String format, Object... objects) {
     maybeLog(Level.TRACE, marker, format, objects);
   }
 
@@ -226,7 +228,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void debug(String format, Object[] objects) {
+  public void debug(String format, Object... objects) {
     maybeLog(Level.DEBUG, null, format, objects);
   }
 
@@ -262,7 +264,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void debug(Marker marker, String format, Object[] objects) {
+  public void debug(Marker marker, String format, Object... objects) {
     maybeLog(Level.DEBUG, marker, format, objects);
   }
 
@@ -301,7 +303,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void info(String format, Object[] objects) {
+  public void info(String format, Object... objects) {
     maybeLog(Level.INFO, null, format, objects);
   }
 
@@ -337,7 +339,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void info(Marker marker, String format, Object[] objects) {
+  public void info(Marker marker, String format, Object... objects) {
     maybeLog(Level.INFO, marker, format, objects);
   }
 
@@ -376,7 +378,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void warn(String format, Object[] objects) {
+  public void warn(String format, Object... objects) {
     maybeLog(Level.WARN, null, format, objects);
   }
 
@@ -412,7 +414,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void warn(Marker marker, String format, Object[] objects) {
+  public void warn(Marker marker, String format, Object... objects) {
     maybeLog(Level.WARN, marker, format, objects);
   }
 
@@ -451,7 +453,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void error(String format, Object[] objects) {
+  public void error(String format, Object... objects) {
     maybeLog(Level.ERROR, null, format, objects);
   }
 
@@ -487,7 +489,7 @@ public class LoggerWrapper implements Logger {
   /**
    * Delegate to the appropriate method of the underlying logger.
    */
-  public void error(Marker marker, String format, Object[] objects) {
+  public void error(Marker marker, String format, Object... objects) {
     maybeLog(Level.ERROR, marker, format, objects);
   }
 
@@ -527,14 +529,14 @@ public class LoggerWrapper implements Logger {
   private void maybeLog(Level level, Marker marker, String format,
       Object arg) {
     if (isEnabled(level)) {
-      log(level, marker, format, arg);
+      log(level, marker, format, new Object[] {arg});
     }
   }
 
   private void maybeLog(Level level, Marker marker, String format, Object arg1,
       Object arg2) {
     if (isEnabled(level)) {
-      log(level, marker, format, arg1, arg2);
+      log(level, marker, format, new Object[] {arg1, arg2});
     }
   }
 
@@ -546,150 +548,23 @@ public class LoggerWrapper implements Logger {
   }
 
   private void log(Level level, Marker marker, String format) {
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
-          format, null, null);
-    } else {
-      switch (level) {
-        case TRACE :
-          logger.trace(marker, format);
-          break;
-        case DEBUG :
-          logger.debug(marker, format);
-          break;
-        case INFO :
-          logger.info(marker, format);
-          break;
-        case WARN :
-          logger.warn(marker, format);
-          break;
-        case ERROR :
-          logger.error(marker, format);
-          break;
-      }
-    }
+    logger.log(fqcn, new SimpleEntry(marker, level, format, null));
   }
 
   private void log(Level level, Marker marker, String format, Throwable t) {
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
-          format, null, t);
-    } else {
-      switch (level) {
-        case TRACE :
-          logger.trace(marker, format, t);
-          break;
-        case DEBUG :
-          logger.debug(marker, format, t);
-          break;
-        case INFO :
-          logger.info(marker, format, t);
-          break;
-        case WARN :
-          logger.warn(marker, format, t);
-          break;
-        case ERROR :
-          logger.error(marker, format, t);
-          break;
-      }
-    }
-  }
-
-  private void log(Level level, Marker marker, String format, Object arg) {
-    if (instanceofLAL) {
-      FormattingTuple ft = MessageFormatter.format(format, arg);
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
-          ft.getMessage(), ft.getArgArray(), ft.getThrowable());
-    } else {
-      switch (level) {
-        case TRACE :
-          logger.trace(marker, format, arg);
-          break;
-        case DEBUG :
-          logger.debug(marker, format, arg);
-          break;
-        case INFO :
-          logger.info(marker, format, arg);
-          break;
-        case WARN :
-          logger.warn(marker, format, arg);
-          break;
-        case ERROR :
-          logger.error(marker, format, arg);
-          break;
-      }
-    }
-  }
-
-  private void log(Level level, Marker marker, String format, Object arg1,
-      Object arg2) {
-    if (instanceofLAL) {
-      FormattingTuple ft = MessageFormatter.format(format, arg1, arg2);
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
-          ft.getMessage(), ft.getArgArray(), ft.getThrowable());
-    } else {
-      switch (level) {
-        case TRACE :
-          logger.trace(marker, format, arg1, arg2);
-          break;
-        case DEBUG :
-          logger.debug(marker, format, arg1, arg2);
-          break;
-        case INFO :
-          logger.info(marker, format, arg1, arg2);
-          break;
-        case WARN :
-          logger.warn(marker, format, arg1, arg2);
-          break;
-        case ERROR :
-          logger.error(marker, format, arg1, arg2);
-          break;
-      }
-    }
+    logger.log(fqcn, new SimpleEntry(marker, level, format, t));
   }
 
   private void log(Level level, Marker marker, String format,
       Object[] argArray) {
-    if (instanceofLAL) {
-      FormattingTuple ft = MessageFormatter.arrayFormat(format, argArray);
-      ((LocationAwareLogger) logger).log(marker, fqcn, level.getIntId(),
-          ft.getMessage(), argArray, ft.getThrowable());
-    } else {
-      switch (level) {
-        case TRACE :
-          logger.trace(marker, format, argArray);
-          break;
-        case DEBUG :
-          logger.debug(marker, format, argArray);
-          break;
-        case INFO :
-          logger.info(marker, format, argArray);
-          break;
-        case WARN :
-          logger.warn(marker, format, argArray);
-          break;
-        case ERROR :
-          logger.error(marker, format, argArray);
-          break;
-      }
-    }
+    logger.log(fqcn, new StandardEntry(marker, level, format, argArray));
   }
 
-  private enum Level {
-    TRACE(LocationAwareLogger.TRACE_INT),
-    DEBUG(LocationAwareLogger.DEBUG_INT),
-    INFO(LocationAwareLogger.INFO_INT),
-    WARN(LocationAwareLogger.WARN_INT),
-    ERROR(LocationAwareLogger.ERROR_INT);
+  public void log(Entry entry) {
+    logger.log(entry);
+  }
 
-    private int intId;
-
-    private Level(int intId) {
-      this.intId = intId;
-    }
-
-    public int getIntId() {
-      return intId;
-    }
+  public void log(String callerFQCN, Entry entry) {
+    logger.log(callerFQCN, entry);
   }
 }

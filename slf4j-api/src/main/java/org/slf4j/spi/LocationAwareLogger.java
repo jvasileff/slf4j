@@ -37,6 +37,7 @@ import org.slf4j.Marker;
  * @author Ceki Gulcu
  * @since 1.3
  */
+@Deprecated
 public interface LocationAwareLogger extends Logger {
 
   final public int TRACE_INT = 00;
@@ -55,6 +56,7 @@ public interface LocationAwareLogger extends Logger {
    * @param message
    * @param t
    */  
-  public void log(Marker marker, String fqcn, int level, String message, Object[] argArray, Throwable t);
-  
+  @Deprecated
+  public void log(Marker marker, String fqcn, int level, String message,
+      Object[] argArray, Throwable t);
 }

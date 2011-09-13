@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import org.slf4j.helpers.LegacyLoggerWrapper;
+import org.slf4j.helpers.LoggerImpl;
 import org.slf4j.helpers.NOPLoggerFactory;
 import org.slf4j.helpers.SubstituteLoggerFactory;
 import org.slf4j.helpers.Util;
@@ -250,7 +252,12 @@ public final class LoggerFactory {
    */
   public static Logger getLogger(String name) {
     ILoggerFactory iLoggerFactory = getILoggerFactory();
-    return iLoggerFactory.getLogger(name);
+    Logger logger = iLoggerFactory.getLogger(name);
+    if (logger instanceof LoggingProvider) {
+      return logger;
+    } else {
+      return new LoggerImpl(name, new LegacyLoggerWrapper(logger));
+    }
   }
 
   /**
