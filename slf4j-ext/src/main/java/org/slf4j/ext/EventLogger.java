@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.slf4j.spi.LocationAwareLogger;
 
 /**
  * Simple Logger used to log events. All events are directed to a logger named "EventLogger"
@@ -32,11 +31,6 @@ public class EventLogger {
    * @param data The EventData.
    */
   public static void logEvent(EventData data) {
-    if (eventLogger instanceof LocationAwareLogger) {
-      ((LocationAwareLogger) eventLogger).log(EVENT_MARKER, FQCN,
-          LocationAwareLogger.INFO_INT, data.toXML(), null, null);
-    } else {
-      eventLogger.info(EVENT_MARKER, data.toXML(), data);
-    }
+    eventLogger.log(FQCN, new EventEntry(data));
   }
 }
