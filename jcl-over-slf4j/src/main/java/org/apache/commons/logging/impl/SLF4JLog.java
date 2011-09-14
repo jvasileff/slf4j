@@ -22,6 +22,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.LoggerHelper;
 
 /**
  * Implementation of {@link Log org.apache.commons.logging.Log} interface which
@@ -35,7 +36,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SLF4JLog implements Log, Serializable {
 
-  private static final long serialVersionUID = 680728617011167209L;
+  private static final long serialVersionUID = -2379157579039314822L;
 
   // used to store this logger's name to recreate it after serialization
   protected String name;
@@ -44,9 +45,19 @@ public class SLF4JLog implements Log, Serializable {
   // logger instance is transient
   private transient Logger logger;
 
+  private static final String FQCN = SLF4JLog.class.getName();
+
   SLF4JLog(Logger logger) {
     this.logger = logger;
     this.name = logger.getName();
+  }
+
+  /**
+   * Delegates to the <code>isTraceEnabled<code> method of the wrapped 
+   * <code>org.slf4j.Logger</code> instance.
+   */
+  public boolean isTraceEnabled() {
+    return logger.isTraceEnabled();
   }
 
   /**
@@ -54,6 +65,20 @@ public class SLF4JLog implements Log, Serializable {
    */
   public boolean isDebugEnabled() {
     return logger.isDebugEnabled();
+  }
+
+  /**
+   * Directly delegates to the wrapped <code>org.slf4j.Logger</code> instance.
+   */
+  public boolean isInfoEnabled() {
+    return logger.isInfoEnabled();
+  }
+
+  /**
+   * Directly delegates to the wrapped <code>org.slf4j.Logger</code> instance.
+   */
+  public boolean isWarnEnabled() {
+    return logger.isWarnEnabled();
   }
 
   /**
@@ -72,28 +97,6 @@ public class SLF4JLog implements Log, Serializable {
   }
 
   /**
-   * Directly delegates to the wrapped <code>org.slf4j.Logger</code> instance.
-   */
-  public boolean isInfoEnabled() {
-    return logger.isInfoEnabled();
-  }
-
-  /**
-   * Delegates to the <code>isDebugEnabled<code> method of the wrapped 
-   * <code>org.slf4j.Logger</code> instance.
-   */
-  public boolean isTraceEnabled() {
-    return logger.isTraceEnabled();
-  }
-
-  /**
-   * Directly delegates to the wrapped <code>org.slf4j.Logger</code> instance.
-   */
-  public boolean isWarnEnabled() {
-    return logger.isWarnEnabled();
-  }
-
-  /**
    * Converts the input parameter to String and then delegates to the debug
    * method of the wrapped <code>org.slf4j.Logger</code> instance.
    * 
@@ -101,7 +104,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void trace(Object message) {
-    logger.trace(String.valueOf(message));
+    LoggerHelper.trace(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -114,7 +117,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void trace(Object message, Throwable t) {
-    logger.trace(String.valueOf(message), t);
+    LoggerHelper.trace(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -125,7 +128,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void debug(Object message) {
-    logger.debug(String.valueOf(message));
+    LoggerHelper.debug(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -138,7 +141,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void debug(Object message, Throwable t) {
-    logger.debug(String.valueOf(message), t);
+    LoggerHelper.debug(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -149,7 +152,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void info(Object message) {
-    logger.info(String.valueOf(message));
+    LoggerHelper.info(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -162,7 +165,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void info(Object message, Throwable t) {
-    logger.info(String.valueOf(message), t);
+    LoggerHelper.info(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -173,7 +176,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void warn(Object message) {
-    logger.warn(String.valueOf(message));
+    LoggerHelper.warn(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -186,7 +189,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void warn(Object message, Throwable t) {
-    logger.warn(String.valueOf(message), t);
+    LoggerHelper.warn(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -197,7 +200,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void error(Object message) {
-    logger.error(String.valueOf(message));
+    LoggerHelper.error(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -210,7 +213,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void error(Object message, Throwable t) {
-    logger.error(String.valueOf(message), t);
+    LoggerHelper.error(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -221,7 +224,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void fatal(Object message) {
-    logger.error(String.valueOf(message));
+    LoggerHelper.error(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -234,7 +237,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void fatal(Object message, Throwable t) {
-    logger.error(String.valueOf(message), t);
+    LoggerHelper.error(FQCN, logger, String.valueOf(message), t);
   }
 
   /**

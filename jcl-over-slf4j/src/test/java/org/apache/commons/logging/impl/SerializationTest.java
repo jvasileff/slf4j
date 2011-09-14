@@ -11,7 +11,6 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.slf4j.impl.JDK14LoggerFactory;
-import org.slf4j.spi.LocationAwareLogger;
 
 public class SerializationTest extends TestCase {
 
@@ -56,11 +55,4 @@ public class SerializationTest extends TestCase {
     verify();
   }
 
-  public void testLocationAware() throws Exception {
-    JDK14LoggerFactory factory = new JDK14LoggerFactory();
-    SLF4JLocationAwareLog log = new SLF4JLocationAwareLog(
-        (LocationAwareLogger) factory.getLogger("x"));
-    oos.writeObject(log);
-    verify();
-  }
 }
