@@ -9,9 +9,9 @@ import static org.slf4j.helpers.Level.WARN;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
-public class LoggerHelper {
+public class LoggerUtils {
 
-  private LoggerHelper() {
+  private LoggerUtils() {
     // no instances;
   }
 

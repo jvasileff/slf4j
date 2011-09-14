@@ -20,7 +20,7 @@ import static org.slf4j.helpers.Level.*;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.slf4j.helpers.LoggerHelper;
+import org.slf4j.helpers.LoggerUtils;
 import org.slf4j.helpers.SimpleEntry;
 
 /**
@@ -171,7 +171,7 @@ public class Category {
   void differentiatedLog(Marker marker, String fqcn,
       org.slf4j.helpers.Level level, Object message, Throwable t) {
 
-    if (LoggerHelper.isEnabled(slf4jLogger, marker, level)) {
+    if (LoggerUtils.isEnabled(slf4jLogger, marker, level)) {
         String m = convertToString(message);
         slf4jLogger.log(fqcn, new SimpleEntry(marker, level, m, t));
     }

@@ -22,7 +22,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.LoggerHelper;
+import org.slf4j.helpers.LoggerUtils;
 
 /**
  * Implementation of {@link Log org.apache.commons.logging.Log} interface which
@@ -104,7 +104,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void trace(Object message) {
-    LoggerHelper.trace(FQCN, logger, String.valueOf(message));
+    LoggerUtils.trace(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -117,7 +117,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void trace(Object message, Throwable t) {
-    LoggerHelper.trace(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.trace(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -128,7 +128,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void debug(Object message) {
-    LoggerHelper.debug(FQCN, logger, String.valueOf(message));
+    LoggerUtils.debug(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -141,7 +141,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void debug(Object message, Throwable t) {
-    LoggerHelper.debug(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.debug(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -152,7 +152,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void info(Object message) {
-    LoggerHelper.info(FQCN, logger, String.valueOf(message));
+    LoggerUtils.info(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -165,7 +165,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void info(Object message, Throwable t) {
-    LoggerHelper.info(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.info(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -176,7 +176,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void warn(Object message) {
-    LoggerHelper.warn(FQCN, logger, String.valueOf(message));
+    LoggerUtils.warn(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -189,7 +189,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void warn(Object message, Throwable t) {
-    LoggerHelper.warn(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.warn(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -200,7 +200,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void error(Object message) {
-    LoggerHelper.error(FQCN, logger, String.valueOf(message));
+    LoggerUtils.error(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -213,7 +213,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void error(Object message, Throwable t) {
-    LoggerHelper.error(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.error(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
@@ -224,7 +224,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void fatal(Object message) {
-    LoggerHelper.error(FQCN, logger, String.valueOf(message));
+    LoggerUtils.error(FQCN, logger, String.valueOf(message));
   }
 
   /**
@@ -237,7 +237,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void fatal(Object message, Throwable t) {
-    LoggerHelper.error(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.error(FQCN, logger, String.valueOf(message), t);
   }
 
   /**
