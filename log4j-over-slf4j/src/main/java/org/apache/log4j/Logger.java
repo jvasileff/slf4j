@@ -16,7 +16,7 @@
 
 package org.apache.log4j;
 
-import org.slf4j.spi.LocationAwareLogger;
+import static org.slf4j.helpers.Level.*;
 
 /**
  * <p>
@@ -65,7 +65,7 @@ public class Logger extends Category {
    * Delegates to {@link org.slf4j.Logger#trace(String)} method in SLF4J.
    */
   public void trace(Object message) {
-    differentiatedLog(null, LOGGER_FQCN, LocationAwareLogger.TRACE_INT, message, null);
+    differentiatedLog(null, LOGGER_FQCN, TRACE, message, null);
   }
 
   /**
@@ -73,7 +73,7 @@ public class Logger extends Category {
    * method in SLF4J.
    */
   public void trace(Object message, Throwable t) {
-    differentiatedLog(null, LOGGER_FQCN, LocationAwareLogger.TRACE_INT, message, null);
+    differentiatedLog(null, LOGGER_FQCN, TRACE, message, t);
   }
 
 }
