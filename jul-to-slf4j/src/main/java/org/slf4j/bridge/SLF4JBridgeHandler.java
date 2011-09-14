@@ -41,7 +41,8 @@ import java.util.logging.LogRecord;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.spi.LocationAwareLogger;
+import org.slf4j.helpers.LoggerHelper;
+import org.slf4j.helpers.SimpleEntry;
 
 // Based on http://bugzilla.slf4j.org/show_bug.cgi?id=38
 
@@ -190,39 +191,25 @@ public class SLF4JBridgeHandler extends Handler {
     return LoggerFactory.getLogger(name);
   }
 
-  protected void callLocationAwareLogger(LocationAwareLogger lal,
-      LogRecord record) {
+  protected void callLogger(Logger logger, LogRecord record) {
     int julLevelValue = record.getLevel().intValue();
-    int slf4jLevel;
+    org.slf4j.helpers.Level slf4jLevel;
 
     if (julLevelValue <= TRACE_LEVEL_THRESHOLD) {
-      slf4jLevel = LocationAwareLogger.TRACE_INT;
+      slf4jLevel = org.slf4j.helpers.Level.TRACE;
     } else if (julLevelValue <= DEBUG_LEVEL_THRESHOLD) {
-      slf4jLevel = LocationAwareLogger.DEBUG_INT;
+      slf4jLevel = org.slf4j.helpers.Level.DEBUG;
     } else if (julLevelValue <= INFO_LEVEL_THRESHOLD) {
-      slf4jLevel = LocationAwareLogger.INFO_INT;
+      slf4jLevel = org.slf4j.helpers.Level.INFO;
     } else if (julLevelValue <= WARN_LEVEL_THRESHOLD) {
-      slf4jLevel = LocationAwareLogger.WARN_INT;
+      slf4jLevel = org.slf4j.helpers.Level.WARN;
     } else {
-      slf4jLevel = LocationAwareLogger.ERROR_INT;
+      slf4jLevel = org.slf4j.helpers.Level.ERROR;
     }
     String i18nMessage = getMessageI18N(record);
-    lal.log(null, FQCN, slf4jLevel, i18nMessage, null, record.getThrown());
-  }
-
-  protected void callPlainSLF4JLogger(Logger slf4jLogger, LogRecord record) {
-    String i18nMessage = getMessageI18N(record);
-    int julLevelValue = record.getLevel().intValue();
-    if (julLevelValue <= TRACE_LEVEL_THRESHOLD) {
-      slf4jLogger.trace(i18nMessage, record.getThrown());
-    } else if (julLevelValue <= DEBUG_LEVEL_THRESHOLD) {
-      slf4jLogger.debug(i18nMessage, record.getThrown());
-    } else if (julLevelValue <= INFO_LEVEL_THRESHOLD) {
-      slf4jLogger.info(i18nMessage, record.getThrown());
-    } else if (julLevelValue <= WARN_LEVEL_THRESHOLD) {
-      slf4jLogger.warn(i18nMessage, record.getThrown());
-    } else {
-      slf4jLogger.error(i18nMessage, record.getThrown());
+    if (LoggerHelper.isEnabled(logger, null, slf4jLevel)) {
+        logger.log(FQCN, new SimpleEntry(null, slf4jLevel, i18nMessage,
+            record.getThrown()));
     }
   }
 
@@ -281,11 +268,7 @@ public class SLF4JBridgeHandler extends Handler {
     if (message == null) {
       message = "";
     }
-    if (slf4jLogger instanceof LocationAwareLogger) {
-      callLocationAwareLogger((LocationAwareLogger) slf4jLogger, record);
-    } else {
-      callPlainSLF4JLogger(slf4jLogger, record);
-    }
+    callLogger(slf4jLogger, record);
   }
 
 }
