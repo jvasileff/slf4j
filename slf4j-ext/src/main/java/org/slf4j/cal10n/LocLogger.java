@@ -26,11 +26,9 @@ import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.ext.LoggerWrapper;
-import org.slf4j.ext.XLogger;
-import org.slf4j.spi.LocationAwareLogger;
+import org.slf4j.helpers.Level;
 
 import ch.qos.cal10n.IMessageConveyor;
-import ch.qos.cal10n.MessageParameterObj;
 
 /**
  * A logger specialized in localized logging. Localization is based in the <a
@@ -71,15 +69,7 @@ public class LocLogger extends LoggerWrapper implements Logger {
     if (!logger.isTraceEnabled()) {
       return;
     }
-    String translatedMsg = imc.getMessage(key, args);
-    MessageParameterObj mpo = new MessageParameterObj(key, args);
-
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(LOCALIZED, FQCN,
-          LocationAwareLogger.TRACE_INT, translatedMsg, args, null);
-    } else {
-      logger.trace(LOCALIZED, translatedMsg, mpo);
-    }
+    logger.log(FQCN, new LocLoggerEntry(Level.TRACE, imc, key, args));
   }
 
   /**
@@ -94,15 +84,7 @@ public class LocLogger extends LoggerWrapper implements Logger {
     if (!logger.isDebugEnabled()) {
       return;
     }
-    String translatedMsg = imc.getMessage(key, args);
-    MessageParameterObj mpo = new MessageParameterObj(key, args);
-
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(LOCALIZED, FQCN,
-          LocationAwareLogger.DEBUG_INT, translatedMsg, args, null);
-    } else {
-      logger.debug(LOCALIZED, translatedMsg, mpo);
-    }
+    logger.log(FQCN, new LocLoggerEntry(Level.DEBUG, imc, key, args));
   }
 
   /**
@@ -117,15 +99,7 @@ public class LocLogger extends LoggerWrapper implements Logger {
     if (!logger.isInfoEnabled()) {
       return;
     }
-    String translatedMsg = imc.getMessage(key, args);
-    MessageParameterObj mpo = new MessageParameterObj(key, args);
-
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(LOCALIZED, FQCN,
-          LocationAwareLogger.INFO_INT, translatedMsg, args, null);
-    } else {
-      logger.info(LOCALIZED, translatedMsg, mpo);
-    }
+    logger.log(FQCN, new LocLoggerEntry(Level.INFO, imc, key, args));
   }
 
   /**
@@ -140,15 +114,7 @@ public class LocLogger extends LoggerWrapper implements Logger {
     if (!logger.isWarnEnabled()) {
       return;
     }
-    String translatedMsg = imc.getMessage(key, args);
-    MessageParameterObj mpo = new MessageParameterObj(key, args);
-
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(LOCALIZED, FQCN,
-          LocationAwareLogger.WARN_INT, translatedMsg, args, null);
-    } else {
-      logger.warn(LOCALIZED, translatedMsg, mpo);
-    }
+    logger.log(FQCN, new LocLoggerEntry(Level.WARN, imc, key, args));
   }
 
   /**
@@ -163,15 +129,7 @@ public class LocLogger extends LoggerWrapper implements Logger {
     if (!logger.isErrorEnabled()) {
       return;
     }
-    String translatedMsg = imc.getMessage(key, args);
-    MessageParameterObj mpo = new MessageParameterObj(key, args);
-
-    if (instanceofLAL) {
-      ((LocationAwareLogger) logger).log(LOCALIZED, FQCN,
-          LocationAwareLogger.ERROR_INT, translatedMsg, args, null);
-    } else {
-      logger.error(LOCALIZED, translatedMsg, mpo);
-    }
+    logger.log(FQCN, new LocLoggerEntry(Level.ERROR, imc, key, args));
   }
 
   public LocLogger withFormatter(Formatter formatter) {
