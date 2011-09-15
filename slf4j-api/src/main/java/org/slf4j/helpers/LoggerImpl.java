@@ -16,7 +16,7 @@ import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
 import org.slf4j.spi.LocationAwareLogger;
 
-public class LoggerImpl implements Logger, LocationAwareLogger, Serializable {
+public class LoggerImpl implements LocationAwareLogger, Serializable {
 
   private static final long serialVersionUID = 3237785459601004498L;
 

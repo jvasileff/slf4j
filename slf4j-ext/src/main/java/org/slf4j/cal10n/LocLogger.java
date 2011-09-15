@@ -36,7 +36,7 @@ import ch.qos.cal10n.IMessageConveyor;
  * 
  * @author Ceki G&uuml;lc&uuml;
  */
-public class LocLogger extends LoggerWrapper implements Logger {
+public class LocLogger extends LoggerWrapper {
 
   private static final String FQCN = LocLogger.class.getName();
 

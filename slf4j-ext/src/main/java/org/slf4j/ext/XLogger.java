@@ -16,7 +16,7 @@ import org.slf4j.spi.LocationAwareLogger;
  * @author Ralph Goers
  * @author Ceki G&uuml;lc&uuml;
  */
-public class XLogger extends LoggerWrapper implements Logger {
+public class XLogger extends LoggerWrapper {
 
   private static final String FQCN = XLogger.class.getName();
   static Marker FLOW_MARKER = MarkerFactory.getMarker("FLOW");
