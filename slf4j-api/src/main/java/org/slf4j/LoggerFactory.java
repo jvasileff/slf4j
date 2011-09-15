@@ -35,6 +35,7 @@ import org.slf4j.helpers.NOPLoggerFactory;
 import org.slf4j.helpers.SubstituteLoggerFactory;
 import org.slf4j.helpers.Util;
 import org.slf4j.impl.StaticLoggerBinder;
+import org.slf4j.spi.LoggerAdapter;
 
 /**
  * The <code>LoggerFactory</code> is a utility class producing Loggers for
@@ -254,7 +255,7 @@ public final class LoggerFactory {
   public static Logger getLogger(String name) {
     ILoggerFactory iLoggerFactory = getILoggerFactory();
     Logger logger = iLoggerFactory.getLogger(name);
-    if (logger instanceof LoggingProvider) {
+    if (logger instanceof LoggerAdapter) {
       return logger;
     } else {
       return new LoggerImpl(new LegacyLoggerWrapper(logger),

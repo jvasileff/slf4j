@@ -11,10 +11,10 @@ import java.io.Serializable;
 import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
-import org.slf4j.LoggingProvider;
 import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
 import org.slf4j.spi.LocationAwareLogger;
+import org.slf4j.spi.LoggerAdapter;
 
 public class LoggerImpl implements LocationAwareLogger, Serializable {
 
@@ -23,9 +23,9 @@ public class LoggerImpl implements LocationAwareLogger, Serializable {
   private static final String FQCN = LoggerImpl.class.getName();
 
   private final Formatter formatter;
-  private LoggingProvider provider;
+  private LoggerAdapter provider;
 
-  public LoggerImpl(LoggingProvider provider, Formatter formatter) {
+  public LoggerImpl(LoggerAdapter provider, Formatter formatter) {
     this.provider = provider;
     this.formatter = formatter;
   }
@@ -34,11 +34,11 @@ public class LoggerImpl implements LocationAwareLogger, Serializable {
     this.formatter = formatter;
   }
 
-  protected void setLoggingProvider(LoggingProvider provider) {
+  protected void setLoggingProvider(LoggerAdapter provider) {
     this.provider = provider;
   }
 
-  protected LoggingProvider getLoggingProvider() {
+  protected LoggerAdapter getLoggingProvider() {
     return provider;
   }
 

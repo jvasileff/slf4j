@@ -1,8 +1,10 @@
-package org.slf4j;
+package org.slf4j.spi;
 
+import org.slf4j.Level;
+import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
 
-public interface LoggingProvider {
+public interface LoggerAdapter {
 
   String getNameInternal();
   boolean isEnabledInternal(Marker marker, Level level);

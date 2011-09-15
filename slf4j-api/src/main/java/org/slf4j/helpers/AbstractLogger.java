@@ -4,11 +4,11 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 import org.slf4j.LoggerFactory;
-import org.slf4j.LoggingProvider;
 import org.slf4j.formatters.StandardFormatter;
+import org.slf4j.spi.LoggerAdapter;
 
 public abstract class AbstractLogger extends LoggerImpl implements
-    Serializable, LoggingProvider {
+    Serializable, LoggerAdapter {
 
   private static final long serialVersionUID = 3237785459601004498L;
 
