@@ -28,14 +28,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import org.slf4j.formatters.StandardFormatter;
+import org.slf4j.helpers.AbstractLogger;
 import org.slf4j.helpers.LegacyLoggerWrapper;
-import org.slf4j.helpers.LoggerImpl;
 import org.slf4j.helpers.NOPLoggerFactory;
 import org.slf4j.helpers.SubstituteLoggerFactory;
 import org.slf4j.helpers.Util;
 import org.slf4j.impl.StaticLoggerBinder;
-import org.slf4j.spi.LoggerAdapter;
 
 /**
  * The <code>LoggerFactory</code> is a utility class producing Loggers for
@@ -255,11 +253,10 @@ public final class LoggerFactory {
   public static Logger getLogger(String name) {
     ILoggerFactory iLoggerFactory = getILoggerFactory();
     Logger logger = iLoggerFactory.getLogger(name);
-    if (logger instanceof LoggerAdapter) {
+    if (logger instanceof AbstractLogger) {
       return logger;
     } else {
-      return new LoggerImpl(new LegacyLoggerWrapper(logger),
-          StandardFormatter.getInstance());
+      return new LegacyLoggerWrapper(logger);
     }
   }
 

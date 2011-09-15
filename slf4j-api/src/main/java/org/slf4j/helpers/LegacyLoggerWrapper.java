@@ -1,5 +1,6 @@
 package org.slf4j.helpers;
 
+import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
@@ -8,15 +9,23 @@ import org.slf4j.entries.MarkerAwareEntry;
 import org.slf4j.entries.ParameterAwareEntry;
 import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.spi.LocationAwareLogger;
-import org.slf4j.spi.LoggerAdapter;
 
-public class LegacyLoggerWrapper implements LoggerAdapter {
+public class LegacyLoggerWrapper extends AbstractLogger {
 
   private Logger logger;
   private LocationAwareLogger lal = null;
   private boolean isLAL = false;
  
   public LegacyLoggerWrapper(Logger logger) {
+    init(logger);
+  }
+
+  public LegacyLoggerWrapper(Logger logger, Formatter formatter) {
+    super(formatter);
+    init(logger);
+  }
+  
+  private void init(Logger logger) {
     this.logger = logger;
     if (logger instanceof LocationAwareLogger) {
       this.lal = (LocationAwareLogger) logger;
@@ -84,5 +93,9 @@ public class LegacyLoggerWrapper implements LoggerAdapter {
               + " is not recognized.");
       }
     }
+  }
+
+  public Logger withFormatter(Formatter formatter) {
+    return new LegacyLoggerWrapper(logger, formatter);
   }
 }
