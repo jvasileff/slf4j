@@ -15,7 +15,7 @@
  */
 package org.apache.log4j;
 
-import static org.slf4j.helpers.Level.*;
+import static org.slf4j.Level.*;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -169,7 +169,7 @@ public class Category {
   }
 
   void differentiatedLog(Marker marker, String fqcn,
-      org.slf4j.helpers.Level level, Object message, Throwable t) {
+      org.slf4j.Level level, Object message, Throwable t) {
 
     if (LoggerUtils.isEnabled(slf4jLogger, marker, level)) {
         String m = convertToString(message);
@@ -254,21 +254,21 @@ public class Category {
 
   // See also http://bugzilla.slf4j.org/show_bug.cgi?id=168
   public void log(String FQCN, Priority p, Object msg, Throwable t) {
-    org.slf4j.helpers.Level level = priorityToLevelInt(p);
+    org.slf4j.Level level = priorityToLevelInt(p);
     differentiatedLog(null, FQCN, level, msg, t);
   }
 
   public void log(Priority p, Object message, Throwable t) {
-    org.slf4j.helpers.Level level = priorityToLevelInt(p);
+    org.slf4j.Level level = priorityToLevelInt(p);
     differentiatedLog(null, CATEGORY_FQCN, level, message, t);
   }
 
   public void log(Priority p, Object message) {
-    org.slf4j.helpers.Level level = priorityToLevelInt(p);
+    org.slf4j.Level level = priorityToLevelInt(p);
     differentiatedLog(null, CATEGORY_FQCN, level, message, null);
   }
 
-  private org.slf4j.helpers.Level priorityToLevelInt(Priority p) {
+  private org.slf4j.Level priorityToLevelInt(Priority p) {
     switch (p.level) {
     case Level.TRACE_INT:
     case Level.X_TRACE_INT:

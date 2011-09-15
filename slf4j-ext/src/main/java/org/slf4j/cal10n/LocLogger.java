@@ -22,11 +22,11 @@
 package org.slf4j.cal10n;
 
 import org.slf4j.Formatter;
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.ext.LoggerWrapper;
-import org.slf4j.helpers.Level;
 
 import ch.qos.cal10n.IMessageConveyor;
 

@@ -16,7 +16,7 @@
 
 package org.apache.log4j;
 
-import static org.slf4j.helpers.Level.*;
+import static org.slf4j.Level.*;
 
 /**
  * <p>

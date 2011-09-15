@@ -1,11 +1,12 @@
 package org.slf4j.helpers;
 
-import static org.slf4j.helpers.Level.DEBUG;
-import static org.slf4j.helpers.Level.ERROR;
-import static org.slf4j.helpers.Level.INFO;
-import static org.slf4j.helpers.Level.TRACE;
-import static org.slf4j.helpers.Level.WARN;
+import static org.slf4j.Level.DEBUG;
+import static org.slf4j.Level.ERROR;
+import static org.slf4j.Level.INFO;
+import static org.slf4j.Level.TRACE;
+import static org.slf4j.Level.WARN;
 
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 

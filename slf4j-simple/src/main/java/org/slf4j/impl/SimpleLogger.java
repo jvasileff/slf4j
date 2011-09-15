@@ -33,11 +33,11 @@
 
 package org.slf4j.impl;
 
+import org.slf4j.Level;
 import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
 import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.AbstractLogger;
-import org.slf4j.helpers.Level;
 
 /**
  * A simple (and direct) implementation that logs messages of level INFO or

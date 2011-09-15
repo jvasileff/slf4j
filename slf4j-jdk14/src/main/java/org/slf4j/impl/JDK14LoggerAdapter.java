@@ -159,7 +159,7 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
     }
   }
 
-  public boolean isEnabledInternal(Marker marker, org.slf4j.helpers.Level level) {
+  public boolean isEnabledInternal(Marker marker, org.slf4j.Level level) {
     switch (level) {
       case TRACE :
         return logger.isLoggable(Level.FINEST);

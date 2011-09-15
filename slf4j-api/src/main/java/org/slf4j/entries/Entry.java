@@ -1,6 +1,6 @@
 package org.slf4j.entries;
 
-import org.slf4j.helpers.Level;
+import org.slf4j.Level;
 
 public interface Entry {
 

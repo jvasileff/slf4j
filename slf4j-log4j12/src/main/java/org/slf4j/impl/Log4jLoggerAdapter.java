@@ -84,7 +84,7 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
   }
 
   public boolean isEnabledInternal(Marker marker,
-      org.slf4j.helpers.Level level) {
+      org.slf4j.Level level) {
     switch (level) {
       case TRACE :
         return traceCapable ? logger.isTraceEnabled() : logger.isDebugEnabled();

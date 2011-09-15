@@ -1,10 +1,10 @@
 package org.slf4j.ext;
 
 import org.slf4j.Formatter;
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
-import org.slf4j.helpers.Level;
 import org.slf4j.helpers.SimpleEntry;
 import org.slf4j.helpers.StandardEntry;
 import org.slf4j.spi.LocationAwareLogger;

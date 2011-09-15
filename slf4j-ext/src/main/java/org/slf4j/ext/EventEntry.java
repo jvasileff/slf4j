@@ -1,11 +1,11 @@
 package org.slf4j.ext;
 
+import org.slf4j.Level;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.entries.Entry;
 import org.slf4j.entries.MarkerAwareEntry;
 import org.slf4j.entries.ParameterAwareEntry;
-import org.slf4j.helpers.Level;
 
 public class EventEntry implements Entry, MarkerAwareEntry, ParameterAwareEntry {
 

@@ -26,12 +26,12 @@
 package org.slf4j.impl;
 
 import org.apache.commons.logging.Log;
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
 import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.AbstractLogger;
-import org.slf4j.helpers.Level;
 
 /**
  * A wrapper over {@link org.apache.commons.logging.Log

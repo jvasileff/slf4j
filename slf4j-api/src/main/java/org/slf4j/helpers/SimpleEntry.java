@@ -1,5 +1,6 @@
 package org.slf4j.helpers;
 
+import org.slf4j.Level;
 import org.slf4j.Marker;
 import org.slf4j.entries.Entry;
 import org.slf4j.entries.MarkerAwareEntry;

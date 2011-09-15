@@ -1,5 +1,6 @@
 package org.slf4j.helpers;
 
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggingProvider;
 import org.slf4j.Marker;

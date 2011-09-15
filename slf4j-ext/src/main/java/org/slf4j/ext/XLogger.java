@@ -103,7 +103,7 @@ public class XLogger extends LoggerWrapper implements Logger {
         messagePattern = buildMessagePattern(argArray.length);
       }
       logger.log(FQCN, new StandardEntry(ENTRY_MARKER,
-          org.slf4j.helpers.Level.TRACE,
+          org.slf4j.Level.TRACE,
           messagePattern, argArray, StandardFormatter.getInstance()));
     }
   }
@@ -114,7 +114,7 @@ public class XLogger extends LoggerWrapper implements Logger {
   public void exit() {
     if (logger.isTraceEnabled(ENTRY_MARKER)) {
       logger.log(FQCN, new SimpleEntry(EXIT_MARKER,
-          org.slf4j.helpers.Level.TRACE, EXIT_MESSAGE_0, null));
+          org.slf4j.Level.TRACE, EXIT_MESSAGE_0, null));
     }
   }
 
@@ -127,7 +127,7 @@ public class XLogger extends LoggerWrapper implements Logger {
   public void exit(Object result) {
     if (logger.isTraceEnabled(ENTRY_MARKER)) {
       logger.log(FQCN, new StandardEntry(EXIT_MARKER,
-          org.slf4j.helpers.Level.TRACE, EXIT_MESSAGE_1,
+          org.slf4j.Level.TRACE, EXIT_MESSAGE_1,
           new Object[] {result}, StandardFormatter.getInstance()));
     }
   }
@@ -141,7 +141,7 @@ public class XLogger extends LoggerWrapper implements Logger {
   public void throwing(Throwable throwable) {
     if (logger.isErrorEnabled(THROWING_MARKER)) {
       logger.log(FQCN, new SimpleEntry(THROWING_MARKER,
-          org.slf4j.helpers.Level.ERROR, "throwing", throwable));
+          org.slf4j.Level.ERROR, "throwing", throwable));
     }
   }
 
@@ -155,7 +155,7 @@ public class XLogger extends LoggerWrapper implements Logger {
    */
   @Deprecated
   public void throwing(Level level, Throwable throwable) {
-    throwing(org.slf4j.helpers.Level.valueOfLevel(level.level), throwable);
+    throwing(org.slf4j.Level.valueOfLevel(level.level), throwable);
   }
 
   /**
@@ -166,7 +166,7 @@ public class XLogger extends LoggerWrapper implements Logger {
    * @param throwable
    *          the exception being caught.
    */
-  public void throwing(org.slf4j.helpers.Level level, Throwable throwable) {
+  public void throwing(org.slf4j.Level level, Throwable throwable) {
     logger.log(FQCN, new SimpleEntry(THROWING_MARKER, level, "throwing",
         throwable));
   }
@@ -180,7 +180,7 @@ public class XLogger extends LoggerWrapper implements Logger {
   public void catching(Throwable throwable) {
     if (logger.isErrorEnabled(CATCHING_MARKER)) {
       logger.log(FQCN, new SimpleEntry(CATCHING_MARKER,
-          org.slf4j.helpers.Level.ERROR, "catching", throwable));
+          org.slf4j.Level.ERROR, "catching", throwable));
     }
   }
 
@@ -193,7 +193,7 @@ public class XLogger extends LoggerWrapper implements Logger {
    *          the exception being caught.
    */
   public void catching(Level level, Throwable throwable) {
-    catching(org.slf4j.helpers.Level.valueOfLevel(level.level), throwable);
+    catching(org.slf4j.Level.valueOfLevel(level.level), throwable);
   }
 
   /**
@@ -204,7 +204,7 @@ public class XLogger extends LoggerWrapper implements Logger {
    * @param throwable
    *          the exception being caught.
    */
-  public void catching(org.slf4j.helpers.Level level, Throwable throwable) {
+  public void catching(org.slf4j.Level level, Throwable throwable) {
     logger.log(FQCN, new SimpleEntry(CATCHING_MARKER, level, "catching",
         throwable));
   }

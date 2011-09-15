@@ -193,18 +193,18 @@ public class SLF4JBridgeHandler extends Handler {
 
   protected void callLogger(Logger logger, LogRecord record) {
     int julLevelValue = record.getLevel().intValue();
-    org.slf4j.helpers.Level slf4jLevel;
+    org.slf4j.Level slf4jLevel;
 
     if (julLevelValue <= TRACE_LEVEL_THRESHOLD) {
-      slf4jLevel = org.slf4j.helpers.Level.TRACE;
+      slf4jLevel = org.slf4j.Level.TRACE;
     } else if (julLevelValue <= DEBUG_LEVEL_THRESHOLD) {
-      slf4jLevel = org.slf4j.helpers.Level.DEBUG;
+      slf4jLevel = org.slf4j.Level.DEBUG;
     } else if (julLevelValue <= INFO_LEVEL_THRESHOLD) {
-      slf4jLevel = org.slf4j.helpers.Level.INFO;
+      slf4jLevel = org.slf4j.Level.INFO;
     } else if (julLevelValue <= WARN_LEVEL_THRESHOLD) {
-      slf4jLevel = org.slf4j.helpers.Level.WARN;
+      slf4jLevel = org.slf4j.Level.WARN;
     } else {
-      slf4jLevel = org.slf4j.helpers.Level.ERROR;
+      slf4jLevel = org.slf4j.Level.ERROR;
     }
     String i18nMessage = getMessageI18N(record);
     if (LoggerUtils.isEnabled(logger, null, slf4jLevel)) {
