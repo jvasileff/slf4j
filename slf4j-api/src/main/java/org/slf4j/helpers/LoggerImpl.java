@@ -22,19 +22,15 @@ public class LoggerImpl implements LocationAwareLogger, Serializable {
 
   private static final String FQCN = LoggerImpl.class.getName();
 
-  private final String name;
   private final Formatter formatter;
   private LoggingProvider provider;
 
-  public LoggerImpl(String name, LoggingProvider provider,
-      Formatter formatter) {
-    this.name = name;
+  public LoggerImpl(LoggingProvider provider, Formatter formatter) {
     this.provider = provider;
     this.formatter = formatter;
   }
 
-  public LoggerImpl(String name, Formatter formatter) {
-    this.name = name;
+  public LoggerImpl(Formatter formatter) {
     this.formatter = formatter;
   }
 
@@ -47,7 +43,7 @@ public class LoggerImpl implements LocationAwareLogger, Serializable {
   }
 
   public final String getName() {
-    return name;
+    return provider.getNameInternal();
   }
 
   public final void log(Entry entry) {
@@ -367,7 +363,7 @@ public class LoggerImpl implements LocationAwareLogger, Serializable {
   }
 
   public Logger withFormatter(Formatter formatter) {
-    return new LoggerImpl(getName(), this.provider, formatter);
+    return new LoggerImpl(this.provider, formatter);
   }
 
   public Formatter getFormatter() {

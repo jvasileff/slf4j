@@ -24,6 +24,10 @@ public class LegacyLoggerWrapper implements LoggingProvider {
     }
   }
 
+  public String getNameInternal() {
+    return logger.getName();
+  }
+
   public boolean isEnabledInternal(Marker marker, Level level) {
     switch(level) {
       case TRACE:

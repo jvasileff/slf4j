@@ -43,13 +43,18 @@ import org.slf4j.helpers.AbstractLogger;
 public final class JCLLoggerAdapter extends AbstractLogger {
 
   private static final long serialVersionUID = 4646510625595243323L;
+  private final String name;
   final Log log;
-  
+
   // WARN: JCLLoggerAdapter constructor should have only package access so
   // that only JCLLoggerFactory be able to create one.
   JCLLoggerAdapter(Log log, String name) {
-    super(name);
     this.log = log;
+    this.name = name;
+  }
+
+  public String getNameInternal() {
+    return name;
   }
 
   public boolean isEnabledInternal(Marker marker, Level level) {

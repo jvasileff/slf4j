@@ -55,13 +55,18 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
 
   private static final long serialVersionUID = -8053026990503422791L;
 
+  private final String name;
   final java.util.logging.Logger logger;
 
   // WARN: JDK14LoggerAdapter constructor should have only package access so
   // that only JDK14LoggerFactory be able to create one.
   JDK14LoggerAdapter(java.util.logging.Logger logger) {
-    super(logger.getName());
+    this.name = logger.getName();
     this.logger = logger;
+  }
+
+  public String getNameInternal() {
+    return name;
   }
 
   /**

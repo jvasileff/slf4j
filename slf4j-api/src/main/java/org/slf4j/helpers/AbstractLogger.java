@@ -12,8 +12,8 @@ public abstract class AbstractLogger extends LoggerImpl implements
 
   private static final long serialVersionUID = 3237785459601004498L;
 
-  protected AbstractLogger(String name) {
-    super(name, StandardFormatter.getInstance());
+  protected AbstractLogger() {
+    super(StandardFormatter.getInstance());
     // would be better for the superclass to take the loggingProvider in the
     // constructor, but super(this) is not allowed.
     setLoggingProvider(this);

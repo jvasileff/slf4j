@@ -78,12 +78,18 @@ public class SimpleLogger extends AbstractLogger {
   private static String WARN_STR = "WARN";
   private static String ERROR_STR = "ERROR";
 
+  private final String name;
+
   /**
    * Package access allows only {@link SimpleLoggerFactory} to instantiate
    * SimpleLogger instances.
    */
   SimpleLogger(String name) {
-    super(name);
+    this.name = name;
+  }
+  
+  public String getNameInternal() {
+    return name;
   }
 
   /**

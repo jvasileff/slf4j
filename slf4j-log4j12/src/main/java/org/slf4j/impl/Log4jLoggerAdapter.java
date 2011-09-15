@@ -64,14 +64,19 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
   // Does the log4j version in use recognize the TRACE level?
   // The trace level was introduced in log4j 1.2.12.
   final boolean traceCapable;
+  private final String name;
 
   // WARN: Log4jLoggerAdapter constructor should have only package access so
   // that
   // only Log4jLoggerFactory be able to create one.
   Log4jLoggerAdapter(org.apache.log4j.Logger logger) {
-    super(logger.getName());
+    this.name = logger.getName();
     this.logger = logger;
     traceCapable = isTraceCapable();
+  }
+  
+  public String getNameInternal() {
+    return name;
   }
 
   private boolean isTraceCapable() {

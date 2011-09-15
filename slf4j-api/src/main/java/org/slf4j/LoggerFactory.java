@@ -257,7 +257,7 @@ public final class LoggerFactory {
     if (logger instanceof LoggingProvider) {
       return logger;
     } else {
-      return new LoggerImpl(name, new LegacyLoggerWrapper(logger),
+      return new LoggerImpl(new LegacyLoggerWrapper(logger),
           StandardFormatter.getInstance());
     }
   }

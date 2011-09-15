@@ -58,7 +58,11 @@ public class NOPLogger extends AbstractLogger {
    * except by derived classes, hence the protected  access for the constructor.
    */
   protected NOPLogger() {
-    super("NOP");
+    super();
+  }
+
+  public String getNameInternal() {
+    return "NOP";
   }
 
   /**
