@@ -58,10 +58,6 @@ public abstract class AbstractLogger implements LoggerAdapter,
     return isEnabledInternal(marker, TRACE);
   }
 
-  public final void trace(Entry entry) {
-    logInternal(FQCN, entry);
-  }
-
   public final void trace(String msg) {
     maybeLog(null, TRACE, msg, (Throwable) null);
   }
@@ -111,10 +107,6 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   public final boolean isDebugEnabled(Marker marker) {
     return isEnabledInternal(marker, DEBUG);
-  }
-
-  public final void debug(Entry entry) {
-    logInternal(FQCN, entry);
   }
 
   public final void debug(String msg) {
@@ -168,10 +160,6 @@ public abstract class AbstractLogger implements LoggerAdapter,
     return isEnabledInternal(marker, INFO);
   }
 
-  public final void info(Entry entry) {
-    logInternal(FQCN, entry);
-  }
-
   public final void info(String msg) {
     maybeLog(null, INFO, msg, (Throwable) null);
   }
@@ -223,10 +211,6 @@ public abstract class AbstractLogger implements LoggerAdapter,
     return isEnabledInternal(marker, WARN);
   }
 
-  public final void warn(Entry entry) {
-    logInternal(FQCN, entry);
-  }
-
   public final void warn(String msg) {
     maybeLog(null, WARN, msg, (Throwable) null);
   }
@@ -276,10 +260,6 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   public final boolean isErrorEnabled(Marker marker) {
     return isEnabledInternal(marker, ERROR);
-  }
-
-  public final void error(Entry entry) {
-    logInternal(FQCN, entry);
   }
 
   public final void error(String msg) {
@@ -360,11 +340,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
     return new LoggerImpl(this, formatter);
   }
 
-  public Formatter getFormatter() {
+  public final Formatter getFormatter() {
     return formatter;
   }
 
-  public void log(Marker marker, String fqcn, int level, String message,
+  public final void log(Marker marker, String fqcn, int level, String message,
       Object[] argArray, Throwable t) {
     log(fqcn, new SimpleEntry(
         marker, Level.valueOfLevel(level), message, argArray, t));
