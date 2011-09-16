@@ -53,7 +53,7 @@ public class LocLogger extends LoggerWrapper {
   final IMessageConveyor imc;
 
   public LocLogger(Logger logger, IMessageConveyor imc) {
-    super(logger, LoggerWrapper.class.getName());
+    super(logger);
     if (imc == null) {
       throw new IllegalArgumentException("IMessageConveyor cannot be null");
     }

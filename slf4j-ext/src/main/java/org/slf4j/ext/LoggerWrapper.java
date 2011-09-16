@@ -33,7 +33,8 @@ public class LoggerWrapper extends AbstractLogger {
   @Deprecated // is direct access to this var necessary?
   protected final Logger logger;
 
-  final String fqcn;
+  @Deprecated // we don't need this, keeping for compatibility with 1.6.x.
+  String fqcn = LoggerWrapper.class.getName();
 
   // is this logger instance a LocationAwareLogger
   @Deprecated
@@ -41,9 +42,8 @@ public class LoggerWrapper extends AbstractLogger {
 
   private final LoggerAdapter adapter;
 
-  public LoggerWrapper(Logger logger, String fqcn) {
+  public LoggerWrapper(Logger logger) {
     this.logger = logger;
-    this.fqcn = fqcn;
 
     // who knows how this class is used, logger may be slf4j 1.6.x.
     if (logger instanceof LoggerAdapter) {
@@ -58,6 +58,12 @@ public class LoggerWrapper extends AbstractLogger {
     } else {
       instanceofLAL = false;
     }
+  }
+
+  @Deprecated // we don't need fqcn, keeping for compatibility with 1.6.x
+  public LoggerWrapper(Logger logger, String fqcn) {
+    this(logger);
+    this.fqcn = fqcn;
   }
 
   public LoggerWrapper withFormatter(Formatter formatter) {

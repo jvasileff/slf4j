@@ -85,10 +85,7 @@ public class XLogger extends LoggerWrapper {
    *          underlying logger
    */
   public XLogger(Logger logger) {
-    // If class B extends A, assuming B does not override method x(), the caller
-    // of new B().x() is A and not B, see also
-    // http://bugzilla.slf4j.org/show_bug.cgi?id=114
-    super(logger, LoggerWrapper.class.getName());
+    super(logger);
   }
 
   /**
