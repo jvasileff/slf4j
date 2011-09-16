@@ -346,7 +346,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   public final void log(Marker marker, String fqcn, int level, String message,
       Object[] argArray, Throwable t) {
-    log(fqcn, new SimpleEntry(
+    logInternal(fqcn, new SimpleEntry(
         marker, Level.valueOfLevel(level), message, argArray, t));
   }
 
