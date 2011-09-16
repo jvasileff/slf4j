@@ -125,7 +125,7 @@ public class XLogger extends LoggerWrapper {
    *          The result of the method being exited
    */
   public void exit(Object result) {
-    if (isTraceEnabled(ENTRY_MARKER)) {
+    if (isTraceEnabled(EXIT_MARKER)) {
       log(FQCN, new StandardEntry(EXIT_MARKER,
           org.slf4j.Level.TRACE, EXIT_MESSAGE_1,
           new Object[] {result}, StandardFormatter.getInstance()));
