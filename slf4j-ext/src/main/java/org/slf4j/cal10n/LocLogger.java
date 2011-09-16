@@ -38,6 +38,9 @@ import ch.qos.cal10n.IMessageConveyor;
  */
 public class LocLogger extends LoggerWrapper {
 
+  // FIXME: review serialization
+  private static final long serialVersionUID = 7819373693629424495L;
+
   private static final String FQCN = LocLogger.class.getName();
 
   /**
@@ -66,10 +69,10 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void trace(Enum<?> key, Object... args) {
-    if (!logger.isTraceEnabled()) {
+    if (!isTraceEnabled()) {
       return;
     }
-    logger.log(FQCN, new LocLoggerEntry(Level.TRACE, imc, key, args));
+    log(FQCN, new LocLoggerEntry(Level.TRACE, imc, key, args));
   }
 
   /**
@@ -81,10 +84,10 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void debug(Enum<?> key, Object... args) {
-    if (!logger.isDebugEnabled()) {
+    if (!isDebugEnabled()) {
       return;
     }
-    logger.log(FQCN, new LocLoggerEntry(Level.DEBUG, imc, key, args));
+    log(FQCN, new LocLoggerEntry(Level.DEBUG, imc, key, args));
   }
 
   /**
@@ -96,10 +99,10 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void info(Enum<?> key, Object... args) {
-    if (!logger.isInfoEnabled()) {
+    if (!isInfoEnabled()) {
       return;
     }
-    logger.log(FQCN, new LocLoggerEntry(Level.INFO, imc, key, args));
+    log(FQCN, new LocLoggerEntry(Level.INFO, imc, key, args));
   }
 
   /**
@@ -111,10 +114,10 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void warn(Enum<?> key, Object... args) {
-    if (!logger.isWarnEnabled()) {
+    if (!isWarnEnabled()) {
       return;
     }
-    logger.log(FQCN, new LocLoggerEntry(Level.WARN, imc, key, args));
+    log(FQCN, new LocLoggerEntry(Level.WARN, imc, key, args));
   }
 
   /**
@@ -126,13 +129,13 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void error(Enum<?> key, Object... args) {
-    if (!logger.isErrorEnabled()) {
+    if (!isErrorEnabled()) {
       return;
     }
-    logger.log(FQCN, new LocLoggerEntry(Level.ERROR, imc, key, args));
+    log(FQCN, new LocLoggerEntry(Level.ERROR, imc, key, args));
   }
 
   public LocLogger withFormatter(Formatter formatter) {
-    return new LocLogger(logger.withFormatter(formatter), imc);
+    return new LocLogger(getWrappedLogger().withFormatter(formatter), imc);
   }
 }
