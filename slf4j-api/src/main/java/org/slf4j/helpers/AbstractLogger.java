@@ -51,11 +51,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
   // TRACE
 
   public final boolean isTraceEnabled() {
-    return isEnabledInternal(null, TRACE);
+    return isEnabledInternal(null, TRACE, null);
   }
 
   public final boolean isTraceEnabled(Marker marker) {
-    return isEnabledInternal(marker, TRACE);
+    return isEnabledInternal(marker, TRACE, null);
   }
 
   public final void trace(String msg) {
@@ -102,11 +102,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
   // DEBUG
 
   public final boolean isDebugEnabled() {
-    return isEnabledInternal(null, DEBUG);
+    return isEnabledInternal(null, DEBUG, null);
   }
 
   public final boolean isDebugEnabled(Marker marker) {
-    return isEnabledInternal(marker, DEBUG);
+    return isEnabledInternal(marker, DEBUG, null);
   }
 
   public final void debug(String msg) {
@@ -153,11 +153,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
   // INFO
 
   public final boolean isInfoEnabled() {
-    return isEnabledInternal(null, INFO);
+    return isEnabledInternal(null, INFO, null);
   }
 
   public final boolean isInfoEnabled(Marker marker) {
-    return isEnabledInternal(marker, INFO);
+    return isEnabledInternal(marker, INFO, null);
   }
 
   public final void info(String msg) {
@@ -204,11 +204,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
   // WARN
 
   public final boolean isWarnEnabled() {
-    return isEnabledInternal(null, WARN);
+    return isEnabledInternal(null, WARN, null);
   }
 
   public final boolean isWarnEnabled(Marker marker) {
-    return isEnabledInternal(marker, WARN);
+    return isEnabledInternal(marker, WARN, null);
   }
 
   public final void warn(String msg) {
@@ -255,11 +255,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
   // ERROR
 
   public final boolean isErrorEnabled() {
-    return isEnabledInternal(null, ERROR);
+    return isEnabledInternal(null, ERROR, null);
   }
 
   public final boolean isErrorEnabled(Marker marker) {
-    return isEnabledInternal(marker, ERROR);
+    return isEnabledInternal(marker, ERROR, null);
   }
 
   public final void error(String msg) {
@@ -307,14 +307,14 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   private void maybeLog(Marker marker, Level level, String message,
       Throwable t) {
-    if (isEnabledInternal(marker, level)) {
+    if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new SimpleMessage(message, t));
     }
   }
 
   private void maybeLog(Marker marker, Level level,
       String format, Object arg) {
-    if (isEnabledInternal(marker, level)) {
+    if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new StandardMessage(format,
           new Object[] {arg}, formatter));
     }
@@ -322,7 +322,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   private void maybeLog(Marker marker, Level level,
       String format, Object arg1, Object arg2) {
-    if (isEnabledInternal(marker, level)) {
+    if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new StandardMessage(format,
           new Object[] {arg1, arg2}, formatter));
     }
@@ -330,7 +330,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   private void maybeLog(Marker marker, Level level,
       String format, Object[] args) {
-    if (isEnabledInternal(marker, level)) {
+    if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new StandardMessage(format,
           args, formatter));
     }

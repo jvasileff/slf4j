@@ -57,7 +57,7 @@ public final class JCLLoggerAdapter extends AbstractLogger {
     return name;
   }
 
-  public boolean isEnabledInternal(Marker marker, Level level) {
+  public boolean isEnabledInternal(Marker marker, Level level, Message message) {
     switch (level) {
       case TRACE :
         return log.isTraceEnabled();

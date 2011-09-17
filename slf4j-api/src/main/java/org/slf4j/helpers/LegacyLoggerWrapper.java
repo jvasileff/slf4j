@@ -36,7 +36,7 @@ public class LegacyLoggerWrapper extends AbstractLogger {
     return logger.getName();
   }
 
-  public boolean isEnabledInternal(Marker marker, Level level) {
+  public boolean isEnabledInternal(Marker marker, Level level, Message message) {
     switch(level) {
       case TRACE:
         return logger.isTraceEnabled(marker);

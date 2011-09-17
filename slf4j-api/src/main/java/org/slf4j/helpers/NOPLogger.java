@@ -69,7 +69,7 @@ public class NOPLogger extends AbstractLogger {
    * Always returns false.
    * @return always false
    */
-  public boolean isEnabledInternal(Marker marker, Level level) {
+  public boolean isEnabledInternal(Marker marker, Level level, Message msg) {
     return false;
   }
 

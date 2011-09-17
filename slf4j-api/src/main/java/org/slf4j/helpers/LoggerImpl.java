@@ -26,8 +26,8 @@ public class LoggerImpl extends AbstractLogger {
     return adapter.getNameInternal();
   }
 
-  public boolean isEnabledInternal(Marker marker, Level level) {
-    return adapter.isEnabledInternal(marker, level);
+  public boolean isEnabledInternal(Marker marker, Level level, Message message) {
+    return adapter.isEnabledInternal(marker, level, message);
   }
 
   public void logInternal(String fqcn, Marker marker, Level level, Message entry) {
