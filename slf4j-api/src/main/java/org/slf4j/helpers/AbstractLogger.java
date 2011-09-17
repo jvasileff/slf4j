@@ -40,12 +40,12 @@ public abstract class AbstractLogger implements LoggerAdapter,
     return getNameInternal();
   }
 
-  public final void log(Message entry) {
-    logInternal(FQCN, entry);
+  public final void log(Marker marker, Level level, Message entry) {
+    logInternal(FQCN, marker, level, entry);
   }
 
-  public final void log(String callerFQCN, Message entry) {
-    logInternal(callerFQCN, entry);
+  public final void log(String callerFQCN, Marker marker, Level level, Message entry) {
+    logInternal(callerFQCN, marker, level, entry);
   }
 
   // TRACE
@@ -308,14 +308,14 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level, String message,
       Throwable t) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new SimpleMessage(marker, level, message, t));
+      logInternal(FQCN, marker, level, new SimpleMessage(message, t));
     }
   }
 
   private void maybeLog(Marker marker, Level level,
       String format, Object arg) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new StandardMessage(marker, level, format,
+      logInternal(FQCN, marker, level, new StandardMessage(format,
           new Object[] {arg}, formatter));
     }
   }
@@ -323,7 +323,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level,
       String format, Object arg1, Object arg2) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new StandardMessage(marker, level, format,
+      logInternal(FQCN, marker, level, new StandardMessage(format,
           new Object[] {arg1, arg2}, formatter));
     }
   }
@@ -331,7 +331,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level,
       String format, Object[] args) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new StandardMessage(marker, level, format,
+      logInternal(FQCN, marker, level, new StandardMessage(format,
           args, formatter));
     }
   }
@@ -346,8 +346,8 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   public final void log(Marker marker, String fqcn, int level, String message,
       Object[] argArray, Throwable t) {
-    logInternal(fqcn, new SimpleMessage(
-        marker, Level.valueOfLevel(level), message, argArray, t));
+    logInternal(fqcn, marker, Level.valueOfLevel(level), new SimpleMessage(
+        message, argArray, t));
   }
 
   /**

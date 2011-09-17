@@ -4,8 +4,10 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 import org.slf4j.Formatter;
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 import org.slf4j.messages.Message;
 
 /**
@@ -61,13 +63,14 @@ abstract class NamedLoggerBase implements Logger, Serializable {
         "a wrapper handles this method for legacy loggers.");
   }
 
-  public final void log(Message entry) {
+  public final void log(Marker marker, Level level, Message entry) {
     throw new UnsupportedOperationException(
         "This should be unreachable code; " +
         "a wrapper handles this method for legacy loggers.");
   }
 
-  public final void log(String callerFQCN, Message entry) {
+  public final void log(String callerFQCN, Marker marker, Level level,
+      Message entry) {
     throw new UnsupportedOperationException(
         "This should be unreachable code; " +
         "a wrapper handles this method for legacy loggers.");

@@ -4,7 +4,6 @@ import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.messages.MarkerMessage;
 import org.slf4j.messages.Message;
 import org.slf4j.messages.ParameterizedMessage;
 import org.slf4j.messages.ThrowableMessage;
@@ -55,24 +54,20 @@ public class LegacyLoggerWrapper extends AbstractLogger {
     }
   }
 
-  public void logInternal(String fqcn, Message entry) {
+  public void logInternal(String fqcn, Marker marker, Level level, Message entry) {
     Throwable throwable = null;
     if (entry instanceof ThrowableMessage) {
       throwable = ((ThrowableMessage)entry).getThrowable();
-    }
-    Marker marker = null;
-    if (entry instanceof MarkerMessage) {
-      marker = ((MarkerMessage)entry).getMarker();
     }
     if (isLAL) {
       Object[] params = null;
       if (entry instanceof ParameterizedMessage) {
         params = ((ParameterizedMessage)entry).getParameters();
       }
-      lal.log(marker, fqcn, entry.getLevel().intValue(), entry.getFormattedMessage(),
+      lal.log(marker, fqcn, level.intValue(), entry.getFormattedMessage(),
           params, throwable);
     } else {
-      switch(entry.getLevel()) {
+      switch(level) {
         case TRACE:
           logger.trace(marker, entry.getFormattedMessage(), throwable);
           break;
@@ -89,7 +84,7 @@ public class LegacyLoggerWrapper extends AbstractLogger {
           logger.error(marker, entry.getFormattedMessage(), throwable);
           break;
         default:
-          throw new IllegalStateException("Level " + entry.getLevel()
+          throw new IllegalStateException("Level " + level
               + " is not recognized.");
       }
     }

@@ -8,6 +8,6 @@ public interface LoggerAdapter {
 
   String getNameInternal();
   boolean isEnabledInternal(Marker marker, Level level);
-  void logInternal(String fqcn, Message entry);
+  void logInternal(String fqcn, Marker marker, Level level, Message entry);
 
 }

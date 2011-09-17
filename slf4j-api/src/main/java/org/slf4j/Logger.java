@@ -722,8 +722,8 @@ public interface Logger {
 
   public Logger withFormatter(Formatter formatter);
 
-  public void log(Message entry);
-  public void log(String callerFQCN, Message entry);
+  public void log(Marker marker, Level level, Message entry);
+  public void log(String callerFQCN, Marker marker, Level level, Message entry);
   public Formatter getFormatter();
 
 }

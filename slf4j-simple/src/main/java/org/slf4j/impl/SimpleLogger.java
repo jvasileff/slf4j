@@ -148,8 +148,9 @@ public class SimpleLogger extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFqcn, Message entry) {
-    switch (entry.getLevel()) {
+  public void logInternal(String callerFqcn, Marker marker, Level level,
+      Message entry) {
+    switch (level) {
       case TRACE :
       case DEBUG :
         break;
@@ -164,7 +165,7 @@ public class SimpleLogger extends AbstractLogger {
         break;
       default:
         // will only happen if a new level is defined
-        throw new IllegalStateException("Level " + entry.getLevel()
+        throw new IllegalStateException("Level " + level
             + " is not recognized.");
     }
   }

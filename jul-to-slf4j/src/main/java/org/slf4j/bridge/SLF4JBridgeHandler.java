@@ -208,7 +208,7 @@ public class SLF4JBridgeHandler extends Handler {
     }
     String i18nMessage = getMessageI18N(record);
     if (LoggerUtils.isEnabled(logger, null, slf4jLevel)) {
-        logger.log(FQCN, new SimpleMessage(null, slf4jLevel, i18nMessage,
+        logger.log(FQCN, null, slf4jLevel, new SimpleMessage(i18nMessage,
             record.getThrown()));
     }
   }

@@ -1,5 +1,6 @@
 package org.slf4j.ext;
 
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -31,6 +32,6 @@ public class EventLogger {
    * @param data The EventData.
    */
   public static void logEvent(EventData data) {
-    eventLogger.log(FQCN, new EventMessage(data));
+    eventLogger.log(FQCN, EVENT_MARKER, Level.INFO, new EventMessage(data));
   }
 }

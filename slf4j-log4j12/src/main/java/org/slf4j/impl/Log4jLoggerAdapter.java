@@ -108,13 +108,14 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFqcn, Message entry) {
+  public void logInternal(String callerFqcn, Marker marker,
+      org.slf4j.Level level, Message entry) {
     Throwable throwable = null;
     if (entry instanceof ThrowableMessage) {
       throwable = ((ThrowableMessage)entry).getThrowable();
     }
     Level log4jLevel;
-    switch (entry.getLevel()) {
+    switch (level) {
     case TRACE:
       log4jLevel = traceCapable ? Level.TRACE : Level.DEBUG;
       break;
@@ -131,7 +132,7 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
       log4jLevel = Level.ERROR;
       break;
     default:
-      throw new IllegalStateException("Level " + entry.getLevel()
+      throw new IllegalStateException("Level " + level
           + " is not recognized.");
     }
     logger.log(callerFqcn, log4jLevel, entry.getFormattedMessage(), throwable);

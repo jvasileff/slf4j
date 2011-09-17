@@ -81,8 +81,8 @@ public class LoggerWrapper extends AbstractLogger {
     return adapter.isEnabledInternal(marker, level);
   }
 
-  public void logInternal(String fqcn, Message entry) {
-    adapter.logInternal(fqcn, entry);
+  public void logInternal(String fqcn, Marker marker, Level level, Message entry) {
+    adapter.logInternal(fqcn, marker, level, entry);
   }
 
   public Logger getWrappedLogger() {

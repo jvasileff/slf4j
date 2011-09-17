@@ -173,7 +173,7 @@ public class Category {
 
     if (LoggerUtils.isEnabled(slf4jLogger, marker, level)) {
         String m = convertToString(message);
-        slf4jLogger.log(fqcn, new SimpleMessage(marker, level, m, t));
+        slf4jLogger.log(fqcn, marker, level, new SimpleMessage(m, t));
     }
   }
 

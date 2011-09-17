@@ -102,8 +102,7 @@ public class XLogger extends LoggerWrapper {
       } else {
         messagePattern = buildMessagePattern(argArray.length);
       }
-      log(FQCN, new StandardMessage(ENTRY_MARKER,
-          org.slf4j.Level.TRACE,
+      log(FQCN, ENTRY_MARKER, org.slf4j.Level.TRACE, new StandardMessage(
           messagePattern, argArray, StandardFormatter.getInstance()));
     }
   }
@@ -113,8 +112,8 @@ public class XLogger extends LoggerWrapper {
    */
   public void exit() {
     if (isTraceEnabled(ENTRY_MARKER)) {
-      log(FQCN, new SimpleMessage(EXIT_MARKER,
-          org.slf4j.Level.TRACE, EXIT_MESSAGE_0, null));
+      log(FQCN, EXIT_MARKER, org.slf4j.Level.TRACE, new SimpleMessage(
+          EXIT_MESSAGE_0, null));
     }
   }
 
@@ -126,9 +125,8 @@ public class XLogger extends LoggerWrapper {
    */
   public void exit(Object result) {
     if (isTraceEnabled(EXIT_MARKER)) {
-      log(FQCN, new StandardMessage(EXIT_MARKER,
-          org.slf4j.Level.TRACE, EXIT_MESSAGE_1,
-          new Object[] {result}, StandardFormatter.getInstance()));
+      log(FQCN, EXIT_MARKER, org.slf4j.Level.TRACE, new StandardMessage(
+          EXIT_MESSAGE_1, new Object[] {result}, StandardFormatter.getInstance()));
     }
   }
 
@@ -140,8 +138,8 @@ public class XLogger extends LoggerWrapper {
    */
   public void throwing(Throwable throwable) {
     if (isErrorEnabled(THROWING_MARKER)) {
-      log(FQCN, new SimpleMessage(THROWING_MARKER,
-          org.slf4j.Level.ERROR, "throwing", throwable));
+      log(FQCN, THROWING_MARKER, org.slf4j.Level.ERROR, new SimpleMessage(
+          "throwing", throwable));
     }
   }
 
@@ -167,8 +165,7 @@ public class XLogger extends LoggerWrapper {
    *          the exception being caught.
    */
   public void throwing(org.slf4j.Level level, Throwable throwable) {
-    log(FQCN, new SimpleMessage(THROWING_MARKER, level, "throwing",
-        throwable));
+    log(FQCN, THROWING_MARKER, level, new SimpleMessage("throwing", throwable));
   }
 
   /**
@@ -179,8 +176,8 @@ public class XLogger extends LoggerWrapper {
    */
   public void catching(Throwable throwable) {
     if (isErrorEnabled(CATCHING_MARKER)) {
-      log(FQCN, new SimpleMessage(CATCHING_MARKER,
-          org.slf4j.Level.ERROR, "catching", throwable));
+      log(FQCN, CATCHING_MARKER, org.slf4j.Level.ERROR, new SimpleMessage(
+          "catching", throwable));
     }
   }
 
@@ -205,7 +202,7 @@ public class XLogger extends LoggerWrapper {
    *          the exception being caught.
    */
   public void catching(org.slf4j.Level level, Throwable throwable) {
-    log(FQCN, new SimpleMessage(CATCHING_MARKER, level, "catching", throwable));
+    log(FQCN, CATCHING_MARKER, level, new SimpleMessage("catching", throwable));
   }
 
   private static String buildMessagePattern(int len) {

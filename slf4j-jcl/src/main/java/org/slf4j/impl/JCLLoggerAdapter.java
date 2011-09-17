@@ -76,13 +76,14 @@ public final class JCLLoggerAdapter extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFqcn, Message entry) {
+  public void logInternal(String callerFqcn, Marker marker, Level level,
+      Message entry) {
     String msg = entry.getFormattedMessage();
     Throwable t = null;
     if (entry instanceof ThrowableMessage) {
       t = ((ThrowableMessage)entry).getThrowable();
     }
-    switch (entry.getLevel()) {
+    switch (level) {
       case TRACE :
         if (t != null) {
           log.trace(msg, t);
@@ -120,7 +121,7 @@ public final class JCLLoggerAdapter extends AbstractLogger {
         break;
       default:
         // will only happen if a new level is defined
-        throw new IllegalStateException("Level " + entry.getLevel()
+        throw new IllegalStateException("Level " + level
             + " is not recognized.");
     }
   }

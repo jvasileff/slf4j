@@ -74,7 +74,8 @@ public class NOPLogger extends AbstractLogger {
   }
 
   /** A NOP implementation. */
-  public void logInternal(String callerFqcn, Message entry) {
+  public void logInternal(String callerFqcn, Marker marker, Level level,
+      Message entry) {
     // NOP
   }
 }

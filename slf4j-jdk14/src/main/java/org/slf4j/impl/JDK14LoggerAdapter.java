@@ -128,9 +128,10 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFQCN, Message entry) {
+  public void logInternal(String callerFQCN, Marker marker,
+      org.slf4j.Level level, Message entry) {
     Level julLevel;
-    switch (entry.getLevel()) {
+    switch (level) {
     case TRACE:
       julLevel = Level.FINEST;
       break;
@@ -147,7 +148,7 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
       julLevel = Level.SEVERE;
       break;
     default:
-      throw new IllegalStateException("Level " + entry.getLevel()
+      throw new IllegalStateException("Level " + level
           + " is not recognized.");
     }
     // the logger.isLoggable check avoids the unconditional
