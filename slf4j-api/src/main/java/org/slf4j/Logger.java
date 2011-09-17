@@ -25,7 +25,7 @@
 
 package org.slf4j;
 
-import org.slf4j.entries.Entry;
+import org.slf4j.messages.Message;
 
 /**
  * The org.slf4j.Logger interface is the main user entry point of SLF4J API. 
@@ -722,8 +722,8 @@ public interface Logger {
 
   public Logger withFormatter(Formatter formatter);
 
-  public void log(Entry entry);
-  public void log(String callerFQCN, Entry entry);
+  public void log(Message entry);
+  public void log(String callerFQCN, Message entry);
   public Formatter getFormatter();
 
 }

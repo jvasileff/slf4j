@@ -72,7 +72,7 @@ public class LocLogger extends LoggerWrapper {
     if (!isTraceEnabled()) {
       return;
     }
-    log(FQCN, new LocLoggerEntry(Level.TRACE, imc, key, args));
+    log(FQCN, new LocLoggerMessage(Level.TRACE, imc, key, args));
   }
 
   /**
@@ -87,7 +87,7 @@ public class LocLogger extends LoggerWrapper {
     if (!isDebugEnabled()) {
       return;
     }
-    log(FQCN, new LocLoggerEntry(Level.DEBUG, imc, key, args));
+    log(FQCN, new LocLoggerMessage(Level.DEBUG, imc, key, args));
   }
 
   /**
@@ -102,7 +102,7 @@ public class LocLogger extends LoggerWrapper {
     if (!isInfoEnabled()) {
       return;
     }
-    log(FQCN, new LocLoggerEntry(Level.INFO, imc, key, args));
+    log(FQCN, new LocLoggerMessage(Level.INFO, imc, key, args));
   }
 
   /**
@@ -117,7 +117,7 @@ public class LocLogger extends LoggerWrapper {
     if (!isWarnEnabled()) {
       return;
     }
-    log(FQCN, new LocLoggerEntry(Level.WARN, imc, key, args));
+    log(FQCN, new LocLoggerMessage(Level.WARN, imc, key, args));
   }
 
   /**
@@ -132,7 +132,7 @@ public class LocLogger extends LoggerWrapper {
     if (!isErrorEnabled()) {
       return;
     }
-    log(FQCN, new LocLoggerEntry(Level.ERROR, imc, key, args));
+    log(FQCN, new LocLoggerMessage(Level.ERROR, imc, key, args));
   }
 
   public LocLogger withFormatter(Formatter formatter) {

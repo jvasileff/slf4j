@@ -35,9 +35,9 @@ package org.slf4j.impl;
 
 import org.slf4j.Level;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.AbstractLogger;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ThrowableMessage;
 
 /**
  * A simple (and direct) implementation that logs messages of level INFO or
@@ -100,10 +100,10 @@ public class SimpleLogger extends AbstractLogger {
    * @param message
    * @param t
    */
-  private void outputLog(String level, Entry entry) {
+  private void outputLog(String level, Message entry) {
     Throwable throwable = null;
-    if (entry instanceof ThrowableAwareEntry) {
-      throwable = ((ThrowableAwareEntry)entry).getThrowable();
+    if (entry instanceof ThrowableMessage) {
+      throwable = ((ThrowableMessage)entry).getThrowable();
     }
 
     StringBuffer buf = new StringBuffer();
@@ -121,7 +121,7 @@ public class SimpleLogger extends AbstractLogger {
     buf.append(getName());
     buf.append(" - ");
 
-    buf.append(entry.getMessage());
+    buf.append(entry.getFormattedMessage());
 
     buf.append(LINE_SEPARATOR);
 
@@ -148,7 +148,7 @@ public class SimpleLogger extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFqcn, Entry entry) {
+  public void logInternal(String callerFqcn, Message entry) {
     switch (entry.getLevel()) {
       case TRACE :
       case DEBUG :

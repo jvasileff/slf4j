@@ -271,14 +271,14 @@ public class LoggerUtils {
   private static void maybeLog(String fqcn, Logger logger, Marker marker,
       Level level, String message, Throwable t) {
     if (isEnabled(logger, marker, level)) {
-      logger.log(fqcn, new SimpleEntry(marker, level, message, t));
+      logger.log(fqcn, new SimpleMessage(marker, level, message, t));
     }
   }
 
   private static void maybeLog(String fqcn, Logger logger, Marker marker,
       Level level, String format, Object arg) {
     if (isEnabled(logger, marker, level)) {
-      logger.log(fqcn, new StandardEntry(marker, level, format,
+      logger.log(fqcn, new StandardMessage(marker, level, format,
           new Object[] {arg}, logger.getFormatter()));
     }
   }
@@ -286,7 +286,7 @@ public class LoggerUtils {
   private static void maybeLog(String fqcn, Logger logger, Marker marker,
       Level level, String format, Object arg1, Object arg2) {
     if (isEnabled(logger, marker, level)) {
-      logger.log(fqcn, new StandardEntry(marker, level, format,
+      logger.log(fqcn, new StandardMessage(marker, level, format,
           new Object[] {arg1, arg2}, logger.getFormatter()));
     }
   }
@@ -294,7 +294,7 @@ public class LoggerUtils {
   private static void maybeLog(String fqcn, Logger logger, Marker marker,
       Level level, String format, Object[] args) {
     if (isEnabled(logger, marker, level)) {
-      logger.log(fqcn, new StandardEntry(marker, level, format,
+      logger.log(fqcn, new StandardMessage(marker, level, format,
           args, logger.getFormatter()));
     }
   }

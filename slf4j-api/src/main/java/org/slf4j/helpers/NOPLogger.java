@@ -36,7 +36,7 @@ package org.slf4j.helpers;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
+import org.slf4j.messages.Message;
 
 
 /**
@@ -74,7 +74,7 @@ public class NOPLogger extends AbstractLogger {
   }
 
   /** A NOP implementation. */
-  public void logInternal(String callerFqcn, Entry entry) {
+  public void logInternal(String callerFqcn, Message entry) {
     // NOP
   }
 }

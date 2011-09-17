@@ -3,14 +3,13 @@ package org.slf4j.cal10n;
 import org.slf4j.Level;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.MarkerAwareEntry;
-import org.slf4j.entries.ParameterAwareEntry;
+import org.slf4j.messages.MarkerMessage;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ParameterizedMessage;
 
 import ch.qos.cal10n.IMessageConveyor;
 
-public class LocLoggerEntry implements Entry, ParameterAwareEntry,
-    MarkerAwareEntry {
+public class LocLoggerMessage implements ParameterizedMessage, MarkerMessage {
 
   /**
    * Every localized message logged by a LocLogger will bear this marker. It
@@ -27,7 +26,7 @@ public class LocLoggerEntry implements Entry, ParameterAwareEntry,
   private boolean processed = false;
   private String message = null;
 
-  public LocLoggerEntry(Level level, IMessageConveyor imc, Enum<?> key,
+  public LocLoggerMessage(Level level, IMessageConveyor imc, Enum<?> key,
       Object[] args) {
     this.level = level;
     this.imc = imc;
@@ -43,7 +42,7 @@ public class LocLoggerEntry implements Entry, ParameterAwareEntry,
     return level;
   }
 
-  public String getMessage() {
+  public String getFormattedMessage() {
     process();
     return message;
   }

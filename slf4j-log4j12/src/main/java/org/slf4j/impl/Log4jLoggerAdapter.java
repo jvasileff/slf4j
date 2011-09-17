@@ -27,9 +27,9 @@ package org.slf4j.impl;
 import org.apache.log4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.AbstractLogger;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ThrowableMessage;
 
 /**
  * A wrapper over {@link org.apache.log4j.Logger org.apache.log4j.Logger} in
@@ -108,10 +108,10 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFqcn, Entry entry) {
+  public void logInternal(String callerFqcn, Message entry) {
     Throwable throwable = null;
-    if (entry instanceof ThrowableAwareEntry) {
-      throwable = ((ThrowableAwareEntry)entry).getThrowable();
+    if (entry instanceof ThrowableMessage) {
+      throwable = ((ThrowableMessage)entry).getThrowable();
     }
     Level log4jLevel;
     switch (entry.getLevel()) {
@@ -134,6 +134,6 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
       throw new IllegalStateException("Level " + entry.getLevel()
           + " is not recognized.");
     }
-    logger.log(callerFqcn, log4jLevel, entry.getMessage(), throwable);
+    logger.log(callerFqcn, log4jLevel, entry.getFormattedMessage(), throwable);
   }
 }

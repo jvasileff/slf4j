@@ -3,17 +3,17 @@ package org.slf4j.ext;
 import org.slf4j.Level;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.MarkerAwareEntry;
-import org.slf4j.entries.ParameterAwareEntry;
+import org.slf4j.messages.MarkerMessage;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ParameterizedMessage;
 
-public class EventEntry implements Entry, MarkerAwareEntry, ParameterAwareEntry {
+public class EventMessage implements MarkerMessage, ParameterizedMessage {
 
   private static final Marker EVENT_MARKER = MarkerFactory.getMarker("EVENT");
   
   private final EventData eventData;
   
-  public EventEntry(EventData eventData) {
+  public EventMessage(EventData eventData) {
     this.eventData = eventData;
   }
 
@@ -25,7 +25,7 @@ public class EventEntry implements Entry, MarkerAwareEntry, ParameterAwareEntry 
     return Level.INFO;
   }
 
-  public String getMessage() {
+  public String getFormattedMessage() {
     return eventData.toXML();
   }
 

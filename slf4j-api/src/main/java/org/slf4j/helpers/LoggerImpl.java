@@ -4,7 +4,7 @@ import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
+import org.slf4j.messages.Message;
 import org.slf4j.spi.LoggerAdapter;
 
 public class LoggerImpl extends AbstractLogger {
@@ -30,7 +30,7 @@ public class LoggerImpl extends AbstractLogger {
     return adapter.isEnabledInternal(marker, level);
   }
 
-  public void logInternal(String fqcn, Entry entry) {
+  public void logInternal(String fqcn, Message entry) {
     adapter.logInternal(fqcn, entry);
   }
 

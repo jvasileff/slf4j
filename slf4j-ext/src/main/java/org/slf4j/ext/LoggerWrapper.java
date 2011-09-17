@@ -4,9 +4,9 @@ import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
 import org.slf4j.helpers.AbstractLogger;
 import org.slf4j.helpers.LegacyLoggerWrapper;
+import org.slf4j.messages.Message;
 import org.slf4j.spi.LocationAwareLogger;
 import org.slf4j.spi.LoggerAdapter;
 
@@ -81,7 +81,7 @@ public class LoggerWrapper extends AbstractLogger {
     return adapter.isEnabledInternal(marker, level);
   }
 
-  public void logInternal(String fqcn, Entry entry) {
+  public void logInternal(String fqcn, Message entry) {
     adapter.logInternal(fqcn, entry);
   }
 

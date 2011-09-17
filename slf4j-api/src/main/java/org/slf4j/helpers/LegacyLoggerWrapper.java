@@ -4,10 +4,10 @@ import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.MarkerAwareEntry;
-import org.slf4j.entries.ParameterAwareEntry;
-import org.slf4j.entries.ThrowableAwareEntry;
+import org.slf4j.messages.MarkerMessage;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ParameterizedMessage;
+import org.slf4j.messages.ThrowableMessage;
 import org.slf4j.spi.LocationAwareLogger;
 
 public class LegacyLoggerWrapper extends AbstractLogger {
@@ -55,38 +55,38 @@ public class LegacyLoggerWrapper extends AbstractLogger {
     }
   }
 
-  public void logInternal(String fqcn, Entry entry) {
+  public void logInternal(String fqcn, Message entry) {
     Throwable throwable = null;
-    if (entry instanceof ThrowableAwareEntry) {
-      throwable = ((ThrowableAwareEntry)entry).getThrowable();
+    if (entry instanceof ThrowableMessage) {
+      throwable = ((ThrowableMessage)entry).getThrowable();
     }
     Marker marker = null;
-    if (entry instanceof MarkerAwareEntry) {
-      marker = ((MarkerAwareEntry)entry).getMarker();
+    if (entry instanceof MarkerMessage) {
+      marker = ((MarkerMessage)entry).getMarker();
     }
     if (isLAL) {
       Object[] params = null;
-      if (entry instanceof ParameterAwareEntry) {
-        params = ((ParameterAwareEntry)entry).getParameters();
+      if (entry instanceof ParameterizedMessage) {
+        params = ((ParameterizedMessage)entry).getParameters();
       }
-      lal.log(marker, fqcn, entry.getLevel().intValue(), entry.getMessage(),
+      lal.log(marker, fqcn, entry.getLevel().intValue(), entry.getFormattedMessage(),
           params, throwable);
     } else {
       switch(entry.getLevel()) {
         case TRACE:
-          logger.trace(marker, entry.getMessage(), throwable);
+          logger.trace(marker, entry.getFormattedMessage(), throwable);
           break;
         case DEBUG:
-          logger.debug(marker, entry.getMessage(), throwable);
+          logger.debug(marker, entry.getFormattedMessage(), throwable);
           break;
         case INFO:
-          logger.info(marker, entry.getMessage(), throwable);
+          logger.info(marker, entry.getFormattedMessage(), throwable);
           break;
         case WARN:
-          logger.warn(marker, entry.getMessage(), throwable);
+          logger.warn(marker, entry.getFormattedMessage(), throwable);
           break;
         case ERROR:
-          logger.error(marker, entry.getMessage(), throwable);
+          logger.error(marker, entry.getFormattedMessage(), throwable);
           break;
         default:
           throw new IllegalStateException("Level " + entry.getLevel()

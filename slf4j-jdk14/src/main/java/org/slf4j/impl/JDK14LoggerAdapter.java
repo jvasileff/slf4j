@@ -38,9 +38,9 @@ import java.util.logging.LogRecord;
 
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.AbstractLogger;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ThrowableMessage;
 
 /**
  * A wrapper over {@link java.util.logging.Logger java.util.logging.Logger} in
@@ -128,7 +128,7 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFQCN, Entry entry) {
+  public void logInternal(String callerFQCN, Message entry) {
     Level julLevel;
     switch (entry.getLevel()) {
     case TRACE:
@@ -157,10 +157,10 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
     // http://bugzilla.slf4j.org/show_bug.cgi?id=90
     if (logger.isLoggable(julLevel)) {
       Throwable throwable = null;
-      if (entry instanceof ThrowableAwareEntry) {
-        throwable = ((ThrowableAwareEntry)entry).getThrowable();
+      if (entry instanceof ThrowableMessage) {
+        throwable = ((ThrowableMessage)entry).getThrowable();
       }
-      log(callerFQCN, julLevel, entry.getMessage(), throwable);
+      log(callerFQCN, julLevel, entry.getFormattedMessage(), throwable);
     }
   }
 

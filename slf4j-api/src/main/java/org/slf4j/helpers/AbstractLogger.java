@@ -14,8 +14,8 @@ import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
 import org.slf4j.formatters.StandardFormatter;
+import org.slf4j.messages.Message;
 import org.slf4j.spi.LocationAwareLogger;
 import org.slf4j.spi.LoggerAdapter;
 
@@ -40,11 +40,11 @@ public abstract class AbstractLogger implements LoggerAdapter,
     return getNameInternal();
   }
 
-  public final void log(Entry entry) {
+  public final void log(Message entry) {
     logInternal(FQCN, entry);
   }
 
-  public final void log(String callerFQCN, Entry entry) {
+  public final void log(String callerFQCN, Message entry) {
     logInternal(callerFQCN, entry);
   }
 
@@ -308,14 +308,14 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level, String message,
       Throwable t) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new SimpleEntry(marker, level, message, t));
+      logInternal(FQCN, new SimpleMessage(marker, level, message, t));
     }
   }
 
   private void maybeLog(Marker marker, Level level,
       String format, Object arg) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new StandardEntry(marker, level, format,
+      logInternal(FQCN, new StandardMessage(marker, level, format,
           new Object[] {arg}, formatter));
     }
   }
@@ -323,7 +323,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level,
       String format, Object arg1, Object arg2) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new StandardEntry(marker, level, format,
+      logInternal(FQCN, new StandardMessage(marker, level, format,
           new Object[] {arg1, arg2}, formatter));
     }
   }
@@ -331,7 +331,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level,
       String format, Object[] args) {
     if (isEnabledInternal(marker, level)) {
-      logInternal(FQCN, new StandardEntry(marker, level, format,
+      logInternal(FQCN, new StandardMessage(marker, level, format,
           args, formatter));
     }
   }
@@ -346,7 +346,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
 
   public final void log(Marker marker, String fqcn, int level, String message,
       Object[] argArray, Throwable t) {
-    logInternal(fqcn, new SimpleEntry(
+    logInternal(fqcn, new SimpleMessage(
         marker, Level.valueOfLevel(level), message, argArray, t));
   }
 

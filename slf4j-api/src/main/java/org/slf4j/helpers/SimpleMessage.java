@@ -2,13 +2,13 @@ package org.slf4j.helpers;
 
 import org.slf4j.Level;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.MarkerAwareEntry;
-import org.slf4j.entries.ParameterAwareEntry;
-import org.slf4j.entries.ThrowableAwareEntry;
+import org.slf4j.messages.MarkerMessage;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ParameterizedMessage;
+import org.slf4j.messages.ThrowableMessage;
 
-public class SimpleEntry implements Entry, MarkerAwareEntry,
-    ThrowableAwareEntry, ParameterAwareEntry {
+public class SimpleMessage implements MarkerMessage, ThrowableMessage,
+    ParameterizedMessage {
 
   private final Level level;
   private final Marker marker;
@@ -16,12 +16,12 @@ public class SimpleEntry implements Entry, MarkerAwareEntry,
   private final Throwable throwable;
   private final Object[] parameters;
 
-  public SimpleEntry(
+  public SimpleMessage(
       Marker marker, Level level, String message, Throwable throwable) {
     this(marker, level, message, null, throwable);
   }
 
-  public SimpleEntry(
+  public SimpleMessage(
       Marker marker, Level level, String message, Object[] params,
       Throwable throwable) {
     this.marker = marker;
@@ -31,7 +31,7 @@ public class SimpleEntry implements Entry, MarkerAwareEntry,
     this.parameters = params;
   }
 
-  public String getMessage() {
+  public String getFormattedMessage() {
     return message;
   }
 

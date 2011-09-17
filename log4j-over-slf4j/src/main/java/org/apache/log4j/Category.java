@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.helpers.LoggerUtils;
-import org.slf4j.helpers.SimpleEntry;
+import org.slf4j.helpers.SimpleMessage;
 
 /**
  * <p>
@@ -173,7 +173,7 @@ public class Category {
 
     if (LoggerUtils.isEnabled(slf4jLogger, marker, level)) {
         String m = convertToString(message);
-        slf4jLogger.log(fqcn, new SimpleEntry(marker, level, m, t));
+        slf4jLogger.log(fqcn, new SimpleMessage(marker, level, m, t));
     }
   }
 

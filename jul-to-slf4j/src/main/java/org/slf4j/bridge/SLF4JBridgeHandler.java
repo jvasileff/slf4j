@@ -42,7 +42,7 @@ import java.util.logging.LogRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.LoggerUtils;
-import org.slf4j.helpers.SimpleEntry;
+import org.slf4j.helpers.SimpleMessage;
 
 // Based on http://bugzilla.slf4j.org/show_bug.cgi?id=38
 
@@ -208,7 +208,7 @@ public class SLF4JBridgeHandler extends Handler {
     }
     String i18nMessage = getMessageI18N(record);
     if (LoggerUtils.isEnabled(logger, null, slf4jLevel)) {
-        logger.log(FQCN, new SimpleEntry(null, slf4jLevel, i18nMessage,
+        logger.log(FQCN, new SimpleMessage(null, slf4jLevel, i18nMessage,
             record.getThrown()));
     }
   }

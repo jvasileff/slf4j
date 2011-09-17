@@ -29,9 +29,9 @@ import org.apache.commons.logging.Log;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.AbstractLogger;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ThrowableMessage;
 
 /**
  * A wrapper over {@link org.apache.commons.logging.Log
@@ -76,11 +76,11 @@ public final class JCLLoggerAdapter extends AbstractLogger {
     }
   }
 
-  public void logInternal(String callerFqcn, Entry entry) {
-    String msg = entry.getMessage();
+  public void logInternal(String callerFqcn, Message entry) {
+    String msg = entry.getFormattedMessage();
     Throwable t = null;
-    if (entry instanceof ThrowableAwareEntry) {
-      t = ((ThrowableAwareEntry)entry).getThrowable();
+    if (entry instanceof ThrowableMessage) {
+      t = ((ThrowableMessage)entry).getThrowable();
     }
     switch (entry.getLevel()) {
       case TRACE :

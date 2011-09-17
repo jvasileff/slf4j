@@ -6,7 +6,7 @@ import java.io.Serializable;
 import org.slf4j.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.entries.Entry;
+import org.slf4j.messages.Message;
 
 /**
  * Serves as base class for named logger implementation. More significantly, this
@@ -61,13 +61,13 @@ abstract class NamedLoggerBase implements Logger, Serializable {
         "a wrapper handles this method for legacy loggers.");
   }
 
-  public final void log(Entry entry) {
+  public final void log(Message entry) {
     throw new UnsupportedOperationException(
         "This should be unreachable code; " +
         "a wrapper handles this method for legacy loggers.");
   }
 
-  public final void log(String callerFQCN, Entry entry) {
+  public final void log(String callerFQCN, Message entry) {
     throw new UnsupportedOperationException(
         "This should be unreachable code; " +
         "a wrapper handles this method for legacy loggers.");

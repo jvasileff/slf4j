@@ -3,15 +3,15 @@ package org.slf4j.helpers;
 import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Marker;
-import org.slf4j.entries.Entry;
-import org.slf4j.entries.FormattedMessageEntry;
-import org.slf4j.entries.MarkerAwareEntry;
-import org.slf4j.entries.ParameterAwareEntry;
-import org.slf4j.entries.ThrowableAwareEntry;
 import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.messages.FormattedMessage;
+import org.slf4j.messages.MarkerMessage;
+import org.slf4j.messages.Message;
+import org.slf4j.messages.ParameterizedMessage;
+import org.slf4j.messages.ThrowableMessage;
 
-public class StandardEntry implements Entry, MarkerAwareEntry,
-    FormattedMessageEntry, ParameterAwareEntry, ThrowableAwareEntry {
+public class StandardMessage implements MarkerMessage,
+    FormattedMessage, ParameterizedMessage, ThrowableMessage {
 
   private final Level level;
   private final Marker marker;
@@ -20,7 +20,7 @@ public class StandardEntry implements Entry, MarkerAwareEntry,
   private final Formatter formatter;
   private FormattingTuple ft;
 
-  public StandardEntry(
+  public StandardMessage(
       Marker marker, Level level,
       String messagePattern, Object[] rawArgs,
       Formatter formatter) {
@@ -32,7 +32,7 @@ public class StandardEntry implements Entry, MarkerAwareEntry,
     this.formatter = formatter;
   }
 
-  public String getMessage() {
+  public String getFormattedMessage() {
     return process().getMessage();
   }
 

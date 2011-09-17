@@ -31,6 +31,6 @@ public class EventLogger {
    * @param data The EventData.
    */
   public static void logEvent(EventData data) {
-    eventLogger.log(FQCN, new EventEntry(data));
+    eventLogger.log(FQCN, new EventMessage(data));
   }
 }
