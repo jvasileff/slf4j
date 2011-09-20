@@ -1,6 +1,7 @@
 package org.slf4j.helpers;
 
 import org.slf4j.Formatter;
+import org.slf4j.formatters.StandardFormatter;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.messages.FormattedMessage;
 import org.slf4j.messages.ParameterizedMessage;
@@ -13,6 +14,10 @@ public class StandardMessage implements FormattedMessage, ParameterizedMessage,
   private final Object[] rawArgs;
   private final Formatter formatter;
   private FormattingTuple ft;
+
+  public StandardMessage(String messagePattern, Object[] rawArgs) {
+    this (messagePattern, rawArgs, StandardFormatter.getInstance());
+  }
 
   public StandardMessage(String messagePattern, Object[] rawArgs, Formatter formatter) {
     this.messagePattern = messagePattern;
