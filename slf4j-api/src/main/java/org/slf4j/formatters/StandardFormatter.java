@@ -1,12 +1,12 @@
 package org.slf4j.formatters;
 
-import java.util.Map;
-
 import org.slf4j.Formatter;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 
 public final class StandardFormatter implements Formatter {
+
+  private static final long serialVersionUID = 913366084435027526L;
 
   private static final StandardFormatter instance = new StandardFormatter();
 
@@ -21,4 +21,12 @@ public final class StandardFormatter implements Formatter {
   public FormattingTuple arrayFormat(String message, Object[] args) {
     return MessageFormatter.arrayFormat(message, args);
   }
+
+  /**
+   * @return The singleton instance.
+   */
+  protected Object readResolve() {
+          return getInstance();
+  }
+
 }
