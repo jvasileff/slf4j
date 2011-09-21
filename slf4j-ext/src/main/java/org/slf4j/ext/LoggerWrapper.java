@@ -1,6 +1,5 @@
 package org.slf4j.ext;
 
-import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
@@ -64,13 +63,6 @@ public class LoggerWrapper extends AbstractLogger {
   public LoggerWrapper(Logger logger, String fqcn) {
     this(logger);
     this.fqcn = fqcn;
-  }
-
-  public LoggerWrapper withFormatter(Formatter formatter) {
-    // TODO: javadoc should recommend subclasses override this method returning
-    //    subclass rather than LoggerWrapper
-    return new LoggerWrapper(logger.withFormatter(formatter),
-        LoggerWrapper.class.getName());
   }
 
   public String getNameInternal() {

@@ -279,7 +279,7 @@ public class LoggerUtils {
       Level level, String format, Object arg) {
     if (isEnabled(logger, marker, level)) {
       logger.log(fqcn, marker, level, new StandardMessage(format,
-          new Object[] {arg}, logger.getFormatter()));
+          new Object[] {arg}));
     }
   }
 
@@ -287,7 +287,7 @@ public class LoggerUtils {
       Level level, String format, Object arg1, Object arg2) {
     if (isEnabled(logger, marker, level)) {
       logger.log(fqcn, marker, level, new StandardMessage(format,
-          new Object[] {arg1, arg2}, logger.getFormatter()));
+          new Object[] {arg1, arg2}));
     }
   }
 
@@ -295,7 +295,7 @@ public class LoggerUtils {
       Level level, String format, Object[] args) {
     if (isEnabled(logger, marker, level)) {
       logger.log(fqcn, marker, level, new StandardMessage(format,
-          args, logger.getFormatter()));
+          args));
     }
   }
 

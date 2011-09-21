@@ -1,8 +1,6 @@
 package org.slf4j.helpers;
 
-import org.slf4j.Formatter;
 import org.slf4j.Level;
-import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.messages.Message;
 import org.slf4j.spi.LoggerAdapter;
@@ -17,11 +15,6 @@ public class LoggerImpl extends AbstractLogger {
     this.adapter = adapter;
   }
 
-  public LoggerImpl(LoggerAdapter adapter, Formatter formatter) {
-    super(formatter);
-    this.adapter = adapter;
-  }
-
   public String getNameInternal() {
     return adapter.getNameInternal();
   }
@@ -32,9 +25,5 @@ public class LoggerImpl extends AbstractLogger {
 
   public void logInternal(String fqcn, Marker marker, Level level, Message entry) {
     adapter.logInternal(fqcn, marker, level, entry);
-  }
-
-  public Logger withFormatter(Formatter formatter) {
-    return new LoggerImpl(adapter, formatter);
   }
 }

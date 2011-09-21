@@ -9,12 +9,9 @@ import static org.slf4j.Level.WARN;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
-import org.slf4j.Formatter;
 import org.slf4j.Level;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
-import org.slf4j.formatters.StandardFormatter;
 import org.slf4j.messages.Message;
 import org.slf4j.spi.LocationAwareLogger;
 import org.slf4j.spi.LoggerAdapter;
@@ -25,16 +22,6 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private static final long serialVersionUID = 3237785459601004498L;
 
   private static final String FQCN = AbstractLogger.class.getName();
-
-  private final Formatter formatter;
-
-  public AbstractLogger() {
-    this(StandardFormatter.getInstance());
-  }
-
-  public AbstractLogger(Formatter formatter) {
-    this.formatter = formatter;
-  }
 
   public final String getName() {
     return getNameInternal();
@@ -316,7 +303,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
       String format, Object arg) {
     if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new StandardMessage(format,
-          new Object[] {arg}, formatter));
+          new Object[] {arg}));
     }
   }
 
@@ -324,7 +311,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
       String format, Object arg1, Object arg2) {
     if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new StandardMessage(format,
-          new Object[] {arg1, arg2}, formatter));
+          new Object[] {arg1, arg2}));
     }
   }
 
@@ -332,16 +319,8 @@ public abstract class AbstractLogger implements LoggerAdapter,
       String format, Object[] args) {
     if (isEnabledInternal(marker, level, null)) {
       logInternal(FQCN, marker, level, new StandardMessage(format,
-          args, formatter));
+          args));
     }
-  }
-
-  public Logger withFormatter(Formatter formatter) {
-    return new LoggerImpl(this, formatter);
-  }
-
-  public final Formatter getFormatter() {
-    return formatter;
   }
 
   public final void log(Marker marker, String fqcn, int level, String message,
@@ -368,8 +347,5 @@ public abstract class AbstractLogger implements LoggerAdapter,
     // using getName() instead of this.name works even for
     // NOPLogger
     return LoggerFactory.getLogger(getName());
-
-    // FIXME: restore formatter
-    //return LoggerFactory.getLogger(getName()).withFormatter(formatter);
   }
 }

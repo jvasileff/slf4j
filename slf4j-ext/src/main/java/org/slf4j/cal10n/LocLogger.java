@@ -21,7 +21,6 @@
  */
 package org.slf4j.cal10n;
 
-import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
@@ -133,9 +132,5 @@ public class LocLogger extends LoggerWrapper {
       return;
     }
     log(FQCN, LOCALIZED, Level.ERROR, new LocLoggerMessage(imc, key, args));
-  }
-
-  public LocLogger withFormatter(Formatter formatter) {
-    return new LocLogger(getWrappedLogger().withFormatter(formatter), imc);
   }
 }

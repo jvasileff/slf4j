@@ -3,7 +3,6 @@ package org.slf4j.helpers;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
-import org.slf4j.Formatter;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,21 +45,6 @@ abstract class NamedLoggerBase implements Logger, Serializable {
     // using getName() instead of this.name works even for
     // NOPLogger
     return LoggerFactory.getLogger(getName());
-
-    // FIXME: restore formatter
-    //return LoggerFactory.getLogger(getName()).withFormatter(formatter);
-  }
-
-  public final Logger withFormatter(Formatter formatter) {
-    throw new UnsupportedOperationException(
-        "This should be unreachable code; " +
-        "a wrapper handles this method for legacy loggers.");
-  }
-
-  public final Formatter getFormatter() {
-    throw new UnsupportedOperationException(
-        "This should be unreachable code; " +
-        "a wrapper handles this method for legacy loggers.");
   }
 
   public final void log(Marker marker, Level level, Message entry) {
