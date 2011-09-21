@@ -1,6 +1,8 @@
 package org.slf4j.messages;
 
-public interface Message {
+import java.io.Serializable;
+
+public interface Message extends Serializable {
 
   String getFormattedMessage();
 

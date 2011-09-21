@@ -23,7 +23,7 @@ public class StandardMessage implements FormattedMessage, ParameterizedMessage,
   private static final long serialVersionUID = -665975803997290697L;
 
   private String messagePattern;
-  private String formattedMessage;
+  private transient String formattedMessage;
   private String[] parameters;
   private transient Throwable throwable;
 

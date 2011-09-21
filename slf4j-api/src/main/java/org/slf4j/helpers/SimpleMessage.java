@@ -5,9 +5,11 @@ import org.slf4j.messages.ThrowableMessage;
 
 public class SimpleMessage implements ThrowableMessage, ParameterizedMessage {
 
+  private static final long serialVersionUID = -8169425494726189881L;
+
   private final String message;
-  private final Throwable throwable;
-  private final Object[] parameters;
+  private final transient Throwable throwable;
+  private final transient Object[] parameters;
 
   public SimpleMessage(String message) {
     this(message, null, null);
