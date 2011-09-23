@@ -20,6 +20,7 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
+import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.LoggerUtils;
@@ -104,7 +105,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void trace(Object message) {
-    LoggerUtils.trace(FQCN, logger, String.valueOf(message));
+    LoggerUtils.logObject(FQCN, logger, null, Level.TRACE, message);
   }
 
   /**
@@ -117,7 +118,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void trace(Object message, Throwable t) {
-    LoggerUtils.trace(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.logObject(FQCN, logger, null, Level.TRACE, message, t);
   }
 
   /**
@@ -128,7 +129,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void debug(Object message) {
-    LoggerUtils.debug(FQCN, logger, String.valueOf(message));
+    LoggerUtils.logObject(FQCN, logger, null, Level.DEBUG, message);
   }
 
   /**
@@ -141,7 +142,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void debug(Object message, Throwable t) {
-    LoggerUtils.debug(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.logObject(FQCN, logger, null, Level.DEBUG, message, t);
   }
 
   /**
@@ -152,7 +153,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void info(Object message) {
-    LoggerUtils.info(FQCN, logger, String.valueOf(message));
+    LoggerUtils.logObject(FQCN, logger, null, Level.INFO, message);
   }
 
   /**
@@ -165,7 +166,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void info(Object message, Throwable t) {
-    LoggerUtils.info(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.logObject(FQCN, logger, null, Level.INFO, message, t);
   }
 
   /**
@@ -176,7 +177,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void warn(Object message) {
-    LoggerUtils.warn(FQCN, logger, String.valueOf(message));
+    LoggerUtils.logObject(FQCN, logger, null, Level.WARN, message);
   }
 
   /**
@@ -189,7 +190,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void warn(Object message, Throwable t) {
-    LoggerUtils.warn(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.logObject(FQCN, logger, null, Level.WARN, message, t);
   }
 
   /**
@@ -200,7 +201,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void error(Object message) {
-    LoggerUtils.error(FQCN, logger, String.valueOf(message));
+    LoggerUtils.logObject(FQCN, logger, null, Level.ERROR, message);
   }
 
   /**
@@ -213,7 +214,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void error(Object message, Throwable t) {
-    LoggerUtils.error(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.logObject(FQCN, logger, null, Level.ERROR, message, t);
   }
 
   /**
@@ -224,7 +225,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the message to log. Converted to {@link String}
    */
   public void fatal(Object message) {
-    LoggerUtils.error(FQCN, logger, String.valueOf(message));
+    LoggerUtils.logObject(FQCN, logger, null, Level.ERROR, message);
   }
 
   /**
@@ -237,7 +238,7 @@ public class SLF4JLog implements Log, Serializable {
    *          the exception to log
    */
   public void fatal(Object message, Throwable t) {
-    LoggerUtils.error(FQCN, logger, String.valueOf(message), t);
+    LoggerUtils.logObject(FQCN, logger, null, Level.ERROR, message, t);
   }
 
   /**
