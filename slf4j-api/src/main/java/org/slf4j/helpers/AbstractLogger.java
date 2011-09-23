@@ -295,38 +295,67 @@ public abstract class AbstractLogger implements LoggerAdapter,
   private void maybeLog(Marker marker, Level level, String message,
       Throwable t) {
     if (isEnabledInternal(marker, level, null)) {
-      logInternal(FQCN, marker, level, new SimpleMessage(message, t));
+      logInternal(FQCN, marker, level,
+          newMessage(message, null, t));
     }
   }
 
   private void maybeLog(Marker marker, Level level,
       String format, Object arg) {
     if (isEnabledInternal(marker, level, null)) {
-      logInternal(FQCN, marker, level, new StandardMessage(format,
-          new Object[] {arg}));
+      logInternal(FQCN, marker, level,
+          newMessage(format, new Object[] {arg}));
     }
   }
 
   private void maybeLog(Marker marker, Level level,
       String format, Object arg1, Object arg2) {
     if (isEnabledInternal(marker, level, null)) {
-      logInternal(FQCN, marker, level, new StandardMessage(format,
-          new Object[] {arg1, arg2}));
+      logInternal(FQCN, marker, level,
+          newMessage(format, new Object[] {arg1, arg2}));
     }
   }
 
   private void maybeLog(Marker marker, Level level,
       String format, Object[] args) {
     if (isEnabledInternal(marker, level, null)) {
-      logInternal(FQCN, marker, level, new StandardMessage(format,
-          args));
+      logInternal(FQCN, marker, level,
+          newMessage(format, args));
     }
   }
 
-  public final void log(Marker marker, String fqcn, int level, String message,
-      Object[] argArray, Throwable t) {
-    logInternal(fqcn, marker, Level.valueOfLevel(level), new SimpleMessage(
-        message, argArray, t));
+  public final void log(Marker marker, String fqcn, int level,
+      String formattedMessage, Object[] argArray, Throwable t) {
+    logInternal(fqcn, marker, Level.valueOfLevel(level),
+        newMessage(formattedMessage, argArray, t));
+  }
+
+  /**
+   * Construct a new Message for the provided parameters.
+   * 
+   * @param format The unformatted message
+   * @param args The arguments, or null.
+   * @return The Message;
+   */
+  protected Message newMessage(String format, Object... args) {
+    if (args == null || args.length == 0) {
+      return new SimpleMessage(format);
+    } else {
+      return new StandardMessage(format, args);
+    }
+  }
+
+  /**
+   * Construct a new Message for the provided parameters.
+   * 
+   * @param formattedMessage The message which has already been formatted.
+   * @param args The arguments, or null.
+   * @param throwable The Throwable or null.
+   * @return The Message;
+   */
+  protected Message newMessage(String formattedMessage, Object[] args,
+      Throwable throwable) {
+    return new SimpleMessage(formattedMessage, args, throwable);
   }
 
   /**
