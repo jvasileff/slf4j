@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.slf4j.helpers.StringUtils;
 import org.slf4j.messages.FormattedMessage;
 import org.slf4j.messages.ParameterizedMessage;
 import org.slf4j.messages.ThrowableMessage;
@@ -122,24 +123,10 @@ public class JUFMessage implements FormattedMessage, ParameterizedMessage,Throwa
       } else if (arg instanceof AtomicLong) {
         immutableArgs[i] = Long.valueOf(((AtomicLong) arg).get());
       } else {
-        immutableArgs[i] = safeToString(arg);
+        immutableArgs[i] = StringUtils.deepToString(arg);
       }
     }
     initialized = true;
   }
 
-  // TODO: better conversion
-  protected String safeToString(Object obj) {
-    String result;
-    try {
-      result = obj.toString();
-    } catch (Exception e) {
-      try {
-        result = e.toString();
-      } catch (Exception f) {
-        result = "exception while converting parameter to String";
-      }
-    }
-    return result;
-  }
 }
