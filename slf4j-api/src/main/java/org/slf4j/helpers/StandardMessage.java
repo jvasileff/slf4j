@@ -2,8 +2,8 @@ package org.slf4j.helpers;
 
 import org.slf4j.messages.FormattedMessage;
 import org.slf4j.messages.ParameterizedMessage;
+import org.slf4j.messages.ThrowableMessage;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,9 +17,11 @@ import java.util.Set;
  * 
  * @see org.slf4j.core.Message
  * @author Joern Huxhorn
+ * @author John Vasileff
  */
 public class StandardMessage implements FormattedMessage, ParameterizedMessage,
-    Serializable {
+    ThrowableMessage {
+
   private static final long serialVersionUID = -665975803997290697L;
 
   private String messagePattern;
