@@ -34,8 +34,8 @@ public class JUFMessage implements FormattedMessage, ParameterizedMessage,Throwa
   private final String format;
 
   private Object[] immutableArgs;
-  private String formattedMessage;
 
+  private transient String formattedMessage;
   private transient Object[] mutableArgs;
   private transient Throwable throwable;
 
