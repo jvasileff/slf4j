@@ -1,5 +1,7 @@
 package org.slf4j.messages;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,6 +9,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class MessageUtils {
 
@@ -217,5 +221,40 @@ public class MessageUtils {
     Set<String> dejaVu = new HashSet<String>(); // that's actually a neat name ;)
     recursiveDeepToString(o, str, dejaVu);
     return str.toString();
+  }
+  
+  public static Object[] newArrayOfImmutables(Object[] args, boolean trimLast) {
+    if (args == null || args.length == 0 || (args.length == 1 && trimLast)) {
+      return null;
+    }
+
+    int length = args.length - (trimLast ? 1 : 0);
+    Object[] immutableArgs = new Object[length];
+    
+    for (int i = 0; i < length; i++) {
+      Object arg = args[i];
+      if (arg instanceof String
+          || arg instanceof Boolean
+          || arg instanceof BigDecimal
+          || arg instanceof BigInteger
+          || arg instanceof Byte
+          || arg instanceof Character
+          || arg instanceof Double
+          || arg instanceof Float
+          || arg instanceof Integer
+          || arg instanceof Long
+          || arg instanceof Short) {
+        immutableArgs[i] = arg;
+      } else if (arg instanceof AtomicInteger) {
+        immutableArgs[i] = Integer.valueOf(((AtomicInteger) arg).get());
+      } else if (arg instanceof AtomicLong) {
+        immutableArgs[i] = Long.valueOf(((AtomicLong) arg).get());
+      } else if (arg instanceof AtomicLong) {
+        immutableArgs[i] = Long.valueOf(((AtomicLong) arg).get());
+      } else {
+        immutableArgs[i] = MessageUtils.deepToString(arg);
+      }
+    }
+    return immutableArgs;
   }
 }

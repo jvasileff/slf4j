@@ -1,11 +1,7 @@
 package org.slf4j.ext;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Formatter;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.messages.FormattedMessage;
 import org.slf4j.messages.ParameterizedMessage;
@@ -98,35 +94,7 @@ public class JUFMessage implements FormattedMessage, ParameterizedMessage,Throwa
       throwable = (Throwable) mutableArgs[mutableArgs.length-1];
     }
 
-    int length = mutableArgs.length - (throwable == null ? 0 : 1);
-
-    immutableArgs = new Object[length];
-
-    for (int i = 0; i < length; i++) {
-      Object arg = mutableArgs[i];
-      if (arg instanceof String
-          || arg instanceof Boolean
-          || arg instanceof BigDecimal
-          || arg instanceof BigInteger
-          || arg instanceof Byte
-          || arg instanceof Character
-          || arg instanceof Double
-          || arg instanceof Float
-          || arg instanceof Integer
-          || arg instanceof Long
-          || arg instanceof Short) {
-        immutableArgs[i] = arg;
-      } else if (arg instanceof AtomicInteger) {
-        immutableArgs[i] = Integer.valueOf(((AtomicInteger) arg).get());
-      } else if (arg instanceof AtomicLong) {
-        immutableArgs[i] = Long.valueOf(((AtomicLong) arg).get());
-      } else if (arg instanceof AtomicLong) {
-        immutableArgs[i] = Long.valueOf(((AtomicLong) arg).get());
-      } else {
-        immutableArgs[i] = MessageUtils.deepToString(arg);
-      }
-    }
+    immutableArgs = MessageUtils.newArrayOfImmutables(mutableArgs, throwable != null);
     initialized = true;
   }
-
 }
