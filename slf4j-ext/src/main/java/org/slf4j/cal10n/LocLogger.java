@@ -68,10 +68,9 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void trace(Enum<?> key, Object... args) {
-    if (!isTraceEnabled()) {
-      return;
+    if (isTraceEnabled()) {
+      log(FQCN, LOCALIZED, Level.TRACE, new LocLoggerMessage(imc, key, args));
     }
-    log(FQCN, LOCALIZED, Level.TRACE, new LocLoggerMessage(imc, key, args));
   }
 
   /**
@@ -83,10 +82,9 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void debug(Enum<?> key, Object... args) {
-    if (!isDebugEnabled()) {
-      return;
+    if (isDebugEnabled()) {
+      log(FQCN, LOCALIZED, Level.DEBUG, new LocLoggerMessage(imc, key, args));
     }
-    log(FQCN, LOCALIZED, Level.DEBUG, new LocLoggerMessage(imc, key, args));
   }
 
   /**
@@ -98,10 +96,9 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void info(Enum<?> key, Object... args) {
-    if (!isInfoEnabled()) {
-      return;
+    if (isInfoEnabled()) {
+      log(FQCN, LOCALIZED, Level.INFO, new LocLoggerMessage(imc, key, args));
     }
-    log(FQCN, LOCALIZED, Level.INFO, new LocLoggerMessage(imc, key, args));
   }
 
   /**
@@ -113,10 +110,9 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void warn(Enum<?> key, Object... args) {
-    if (!isWarnEnabled()) {
-      return;
+    if (isWarnEnabled()) {
+      log(FQCN, LOCALIZED, Level.WARN, new LocLoggerMessage(imc, key, args));
     }
-    log(FQCN, LOCALIZED, Level.WARN, new LocLoggerMessage(imc, key, args));
   }
 
   /**
@@ -128,9 +124,8 @@ public class LocLogger extends LoggerWrapper {
    *          optional arguments
    */
   public void error(Enum<?> key, Object... args) {
-    if (!isErrorEnabled()) {
-      return;
+    if (isErrorEnabled()) {
+      log(FQCN, LOCALIZED, Level.ERROR, new LocLoggerMessage(imc, key, args));
     }
-    log(FQCN, LOCALIZED, Level.ERROR, new LocLoggerMessage(imc, key, args));
   }
 }
