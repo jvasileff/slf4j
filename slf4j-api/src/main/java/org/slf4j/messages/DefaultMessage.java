@@ -1,6 +1,5 @@
 package org.slf4j.messages;
 
-
 import java.util.Arrays;
 
 /**
@@ -14,34 +13,37 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
 
   private static final long serialVersionUID = -665975803997290697L;
 
-  private String messagePattern;
+  private boolean initialized = false;
+
+  private final String messagePattern;
+
+  private Object[] immutableParameters;
+
   private transient String formattedMessage;
-  private String[] parameters;
+  private transient Object[] mutableParameters;
   private transient Throwable throwable;
 
-  public DefaultMessage() {
-    this(null, null, null);
-  }
-
-  public DefaultMessage(String messagePattern, String[] parameters, Throwable throwable) {
+  public DefaultMessage(String messagePattern, Object... arguments) {
     this.messagePattern = messagePattern;
-    this.parameters = parameters;
-    this.throwable = throwable;
-  }
-
-  public String getFormattedMessage() {
-    if (formattedMessage == null) {
-      formattedMessage = format(messagePattern, parameters);
-    }
-    return formattedMessage;
+    this.mutableParameters = arguments;
+    initialize(); // this could be deferred with logging framework support
   }
 
   public String getMessagePattern() {
     return messagePattern;
   }
 
-  public String[] getParameters() {
-    return parameters;
+  public Object[] getParameters() {
+    initialize();
+    return immutableParameters;
+  }
+
+  public String getFormattedMessage() {
+    initialize();
+    if (formattedMessage == null) {
+      formattedMessage = format(messagePattern, immutableParameters);
+    }
+    return formattedMessage;
   }
 
   /**
@@ -51,30 +53,8 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
    * @return the Throwable, if any.
    */
   public Throwable getThrowable() {
+    initialize();
     return throwable;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    DefaultMessage that = (DefaultMessage) o;
-
-    if (messagePattern != null ? !messagePattern.equals(that.messagePattern) : that.messagePattern != null) {
-      return false;
-    }
-    if (!Arrays.equals(parameters, that.parameters)) return false;
-    //if (throwable != null ? !throwable.equals(that.throwable) : that.throwable != null) return false;
-
-    return true;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = messagePattern != null ? messagePattern.hashCode() : 0;
-    result = 31 * result + (parameters != null ? Arrays.hashCode(parameters) : 0);
-    return result;
   }
 
   private static final char DELIM_START = '{';
@@ -88,7 +68,7 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
    * @param arguments      the arguments to be used to replace placeholders.
    * @return the formatted message.
    */
-  public static String format(String messagePattern, String... arguments) {
+  public static String format(String messagePattern, Object... arguments) {
     if (messagePattern == null || arguments == null || arguments.length == 0) {
       return messagePattern;
     }
@@ -116,8 +96,7 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
                 // write escaped escape chars
                 result.append(DELIM_START);
                 result.append(DELIM_STOP);
-              }
-              else {
+              } else {
                 // unescaped
                 if (currentArgument < arguments.length) {
                   result.append(arguments[currentArgument]);
@@ -170,8 +149,7 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
       char curChar = messagePattern.charAt(i);
       if (curChar == ESCAPE_CHAR) {
         isEscaped = !isEscaped;
-      }
-      else if (curChar == DELIM_START) {
+      } else if (curChar == DELIM_START) {
         if (!isEscaped) {
           if (i < messagePattern.length() - 1) {
             if (messagePattern.charAt(i + 1) == DELIM_STOP) {
@@ -181,8 +159,7 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
           }
         }
         isEscaped = false;
-      }
-      else {
+      } else {
         isEscaped = false;
       }
     }
@@ -190,72 +167,105 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
   }
 
   /**
-   * <p>This constructor returns a ParameterizedMessage which contains the arguments converted to String
-   * as well as an optional Throwable.</p>
+   * <p>
+   * Initialize an immutable copy of the parameters and the optional Throwable.
    * <p/>
-   * <p>If the last argument is a Throwable and is NOT used up by a placeholder in the message pattern it is returned
-   * in ParameterizedMessage.getThrowable() and won't be contained in the created String[].<br/>
-   * If it is used up ParameterizedMessage.getThrowable() will return null even if the last argument was a Throwable!</p>
-   *
-   * @param messagePattern the message pattern that to be checked for placeholders.
-   * @param arguments      the argument array to be converted.
-   * @return a ParameterizedMessage containing the messagePattern, converted arguments and, optionally, a Throwable.
+   * <p>
+   * If the last argument is a Throwable and is NOT used up by a placeholder in
+   * the message pattern it will be returned by getThrowable() and won't be
+   * contained in the created Object[] immutableParameters.<br/>
+   * If it is used up getThrowable() will return null even if the last argument
+   * was a Throwable!
+   * </p>
    */
-  public DefaultMessage(String messagePattern, Object... arguments) {
-    if (arguments == null) {
-      this.messagePattern = messagePattern;
+  public void initialize() {
+    if (initialized) {
+      return;
+    }
+
+    if (mutableParameters == null || mutableParameters.length == 0) {
+      immutableParameters = null;
+      initialized = true;
       return;
     }
 
     // placeholders are always counted because the amount is needed for both
-    // the handling of Throwable as the last argument (http://bugzilla.slf4j.org/show_bug.cgi?id=70)
-    // and the handling of the special case (http://jira.qos.ch/browse/LBGENERAL-36) below
+    // the handling of Throwable as the last argument
+    // (http://bugzilla.slf4j.org/show_bug.cgi?id=70)
+    // and the handling of the special case
+    // (http://jira.qos.ch/browse/LBGENERAL-36) below
     int argsCount = countArgumentPlaceholders(messagePattern);
-    int resultArgCount = arguments.length;
-    Throwable throwable = null;
-    if (argsCount < arguments.length) {
-      if (arguments[arguments.length - 1] instanceof Throwable) {
-        throwable = (Throwable) arguments[arguments.length - 1];
-        resultArgCount--;
+    if (argsCount < mutableParameters.length) {
+      if (mutableParameters[mutableParameters.length - 1] instanceof Throwable) {
+        throwable = (Throwable) mutableParameters[mutableParameters.length - 1];
       }
     }
 
-    String[] stringArgs;
-    if (argsCount == 1 && throwable == null && arguments.length > 1) {
+    if (argsCount == 1 && throwable == null && mutableParameters.length > 1) {
       // special case
-      // The pattern contains exactly one placeholder, there was no Throwable detected and
-      // more than one arguments exists.
+      // The pattern contains exactly one placeholder, there was no Throwable
+      // detected and more than one arguments exists.
       // This means that the whole array shall be used as the replacement.
       // http://jira.qos.ch/browse/LBGENERAL-36
       // ("{}", new String[]{"Foo", "Bar"}) => [Foo, Bar] instead of Foo
-      stringArgs = new String[1];
-      stringArgs[0] = MessageUtils.deepToString(arguments);
+      immutableParameters = new Object[1];
+      immutableParameters[0] = MessageUtils.deepToString(mutableParameters);
+    } else {
+      immutableParameters = MessageUtils.newArrayOfImmutables(mutableParameters,
+          throwable != null);
     }
-    else {
-      stringArgs = new String[resultArgCount];
-      for (int i = 0; i < stringArgs.length; i++) {
-        stringArgs[i] = MessageUtils.deepToString(arguments[i]);
-      }
-    }
-    
-    this.messagePattern = messagePattern;
-    this.parameters = stringArgs;
-    this.throwable = throwable;
+
+    mutableParameters = null;
+    initialized = true;
   }
 
   @Override
   public String toString() {
-    return "ParameterizedMessage[messagePattern=" + messagePattern + ", parameters=" + Arrays.toString(parameters) + ", throwable=" + throwable + "]";
+    initialize();
+    return "ParameterizedMessage[messagePattern=" + messagePattern
+        + ", parameters=" + Arrays.toString(immutableParameters)
+        + ", throwable=" + throwable + "]";
   }
 
   public DefaultMessage clone() throws CloneNotSupportedException {
+    initialize();
     DefaultMessage result = (DefaultMessage) super.clone();
-    if (parameters != null) {
-      result.parameters = new String[parameters.length];
-      System.arraycopy(parameters, 0, result.parameters, 0, parameters.length);
+    if (immutableParameters != null) {
+      result.immutableParameters = new Object[immutableParameters.length];
+      System.arraycopy(immutableParameters, 0, result.immutableParameters, 0,
+          immutableParameters.length);
     }
     // Throwable is not cloned.
     return result;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    DefaultMessage that = (DefaultMessage) o;
+
+    if (getMessagePattern() != null
+        ? !getMessagePattern().equals(that.getMessagePattern())
+        : that.getMessagePattern() != null) {
+      return false;
+    }
+
+    if (!Arrays.equals(getParameters(), that.getParameters())) {
+      return false;
+    }
+
+    //if (throwable != null ? !throwable.equals(that.throwable) : that.throwable != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = getMessagePattern() != null ? getMessagePattern().hashCode() : 0;
+    result = 31 * result
+        + (getParameters() != null ? Arrays.hashCode(getParameters()) : 0);
+    return result;
+  }
 }
