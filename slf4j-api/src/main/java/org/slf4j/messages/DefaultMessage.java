@@ -1,3 +1,5 @@
+// portions copied from the huxi/slf4j-redesign branch
+
 package org.slf4j.messages;
 
 import java.util.Arrays;

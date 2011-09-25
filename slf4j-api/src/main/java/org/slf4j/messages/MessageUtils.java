@@ -1,3 +1,5 @@
+// portions copied from the huxi/slf4j-redesign branch
+
 package org.slf4j.messages;
 
 import java.math.BigDecimal;
@@ -14,9 +16,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class MessageUtils {
 
-  // The code in this class was taken from ParameterizedMessage in Joern's
-  // slf4j-redesign branch
- 
   public static final String RECURSION_PREFIX = "[...";
   public static final String RECURSION_SUFFIX = "...]";
   public static final String ERROR_PREFIX = "[!!!";
