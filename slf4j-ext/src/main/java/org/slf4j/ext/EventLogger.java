@@ -1,10 +1,9 @@
 package org.slf4j.ext;
 
-import org.slf4j.Level;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
+import org.slf4j.spi.LocationAwareLogger;
 
 /**
  * Simple Logger used to log events. All events are directed to a logger named "EventLogger"
@@ -18,7 +17,8 @@ public class EventLogger {
 
   static Marker EVENT_MARKER = MarkerFactory.getMarker("EVENT");
 
-  private static Logger eventLogger = LoggerFactory.getLogger("EventLogger");
+  private static LoggerWrapper eventLogger =
+      new LoggerWrapper(LoggerFactory.getLogger("EventLogger"), FQCN);
 
   /**
    * There can only be a single EventLogger.
@@ -32,6 +32,11 @@ public class EventLogger {
    * @param data The EventData.
    */
   public static void logEvent(EventData data) {
-    eventLogger.log(FQCN, EVENT_MARKER, Level.INFO, new EventMessage(data));
+    if (eventLogger.instanceofLAL) {
+      ((LocationAwareLogger) eventLogger.logger).log(EVENT_MARKER, FQCN,
+          LocationAwareLogger.INFO_INT, data.toXML(), null, null);
+    } else {
+      eventLogger.logger.info(EVENT_MARKER, data.toXML(), data);
+    }
   }
 }

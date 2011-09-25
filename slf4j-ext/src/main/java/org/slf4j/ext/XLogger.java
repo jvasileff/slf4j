@@ -3,8 +3,8 @@ package org.slf4j.ext;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.slf4j.messages.DefaultMessage;
-import org.slf4j.messages.SimpleMessage;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**
@@ -14,10 +14,7 @@ import org.slf4j.spi.LocationAwareLogger;
  * @author Ralph Goers
  * @author Ceki G&uuml;lc&uuml;
  */
-public class XLogger extends LoggerWrapper {
-
-  // FIXME: review serialization
-  private static final long serialVersionUID = -5085187853082120808L;
+public class XLogger extends LoggerWrapper implements Logger {
 
   private static final String FQCN = XLogger.class.getName();
   static Marker FLOW_MARKER = MarkerFactory.getMarker("FLOW");
@@ -51,7 +48,6 @@ public class XLogger extends LoggerWrapper {
     ENTRY_MESSAGE_ARRAY[4] = ENTRY_MESSAGE_4;
   }
 
-  @Deprecated
   public enum Level {
     TRACE("TRACE", LocationAwareLogger.TRACE_INT), DEBUG("DEBUG",
         LocationAwareLogger.DEBUG_INT), INFO("INFO",
@@ -83,7 +79,10 @@ public class XLogger extends LoggerWrapper {
    *          underlying logger
    */
   public XLogger(Logger logger) {
-    super(logger);
+    // If class B extends A, assuming B does not override method x(), the caller
+    // of new B().x() is A and not B, see also
+    // http://bugzilla.slf4j.org/show_bug.cgi?id=114
+    super(logger, LoggerWrapper.class.getName());
   }
 
   /**
@@ -93,15 +92,16 @@ public class XLogger extends LoggerWrapper {
    *          supplied parameters
    */
   public void entry(Object... argArray) {
-    if (isTraceEnabled(ENTRY_MARKER)) {
+    if (instanceofLAL && logger.isTraceEnabled(ENTRY_MARKER)) {
       String messagePattern = null;
       if (argArray.length < ENTRY_MESSAGE_ARRAY_LEN) {
         messagePattern = ENTRY_MESSAGE_ARRAY[argArray.length];
       } else {
         messagePattern = buildMessagePattern(argArray.length);
       }
-      log(FQCN, ENTRY_MARKER, org.slf4j.Level.TRACE, new DefaultMessage(
-          messagePattern, argArray));
+      FormattingTuple tp = MessageFormatter.arrayFormat(messagePattern, argArray);
+      ((LocationAwareLogger) logger).log(ENTRY_MARKER, FQCN,
+          LocationAwareLogger.TRACE_INT, tp.getMessage(), argArray, tp.getThrowable());
     }
   }
 
@@ -109,9 +109,9 @@ public class XLogger extends LoggerWrapper {
    * Log method exit
    */
   public void exit() {
-    if (isTraceEnabled(ENTRY_MARKER)) {
-      log(FQCN, EXIT_MARKER, org.slf4j.Level.TRACE, new SimpleMessage(
-          EXIT_MESSAGE_0, null));
+    if (instanceofLAL && logger.isTraceEnabled(ENTRY_MARKER)) {
+      ((LocationAwareLogger) logger).log(EXIT_MARKER, FQCN,
+          LocationAwareLogger.TRACE_INT, EXIT_MESSAGE_0, null, null);
     }
   }
 
@@ -122,9 +122,11 @@ public class XLogger extends LoggerWrapper {
    *          The result of the method being exited
    */
   public void exit(Object result) {
-    if (isTraceEnabled(EXIT_MARKER)) {
-      log(FQCN, EXIT_MARKER, org.slf4j.Level.TRACE, new DefaultMessage(
-          EXIT_MESSAGE_1, new Object[] {result}));
+    if (instanceofLAL && logger.isTraceEnabled(ENTRY_MARKER)) {
+      FormattingTuple tp = MessageFormatter.format(EXIT_MESSAGE_1, result);
+      ((LocationAwareLogger) logger).log(EXIT_MARKER, FQCN,
+          LocationAwareLogger.TRACE_INT, tp.getMessage(),
+          new Object[] { result }, tp.getThrowable());
     }
   }
 
@@ -135,9 +137,9 @@ public class XLogger extends LoggerWrapper {
    *          the exception being caught.
    */
   public void throwing(Throwable throwable) {
-    if (isErrorEnabled(THROWING_MARKER)) {
-      log(FQCN, THROWING_MARKER, org.slf4j.Level.ERROR, new SimpleMessage(
-          "throwing", throwable));
+    if (instanceofLAL) {
+      ((LocationAwareLogger) logger).log(THROWING_MARKER, FQCN,
+          LocationAwareLogger.ERROR_INT, "throwing", null, throwable);
     }
   }
 
@@ -149,21 +151,11 @@ public class XLogger extends LoggerWrapper {
    * @param throwable
    *          the exception being caught.
    */
-  @Deprecated
   public void throwing(Level level, Throwable throwable) {
-    throwing(org.slf4j.Level.valueOfLevel(level.level), throwable);
-  }
-
-  /**
-   * Log an exception being thrown allowing the log level to be specified.
-   * 
-   * @param level
-   *          the logging level to use.
-   * @param throwable
-   *          the exception being caught.
-   */
-  public void throwing(org.slf4j.Level level, Throwable throwable) {
-    log(FQCN, THROWING_MARKER, level, new SimpleMessage("throwing", throwable));
+    if (instanceofLAL) {
+      ((LocationAwareLogger) logger).log(THROWING_MARKER, FQCN, level.level,
+          "throwing", null, throwable);
+    }
   }
 
   /**
@@ -173,9 +165,9 @@ public class XLogger extends LoggerWrapper {
    *          the exception being caught.
    */
   public void catching(Throwable throwable) {
-    if (isErrorEnabled(CATCHING_MARKER)) {
-      log(FQCN, CATCHING_MARKER, org.slf4j.Level.ERROR, new SimpleMessage(
-          "catching", throwable));
+    if (instanceofLAL) {
+      ((LocationAwareLogger) logger).log(CATCHING_MARKER, FQCN,
+          LocationAwareLogger.ERROR_INT, "catching", null, throwable);
     }
   }
 
@@ -188,19 +180,10 @@ public class XLogger extends LoggerWrapper {
    *          the exception being caught.
    */
   public void catching(Level level, Throwable throwable) {
-    catching(org.slf4j.Level.valueOfLevel(level.level), throwable);
-  }
-
-  /**
-   * Log an exception being caught allowing the log level to be specified.
-   * 
-   * @param level
-   *          the logging level to use.
-   * @param throwable
-   *          the exception being caught.
-   */
-  public void catching(org.slf4j.Level level, Throwable throwable) {
-    log(FQCN, CATCHING_MARKER, level, new SimpleMessage("catching", throwable));
+    if (instanceofLAL) {
+      ((LocationAwareLogger) logger).log(CATCHING_MARKER, FQCN, level.level,
+          "catching", null, throwable);
+    }
   }
 
   private static String buildMessagePattern(int len) {
