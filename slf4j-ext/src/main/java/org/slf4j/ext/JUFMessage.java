@@ -7,9 +7,9 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.slf4j.helpers.StringUtils;
 import org.slf4j.messages.FormattedMessage;
 import org.slf4j.messages.ParameterizedMessage;
+import org.slf4j.messages.MessageUtils;
 import org.slf4j.messages.ThrowableMessage;
 
 /**
@@ -123,7 +123,7 @@ public class JUFMessage implements FormattedMessage, ParameterizedMessage,Throwa
       } else if (arg instanceof AtomicLong) {
         immutableArgs[i] = Long.valueOf(((AtomicLong) arg).get());
       } else {
-        immutableArgs[i] = StringUtils.deepToString(arg);
+        immutableArgs[i] = MessageUtils.deepToString(arg);
       }
     }
     initialized = true;

@@ -1,6 +1,5 @@
 package org.slf4j.messages;
 
-import org.slf4j.helpers.StringUtils;
 
 import java.util.Arrays;
 
@@ -230,12 +229,12 @@ public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
       // http://jira.qos.ch/browse/LBGENERAL-36
       // ("{}", new String[]{"Foo", "Bar"}) => [Foo, Bar] instead of Foo
       stringArgs = new String[1];
-      stringArgs[0] = StringUtils.deepToString(arguments);
+      stringArgs[0] = MessageUtils.deepToString(arguments);
     }
     else {
       stringArgs = new String[resultArgCount];
       for (int i = 0; i < stringArgs.length; i++) {
-        stringArgs[i] = StringUtils.deepToString(arguments[i]);
+        stringArgs[i] = MessageUtils.deepToString(arguments[i]);
       }
     }
     

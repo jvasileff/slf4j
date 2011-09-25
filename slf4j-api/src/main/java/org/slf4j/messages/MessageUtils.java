@@ -1,4 +1,4 @@
-package org.slf4j.helpers;
+package org.slf4j.messages;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class StringUtils {
+public class MessageUtils {
 
   // The code in this class was taken from ParameterizedMessage in Joern's
   // slf4j-redesign branch
@@ -20,7 +20,7 @@ public class StringUtils {
   public static final String ERROR_MSG_SEPARATOR = ":";
   public static final String ERROR_SUFFIX = "!!!]";
 
-  private StringUtils() {
+  private MessageUtils() {
     // no instances;
   }
 
@@ -82,7 +82,7 @@ public class StringUtils {
       }
       else {
         // special handling of container Object[]
-        String id = StringUtils.identityToString(o);
+        String id = MessageUtils.identityToString(o);
         if (dejaVu.contains(id)) {
           str.append(RECURSION_PREFIX).append(id).append(RECURSION_SUFFIX);
         }
@@ -107,7 +107,7 @@ public class StringUtils {
     }
     else if (o instanceof Map) {
       // special handling of container Map
-      String id = StringUtils.identityToString(o);
+      String id = MessageUtils.identityToString(o);
       if (dejaVu.contains(id)) {
         str.append(RECURSION_PREFIX).append(id).append(RECURSION_SUFFIX);
       }
@@ -134,7 +134,7 @@ public class StringUtils {
     }
     else if (o instanceof Collection) {
       // special handling of container Collection
-      String id = StringUtils.identityToString(o);
+      String id = MessageUtils.identityToString(o);
       if (dejaVu.contains(id)) {
         str.append(RECURSION_PREFIX).append(id).append(RECURSION_SUFFIX);
       }
@@ -168,7 +168,7 @@ public class StringUtils {
       }
       catch (Throwable t) {
         str.append(ERROR_PREFIX);
-        str.append(StringUtils.identityToString(o));
+        str.append(MessageUtils.identityToString(o));
         str.append(ERROR_SEPARATOR);
         String msg = t.getMessage();
         String className = t.getClass().getName();
