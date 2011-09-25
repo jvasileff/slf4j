@@ -4,10 +4,11 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.messages.MessageUtils;
 import org.slf4j.messages.ParameterizedMessage;
+import org.slf4j.messages.ThrowableMessage;
 
 import ch.qos.cal10n.IMessageConveyor;
 
-public class LocLoggerMessage implements ParameterizedMessage {
+public class LocLoggerMessage implements ParameterizedMessage, ThrowableMessage {
 
   private static final long serialVersionUID = -8655840927580085488L;
 
@@ -28,7 +29,9 @@ public class LocLoggerMessage implements ParameterizedMessage {
 
   // IMessageConveyor is not Serializable
   private transient IMessageConveyor imc;
+
   private transient Object[] mutableArgs;
+  private transient Throwable throwable;
 
   public LocLoggerMessage(IMessageConveyor imc, Enum<?> key, Object[] args) {
     this.imc = imc;
@@ -47,12 +50,25 @@ public class LocLoggerMessage implements ParameterizedMessage {
     return formattedMessage;
   }
 
+  public Throwable getThrowable() {
+    initialize();
+    return throwable;
+  }
+
   private void initialize() {
     if (initialized) {
       return;
     }
 
-    immutableArgs = MessageUtils.newArrayOfImmutables(mutableArgs,  false);
+    if (mutableArgs == null || mutableArgs.length == 0) {
+      immutableArgs = null;
+    } else {
+      if (mutableArgs[mutableArgs.length-1] instanceof Throwable) {
+          throwable = (Throwable) mutableArgs[mutableArgs.length-1];
+      }
+      immutableArgs = MessageUtils.newArrayOfImmutables(mutableArgs,
+          throwable != null);
+    }
     mutableArgs = null;
 
     // format now; imc is not Serializable
