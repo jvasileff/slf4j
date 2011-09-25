@@ -143,7 +143,7 @@ public class SimpleLogger extends AbstractLogger {
         return true;
       default:
         // will only happen if a new level is defined
-        throw new IllegalStateException("Level " + level
+        throw new IllegalArgumentException("Level " + level
             + " is not recognized.");
     }
   }
@@ -165,7 +165,7 @@ public class SimpleLogger extends AbstractLogger {
         break;
       default:
         // will only happen if a new level is defined
-        throw new IllegalStateException("Level " + level
+        throw new IllegalArgumentException("Level " + level
             + " is not recognized.");
     }
   }

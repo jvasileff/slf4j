@@ -88,53 +88,39 @@ public final class Log4jLoggerAdapter extends AbstractLogger {
     }
   }
 
-  public boolean isEnabledInternal(Marker marker,
-      org.slf4j.Level level, Message message) {
-    switch (level) {
-      case TRACE :
-        return traceCapable ? logger.isTraceEnabled() : logger.isDebugEnabled();
-      case DEBUG :
-        return logger.isDebugEnabled();
-      case INFO :
-        return logger.isInfoEnabled();
-      case WARN :
-        return logger.isEnabledFor(Level.WARN);
-      case ERROR :
-        return logger.isEnabledFor(Level.ERROR);
-      default:
-        // will only happen if a new level is defined
-        throw new IllegalStateException("Level " + level
-            + " is not recognized.");
-    }
+  public boolean isEnabledInternal(Marker marker, org.slf4j.Level level,
+      Message message) {
+
+    return logger.isEnabledFor(toLog4jLevel(level, traceCapable));
   }
 
   public void logInternal(String callerFqcn, Marker marker,
       org.slf4j.Level level, Message entry) {
+
     Throwable throwable = null;
     if (entry instanceof ThrowableMessage) {
       throwable = ((ThrowableMessage)entry).getThrowable();
     }
-    Level log4jLevel;
-    switch (level) {
-    case TRACE:
-      log4jLevel = traceCapable ? Level.TRACE : Level.DEBUG;
-      break;
-    case DEBUG:
-      log4jLevel = Level.DEBUG;
-      break;
-    case INFO:
-      log4jLevel = Level.INFO;
-      break;
-    case WARN:
-      log4jLevel = Level.WARN;
-      break;
-    case ERROR:
-      log4jLevel = Level.ERROR;
-      break;
-    default:
-      throw new IllegalStateException("Level " + level
-          + " is not recognized.");
-    }
+    Level log4jLevel = toLog4jLevel(level, traceCapable);
     logger.log(callerFqcn, log4jLevel, entry.getFormattedMessage(), throwable);
+  }
+
+  private static Level toLog4jLevel(org.slf4j.Level level, boolean traceCapable) {
+    switch (level) {
+      case TRACE :
+        return traceCapable ? Level.TRACE : Level.DEBUG;
+      case DEBUG :
+        return Level.DEBUG;
+      case INFO :
+        return Level.INFO;
+      case WARN :
+        return Level.WARN;
+      case ERROR :
+        return Level.ERROR;
+      default :
+        // will only happen if a new level is defined
+        throw new IllegalArgumentException("Level " + level
+            + " is not recognized.");
+    }
   }
 }

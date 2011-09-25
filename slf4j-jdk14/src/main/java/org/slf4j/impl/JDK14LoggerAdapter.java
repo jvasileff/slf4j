@@ -130,27 +130,9 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
 
   public void logInternal(String callerFQCN, Marker marker,
       org.slf4j.Level level, Message entry) {
-    Level julLevel;
-    switch (level) {
-    case TRACE:
-      julLevel = Level.FINEST;
-      break;
-    case DEBUG:
-      julLevel = Level.FINE;
-      break;
-    case INFO:
-      julLevel = Level.INFO;
-      break;
-    case WARN:
-      julLevel = Level.WARNING;
-      break;
-    case ERROR:
-      julLevel = Level.SEVERE;
-      break;
-    default:
-      throw new IllegalStateException("Level " + level
-          + " is not recognized.");
-    }
+
+    Level julLevel = toJulLevel(level);
+
     // the logger.isLoggable check avoids the unconditional
     // construction of location data for disabled log
     // statements. As of 2008-07-31, callers of this method
@@ -167,20 +149,25 @@ public final class JDK14LoggerAdapter extends AbstractLogger {
 
   public boolean isEnabledInternal(Marker marker, org.slf4j.Level level,
       Message message) {
+
+    return logger.isLoggable(toJulLevel(level));
+  }
+
+  private static Level toJulLevel(org.slf4j.Level level) {
     switch (level) {
       case TRACE :
-        return logger.isLoggable(Level.FINEST);
+        return Level.FINEST;
       case DEBUG :
-        return logger.isLoggable(Level.FINE);
+        return Level.FINE;
       case INFO :
-        return logger.isLoggable(Level.INFO);
+        return Level.INFO;
       case WARN :
-        return logger.isLoggable(Level.WARNING);
+        return Level.WARNING;
       case ERROR :
-        return logger.isLoggable(Level.SEVERE);
+        return Level.SEVERE;
       default:
         // will only happen if a new level is defined
-        throw new IllegalStateException("Level " + level
+        throw new IllegalArgumentException("Level " + level
             + " is not recognized.");
     }
   }
