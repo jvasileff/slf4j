@@ -3,8 +3,8 @@ package org.slf4j.ext;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.slf4j.helpers.SimpleMessage;
-import org.slf4j.helpers.StandardMessage;
+import org.slf4j.messages.DefaultMessage;
+import org.slf4j.messages.SimpleMessage;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**
@@ -100,7 +100,7 @@ public class XLogger extends LoggerWrapper {
       } else {
         messagePattern = buildMessagePattern(argArray.length);
       }
-      log(FQCN, ENTRY_MARKER, org.slf4j.Level.TRACE, new StandardMessage(
+      log(FQCN, ENTRY_MARKER, org.slf4j.Level.TRACE, new DefaultMessage(
           messagePattern, argArray));
     }
   }
@@ -123,7 +123,7 @@ public class XLogger extends LoggerWrapper {
    */
   public void exit(Object result) {
     if (isTraceEnabled(EXIT_MARKER)) {
-      log(FQCN, EXIT_MARKER, org.slf4j.Level.TRACE, new StandardMessage(
+      log(FQCN, EXIT_MARKER, org.slf4j.Level.TRACE, new DefaultMessage(
           EXIT_MESSAGE_1, new Object[] {result}));
     }
   }

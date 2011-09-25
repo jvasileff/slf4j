@@ -1,19 +1,16 @@
-package org.slf4j.helpers;
+package org.slf4j.messages;
 
-import org.slf4j.messages.FormattedMessage;
-import org.slf4j.messages.ParameterizedMessage;
-import org.slf4j.messages.ThrowableMessage;
+import org.slf4j.helpers.StringUtils;
 
 import java.util.Arrays;
 
 /**
  * This Message implements the default parameterized message format of SLF4J.
  * 
- * @see org.slf4j.core.Message
  * @author Joern Huxhorn
  * @author John Vasileff
  */
-public class StandardMessage implements FormattedMessage, ParameterizedMessage,
+public class DefaultMessage implements FormattedMessage, ParameterizedMessage,
     ThrowableMessage {
 
   private static final long serialVersionUID = -665975803997290697L;
@@ -23,11 +20,11 @@ public class StandardMessage implements FormattedMessage, ParameterizedMessage,
   private String[] parameters;
   private transient Throwable throwable;
 
-  public StandardMessage() {
+  public DefaultMessage() {
     this(null, null, null);
   }
 
-  public StandardMessage(String messagePattern, String[] parameters, Throwable throwable) {
+  public DefaultMessage(String messagePattern, String[] parameters, Throwable throwable) {
     this.messagePattern = messagePattern;
     this.parameters = parameters;
     this.throwable = throwable;
@@ -63,7 +60,7 @@ public class StandardMessage implements FormattedMessage, ParameterizedMessage,
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    StandardMessage that = (StandardMessage) o;
+    DefaultMessage that = (DefaultMessage) o;
 
     if (messagePattern != null ? !messagePattern.equals(that.messagePattern) : that.messagePattern != null) {
       return false;
@@ -205,7 +202,7 @@ public class StandardMessage implements FormattedMessage, ParameterizedMessage,
    * @param arguments      the argument array to be converted.
    * @return a ParameterizedMessage containing the messagePattern, converted arguments and, optionally, a Throwable.
    */
-  public StandardMessage(String messagePattern, Object... arguments) {
+  public DefaultMessage(String messagePattern, Object... arguments) {
     if (arguments == null) {
       this.messagePattern = messagePattern;
       return;
@@ -252,8 +249,8 @@ public class StandardMessage implements FormattedMessage, ParameterizedMessage,
     return "ParameterizedMessage[messagePattern=" + messagePattern + ", parameters=" + Arrays.toString(parameters) + ", throwable=" + throwable + "]";
   }
 
-  public StandardMessage clone() throws CloneNotSupportedException {
-    StandardMessage result = (StandardMessage) super.clone();
+  public DefaultMessage clone() throws CloneNotSupportedException {
+    DefaultMessage result = (DefaultMessage) super.clone();
     if (parameters != null) {
       result.parameters = new String[parameters.length];
       System.arraycopy(parameters, 0, result.parameters, 0, parameters.length);

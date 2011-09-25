@@ -1,7 +1,5 @@
-package org.slf4j.helpers;
+package org.slf4j.messages;
 
-import org.slf4j.messages.ParameterizedMessage;
-import org.slf4j.messages.ThrowableMessage;
 
 public class SimpleMessage implements ThrowableMessage, ParameterizedMessage {
 

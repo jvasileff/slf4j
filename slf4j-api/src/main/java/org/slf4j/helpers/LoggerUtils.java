@@ -3,6 +3,8 @@ package org.slf4j.helpers;
 import org.slf4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
+import org.slf4j.messages.DefaultMessage;
+import org.slf4j.messages.SimpleMessage;
 
 public class LoggerUtils {
 
@@ -38,7 +40,7 @@ public class LoggerUtils {
   public static void log(String fqcn, Logger logger, Marker marker,
       Level level, String format, Object... args) {
     if (isEnabled(logger, marker, level)) {
-      logger.log(fqcn, marker, level, new StandardMessage(format, args));
+      logger.log(fqcn, marker, level, new DefaultMessage(format, args));
     }
   }
 

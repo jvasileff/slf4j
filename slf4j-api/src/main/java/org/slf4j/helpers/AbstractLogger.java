@@ -12,7 +12,9 @@ import java.io.Serializable;
 import org.slf4j.Level;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
+import org.slf4j.messages.DefaultMessage;
 import org.slf4j.messages.Message;
+import org.slf4j.messages.SimpleMessage;
 import org.slf4j.spi.LocationAwareLogger;
 import org.slf4j.spi.LoggerAdapter;
 
@@ -341,7 +343,7 @@ public abstract class AbstractLogger implements LoggerAdapter,
     if (args == null || args.length == 0) {
       return new SimpleMessage(format);
     } else {
-      return new StandardMessage(format, args);
+      return new DefaultMessage(format, args);
     }
   }
 

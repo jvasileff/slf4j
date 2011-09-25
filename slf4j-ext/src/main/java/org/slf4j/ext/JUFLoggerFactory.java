@@ -5,8 +5,8 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.SimpleMessage;
 import org.slf4j.messages.Message;
+import org.slf4j.messages.SimpleMessage;
 
 public class JUFLoggerFactory {
 

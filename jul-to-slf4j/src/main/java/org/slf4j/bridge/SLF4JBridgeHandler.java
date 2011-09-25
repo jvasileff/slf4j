@@ -42,7 +42,7 @@ import java.util.logging.LogRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.LoggerUtils;
-import org.slf4j.helpers.SimpleMessage;
+import org.slf4j.messages.SimpleMessage;
 
 // Based on http://bugzilla.slf4j.org/show_bug.cgi?id=38
 
