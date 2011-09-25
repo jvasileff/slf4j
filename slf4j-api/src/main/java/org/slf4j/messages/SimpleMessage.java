@@ -1,13 +1,16 @@
 package org.slf4j.messages;
 
-
 public class SimpleMessage implements ThrowableMessage, ParameterizedMessage {
 
   private static final long serialVersionUID = -8169425494726189881L;
 
+  private boolean initialized = false;
+
   private final String message;
+  private Object[] immutableArgs;
+
+  private transient Object[] mutableArgs;
   private final transient Throwable throwable;
-  private final transient Object[] parameters;
 
   public SimpleMessage(String message) {
     this(message, null, null);
@@ -20,7 +23,8 @@ public class SimpleMessage implements ThrowableMessage, ParameterizedMessage {
   public SimpleMessage(String message, Object[] params, Throwable throwable) {
     this.message = message;
     this.throwable = throwable;
-    this.parameters = params;
+    this.mutableArgs = params;
+    initialize(); // this could be deferred with logging framework support
   }
 
   public String getFormattedMessage() {
@@ -32,6 +36,17 @@ public class SimpleMessage implements ThrowableMessage, ParameterizedMessage {
   }
 
   public Object[] getParameters() {
-    return parameters;
+    initialize();
+    return immutableArgs;
+  }
+
+  public void initialize() {
+    if (initialized) {
+      return;
+    }
+
+    immutableArgs = MessageUtils.newArrayOfImmutables(mutableArgs,  false);
+    mutableArgs = null;
+    initialized = true;
   }
 }

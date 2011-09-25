@@ -95,6 +95,7 @@ public class JUFMessage implements FormattedMessage, ParameterizedMessage,Throwa
     }
 
     immutableArgs = MessageUtils.newArrayOfImmutables(mutableArgs, throwable != null);
+    mutableArgs = null;
     initialized = true;
   }
 }
